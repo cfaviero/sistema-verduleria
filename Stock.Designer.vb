@@ -23,16 +23,16 @@ Partial Class stock
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         dgvStock = New DataGridView()
-        TextBox1 = New TextBox()
-        TextBox2 = New TextBox()
-        TextBox3 = New TextBox()
-        TextBox4 = New TextBox()
+        txtNombre = New TextBox()
+        txtPrecio = New TextBox()
+        txtStock = New TextBox()
         Label1 = New Label()
         Label2 = New Label()
         Label3 = New Label()
         Label4 = New Label()
         Label5 = New Label()
         Label6 = New Label()
+        cmbCategoria = New ComboBox()
         CType(dgvStock, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -49,36 +49,30 @@ Partial Class stock
         dgvStock.MultiSelect = False
         dgvStock.Name = "dgvStock"
         dgvStock.ReadOnly = True
+        dgvStock.SelectionMode = DataGridViewSelectionMode.FullRowSelect
         dgvStock.Size = New Size(440, 180)
         dgvStock.TabIndex = 0
         ' 
-        ' TextBox1
+        ' txtNombre
         ' 
-        TextBox1.Location = New Point(142, 62)
-        TextBox1.Name = "TextBox1"
-        TextBox1.Size = New Size(139, 23)
-        TextBox1.TabIndex = 1
+        txtNombre.Location = New Point(142, 62)
+        txtNombre.Name = "txtNombre"
+        txtNombre.Size = New Size(139, 23)
+        txtNombre.TabIndex = 1
         ' 
-        ' TextBox2
+        ' txtPrecio
         ' 
-        TextBox2.Location = New Point(142, 105)
-        TextBox2.Name = "TextBox2"
-        TextBox2.Size = New Size(139, 23)
-        TextBox2.TabIndex = 2
+        txtPrecio.Location = New Point(142, 105)
+        txtPrecio.Name = "txtPrecio"
+        txtPrecio.Size = New Size(139, 23)
+        txtPrecio.TabIndex = 2
         ' 
-        ' TextBox3
+        ' txtStock
         ' 
-        TextBox3.Location = New Point(142, 191)
-        TextBox3.Name = "TextBox3"
-        TextBox3.Size = New Size(139, 23)
-        TextBox3.TabIndex = 4
-        ' 
-        ' TextBox4
-        ' 
-        TextBox4.Location = New Point(142, 148)
-        TextBox4.Name = "TextBox4"
-        TextBox4.Size = New Size(139, 23)
-        TextBox4.TabIndex = 3
+        txtStock.Location = New Point(142, 148)
+        txtStock.Name = "txtStock"
+        txtStock.Size = New Size(139, 23)
+        txtStock.TabIndex = 3
         ' 
         ' Label1
         ' 
@@ -134,21 +128,29 @@ Partial Class stock
         Label6.TabIndex = 10
         Label6.Text = "-"
         ' 
+        ' cmbCategoria
+        ' 
+        cmbCategoria.FormattingEnabled = True
+        cmbCategoria.Location = New Point(142, 191)
+        cmbCategoria.Name = "cmbCategoria"
+        cmbCategoria.Size = New Size(139, 23)
+        cmbCategoria.TabIndex = 11
+        ' 
         ' stock
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 448)
+        Controls.Add(cmbCategoria)
         Controls.Add(Label6)
         Controls.Add(Label5)
         Controls.Add(Label4)
         Controls.Add(Label3)
         Controls.Add(Label2)
         Controls.Add(Label1)
-        Controls.Add(TextBox3)
-        Controls.Add(TextBox4)
-        Controls.Add(TextBox2)
-        Controls.Add(TextBox1)
+        Controls.Add(txtStock)
+        Controls.Add(txtPrecio)
+        Controls.Add(txtNombre)
         Controls.Add(dgvStock)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Name = "stock"
@@ -159,14 +161,14 @@ Partial Class stock
     End Sub
 
     Friend WithEvents dgvStock As DataGridView
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents txtNombre As TextBox
+    Friend WithEvents txtPrecio As TextBox
+    Friend WithEvents txtStock As TextBox
     Friend WithEvents Label1 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label6 As Label
+    Friend WithEvents cmbCategoria As ComboBox
 End Class
