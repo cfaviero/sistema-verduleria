@@ -106,6 +106,7 @@ Partial Class Form1
         Controls.Add(btnProv)
         Controls.Add(btnStock)
         Controls.Add(PictureBox1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Form1"
         Text = "Verduleria ""THIAN"""

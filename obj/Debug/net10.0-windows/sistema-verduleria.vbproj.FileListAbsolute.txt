@@ -21,3 +21,7 @@ D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Caj
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Clientes.resources
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Proveedores.resources
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.stock.resources
+D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\Microsoft.Extensions.Logging.Abstractions.dll
+D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\MySqlConnector.dll
+D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema-verduleria.vbproj.AssemblyReference.cache

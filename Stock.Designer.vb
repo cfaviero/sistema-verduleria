@@ -22,7 +22,7 @@ Partial Class stock
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        DataGridView1 = New DataGridView()
+        dgvStock = New DataGridView()
         TextBox1 = New TextBox()
         TextBox2 = New TextBox()
         TextBox3 = New TextBox()
@@ -33,16 +33,24 @@ Partial Class stock
         Label4 = New Label()
         Label5 = New Label()
         Label6 = New Label()
-        CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(dgvStock, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' DataGridView1
+        ' dgvStock
         ' 
-        DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridView1.Location = New Point(12, 258)
-        DataGridView1.Name = "DataGridView1"
-        DataGridView1.Size = New Size(776, 180)
-        DataGridView1.TabIndex = 0
+        dgvStock.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
+        dgvStock.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
+        dgvStock.BackgroundColor = SystemColors.ActiveCaptionText
+        dgvStock.BorderStyle = BorderStyle.Fixed3D
+        dgvStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        dgvStock.Cursor = Cursors.Hand
+        dgvStock.GridColor = Color.Gold
+        dgvStock.Location = New Point(12, 256)
+        dgvStock.MultiSelect = False
+        dgvStock.Name = "dgvStock"
+        dgvStock.ReadOnly = True
+        dgvStock.Size = New Size(440, 180)
+        dgvStock.TabIndex = 0
         ' 
         ' TextBox1
         ' 
@@ -126,11 +134,11 @@ Partial Class stock
         Label6.TabIndex = 10
         Label6.Text = "-"
         ' 
-        ' Stock
+        ' stock
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(800, 448)
         Controls.Add(Label6)
         Controls.Add(Label5)
         Controls.Add(Label4)
@@ -141,15 +149,16 @@ Partial Class stock
         Controls.Add(TextBox4)
         Controls.Add(TextBox2)
         Controls.Add(TextBox1)
-        Controls.Add(DataGridView1)
-        Name = "Stock"
+        Controls.Add(dgvStock)
+        FormBorderStyle = FormBorderStyle.FixedSingle
+        Name = "stock"
         Text = "Stock"
-        CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
+        CType(dgvStock, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvStock As DataGridView
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents TextBox2 As TextBox
     Friend WithEvents TextBox3 As TextBox

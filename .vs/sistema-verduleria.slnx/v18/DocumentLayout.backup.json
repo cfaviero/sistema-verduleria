@@ -3,12 +3,20 @@
   "WorkspaceRootPath": "D:\\Proyectos\\sistema-verduleria\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\efectovisual.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:efectovisual.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\conexionbd.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:conexionbd.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,16 +26,16 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "Form1.vb [Dise\u00F1o]",
               "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Form1.vb",
               "RelativeDocumentMoniker": "Form1.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Form1.vb [Dise\u00F1o]*",
-              "RelativeToolTip": "Form1.vb [Dise\u00F1o]*",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Form1.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Form1.vb [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
               "WhenOpened": "2026-09-21T16:25:28.585Z",
               "IsPinned": true,
@@ -35,16 +43,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "EfectoVisual.vb",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\EfectoVisual.vb",
-              "RelativeDocumentMoniker": "EfectoVisual.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\EfectoVisual.vb",
-              "RelativeToolTip": "EfectoVisual.vb",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwCAAAAAfAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ConexionBD.vb",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\ConexionBD.vb",
+              "RelativeDocumentMoniker": "ConexionBD.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\ConexionBD.vb",
+              "RelativeToolTip": "ConexionBD.vb",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAIAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-21T20:29:42.873Z",
+              "WhenOpened": "2026-09-22T18:22:19.871Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Stock.vb",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
+              "RelativeDocumentMoniker": "Stock.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Stock.vb*",
+              "RelativeToolTip": "Stock.vb*",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAswAsAAACNAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-09-22T18:06:14.654Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Stock.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
+              "RelativeDocumentMoniker": "Stock.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Stock.vb [Dise\u00F1o]*",
+              "RelativeToolTip": "Stock.vb [Dise\u00F1o]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
+              "WhenOpened": "2026-09-22T17:52:31.257Z",
+              "EditorCaption": " [Dise\u00F1o]"
             }
           ]
         }
