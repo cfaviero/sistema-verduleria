@@ -25,7 +25,6 @@ Partial Class Form1
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         PictureBox1 = New PictureBox()
         btnStock = New Button()
-        btnProv = New Button()
         btnClientes = New Button()
         lblHoraActual = New Label()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -48,27 +47,13 @@ Partial Class Form1
         btnStock.Cursor = Cursors.Hand
         btnStock.FlatAppearance.BorderSize = 0
         btnStock.FlatStyle = FlatStyle.Flat
-        btnStock.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
-        btnStock.Location = New Point(130, 122)
+        btnStock.Font = New Font("Segoe UI Semibold", 27F, FontStyle.Bold)
+        btnStock.Location = New Point(86, 146)
         btnStock.Name = "btnStock"
-        btnStock.Size = New Size(104, 37)
+        btnStock.Size = New Size(273, 83)
         btnStock.TabIndex = 1
         btnStock.Text = "STOCK"
         btnStock.UseVisualStyleBackColor = False
-        ' 
-        ' btnProv
-        ' 
-        btnProv.BackColor = SystemColors.Control
-        btnProv.Cursor = Cursors.Hand
-        btnProv.FlatAppearance.BorderSize = 0
-        btnProv.FlatStyle = FlatStyle.Flat
-        btnProv.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
-        btnProv.Location = New Point(130, 232)
-        btnProv.Name = "btnProv"
-        btnProv.Size = New Size(104, 37)
-        btnProv.TabIndex = 2
-        btnProv.Text = "PROVEEDORES"
-        btnProv.UseVisualStyleBackColor = False
         ' 
         ' btnClientes
         ' 
@@ -76,10 +61,10 @@ Partial Class Form1
         btnClientes.Cursor = Cursors.Hand
         btnClientes.FlatAppearance.BorderSize = 0
         btnClientes.FlatStyle = FlatStyle.Flat
-        btnClientes.Font = New Font("Segoe UI Semibold", 9F, FontStyle.Bold)
-        btnClientes.Location = New Point(130, 344)
+        btnClientes.Font = New Font("Segoe UI Semibold", 27F, FontStyle.Bold)
+        btnClientes.Location = New Point(86, 271)
         btnClientes.Name = "btnClientes"
-        btnClientes.Size = New Size(104, 37)
+        btnClientes.Size = New Size(273, 83)
         btnClientes.TabIndex = 3
         btnClientes.Text = "CLIENTES"
         btnClientes.UseVisualStyleBackColor = False
@@ -103,7 +88,6 @@ Partial Class Form1
         ClientSize = New Size(879, 491)
         Controls.Add(lblHoraActual)
         Controls.Add(btnClientes)
-        Controls.Add(btnProv)
         Controls.Add(btnStock)
         Controls.Add(PictureBox1)
         FormBorderStyle = FormBorderStyle.FixedSingle
@@ -117,7 +101,6 @@ Partial Class Form1
 
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnStock As Button
-    Friend WithEvents btnProv As Button
     Friend WithEvents btnClientes As Button
     Friend WithEvents lblHoraActual As Label
 

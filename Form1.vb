@@ -12,15 +12,15 @@
         EfectoVisual.AplicarTransicionHora(lblHoraActual)
     End Sub
 
-    Private Sub btnProv_Click(sender As Object, e As EventArgs) Handles btnProv.Click
-        Proveedores.Show()
+    Private Sub btnProv_Click(sender As Object, e As EventArgs)
+        Proveedores.ShowDialog
     End Sub
 
     Private Sub btnClientes_Click(sender As Object, e As EventArgs) Handles btnClientes.Click
-        Clientes.Show()
+        Clientes.ShowDialog()
     End Sub
 
     Private Sub btnStock_Click(sender As Object, e As EventArgs) Handles btnStock.Click
-        stock.Show()
+        stock.ShowDialog()
     End Sub
 End Class

@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\Proyectos\\sistema-verduleria\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\caja.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:caja.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\clientes.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:clientes.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
@@ -38,33 +38,32 @@
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Stock.vb",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
-              "RelativeDocumentMoniker": "Stock.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
-              "RelativeToolTip": "Stock.vb",
-              "ViewState": "AgIAACIAAAAAAAAAAAAUwD0AAAAAAAAAAAAAAA==",
+              "Title": "Clientes.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Clientes.vb",
+              "RelativeDocumentMoniker": "Clientes.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Clientes.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Clientes.vb [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-22T18:06:14.654Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-09-23T20:24:55.76Z",
+              "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Stock.vb [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
-              "RelativeDocumentMoniker": "Stock.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Stock.vb [Dise\u00F1o]",
-              "RelativeToolTip": "Stock.vb [Dise\u00F1o]",
+              "Title": "Caja.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Caja.vb",
+              "RelativeDocumentMoniker": "Caja.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Caja.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Caja.vb [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-22T17:52:31.257Z",
+              "WhenOpened": "2026-09-23T20:24:23.552Z",
               "EditorCaption": " [Dise\u00F1o]"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
             }
           ]
         }

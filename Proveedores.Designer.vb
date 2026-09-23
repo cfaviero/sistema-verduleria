@@ -22,31 +22,52 @@ Partial Class Proveedores
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Proveedores))
-        PictureBox1 = New PictureBox()
+        lblProducto = New Label()
+        cklProveedores = New CheckedListBox()
+        btnGuardar = New Button()
         Label1 = New Label()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' PictureBox1
+        ' lblProducto
         ' 
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(208, 112)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(383, 326)
-        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox1.TabIndex = 0
-        PictureBox1.TabStop = False
+        lblProducto.AutoSize = True
+        lblProducto.Font = New Font("Segoe UI", 27F, FontStyle.Bold)
+        lblProducto.Location = New Point(24, 25)
+        lblProducto.Name = "lblProducto"
+        lblProducto.Size = New Size(175, 48)
+        lblProducto.TabIndex = 0
+        lblProducto.Text = "Producto"
+        ' 
+        ' cklProveedores
+        ' 
+        cklProveedores.BorderStyle = BorderStyle.None
+        cklProveedores.CheckOnClick = True
+        cklProveedores.FormattingEnabled = True
+        cklProveedores.Location = New Point(24, 105)
+        cklProveedores.Name = "cklProveedores"
+        cklProveedores.Size = New Size(209, 234)
+        cklProveedores.TabIndex = 1
+        ' 
+        ' btnGuardar
+        ' 
+        btnGuardar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        btnGuardar.Location = New Point(24, 360)
+        btnGuardar.Name = "btnGuardar"
+        btnGuardar.Size = New Size(209, 43)
+        btnGuardar.TabIndex = 2
+        btnGuardar.Text = "Guardar"
+        btnGuardar.UseVisualStyleBackColor = True
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Font = New Font("Segoe UI", 27F, FontStyle.Bold)
-        Label1.Location = New Point(239, 36)
+        Label1.FlatStyle = FlatStyle.Popup
+        Label1.Font = New Font("Segoe UI", 27F)
+        Label1.Location = New Point(335, 355)
         Label1.Name = "Label1"
-        Label1.Size = New Size(331, 48)
-        Label1.TabIndex = 1
-        Label1.Text = "En Mantenimiento"
+        Label1.Size = New Size(453, 48)
+        Label1.TabIndex = 4
+        Label1.Text = "Seleccione los proveedores"
         ' 
         ' Proveedores
         ' 
@@ -54,14 +75,17 @@ Partial Class Proveedores
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
         Controls.Add(Label1)
-        Controls.Add(PictureBox1)
+        Controls.Add(btnGuardar)
+        Controls.Add(cklProveedores)
+        Controls.Add(lblProducto)
         Name = "Proveedores"
         Text = "Proveedores"
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
-    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents lblProducto As Label
+    Friend WithEvents cklProveedores As CheckedListBox
+    Friend WithEvents btnGuardar As Button
     Friend WithEvents Label1 As Label
 End Class
