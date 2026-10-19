@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "D:\\Proyectos\\sistema-verduleria\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\login.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:login.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:stock.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\proveedores.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:proveedores.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}"
+      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\login.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
+      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:login.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
       "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:form1.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|d:\\proyectos\\sistema-verduleria\\proveedores.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form",
-      "RelativeMoniker": "D:0:0:{19B517AB-C3B9-60B5-48DE-FDA0B6775FAF}|sistema-verduleria.vbproj|solutionrelative:proveedores.vb||{2C015C70-C72C-11D0-88C3-00A0C9110049}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -29,12 +21,22 @@
       "VerticalTabListWidth": 256,
       "DocumentGroups": [
         {
-          "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "DockedWidth": 212,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 188,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "Form1.vb [Dise\u00F1o]",
               "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Form1.vb",
               "RelativeDocumentMoniker": "Form1.vb",
@@ -46,57 +48,28 @@
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Proveedores.vb [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Proveedores.vb",
-              "RelativeDocumentMoniker": "Proveedores.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Proveedores.vb [Dise\u00F1o]",
-              "RelativeToolTip": "Proveedores.vb [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-23T18:23:15.432Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Proveedores.vb",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Proveedores.vb",
-              "RelativeDocumentMoniker": "Proveedores.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Proveedores.vb",
-              "RelativeToolTip": "Proveedores.vb",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMAAAAAWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-23T18:23:09.583Z",
-              "EditorCaption": ""
-            },
-            {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Stock.vb [Dise\u00F1o]",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
-              "RelativeDocumentMoniker": "Stock.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Stock.vb [Dise\u00F1o]*",
-              "RelativeToolTip": "Stock.vb [Dise\u00F1o]*",
+              "Title": "Login.vb [Dise\u00F1o]",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Login.vb",
+              "RelativeDocumentMoniker": "Login.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Login.vb [Dise\u00F1o]",
+              "RelativeToolTip": "Login.vb [Dise\u00F1o]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-22T17:52:31.257Z",
+              "WhenOpened": "2026-10-18T00:22:23.116Z",
               "EditorCaption": " [Dise\u00F1o]"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Stock.vb",
-              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Stock.vb",
-              "RelativeDocumentMoniker": "Stock.vb",
-              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Stock.vb*",
-              "RelativeToolTip": "Stock.vb*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAE4AAAAiAAAAAAAAAA==",
+              "Title": "Login.vb",
+              "DocumentMoniker": "D:\\Proyectos\\sistema-verduleria\\Login.vb",
+              "RelativeDocumentMoniker": "Login.vb",
+              "ToolTip": "D:\\Proyectos\\sistema-verduleria\\Login.vb",
+              "RelativeToolTip": "Login.vb",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAswAsAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003361|",
-              "WhenOpened": "2026-09-22T23:43:17.954Z",
+              "WhenOpened": "2026-10-18T00:24:56.137Z",
               "EditorCaption": ""
             }
           ]
