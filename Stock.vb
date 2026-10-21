@@ -260,7 +260,7 @@ Public Class Stock
                 cn.Open()
 
                 Dim borrar As String
-                borrar = "DELETE FROM productos WHERE id_producto = @id_producto"
+                borrar = "update productos set activo = 0 WHERE id_producto = @id_producto"
 
                 Using comando As New MySqlCommand(borrar, cn)
                     comando.Parameters.AddWithValue("@id_producto", idProducto)
