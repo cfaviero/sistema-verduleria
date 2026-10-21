@@ -87,6 +87,7 @@ Partial Class stock
         txtStock.BorderStyle = BorderStyle.FixedSingle
         txtStock.Location = New Point(111, 119)
         txtStock.Name = "txtStock"
+        txtStock.ReadOnly = True
         txtStock.Size = New Size(225, 23)
         txtStock.TabIndex = 3
         ' 

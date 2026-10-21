@@ -49,6 +49,7 @@ Partial Class Login
         ' 
         txtContra.Location = New Point(197, 177)
         txtContra.Name = "txtContra"
+        txtContra.PasswordChar = "*"c
         txtContra.Size = New Size(100, 23)
         txtContra.TabIndex = 2
         ' 

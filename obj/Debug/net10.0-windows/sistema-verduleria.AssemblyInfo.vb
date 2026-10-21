@@ -16,7 +16,7 @@ Imports System.Reflection
 <Assembly: System.Reflection.AssemblyCompanyAttribute("sistema-verduleria"),  _
  Assembly: System.Reflection.AssemblyConfigurationAttribute("Debug"),  _
  Assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0"),  _
- Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+801bf2f91db9f6977172bf56c7eb0be524f6de0a"),  _
+ Assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ae9f9e9d9405308bf563af034a6002b1ff23c7b"),  _
  Assembly: System.Reflection.AssemblyProductAttribute("sistema-verduleria"),  _
  Assembly: System.Reflection.AssemblyTitleAttribute("sistema-verduleria"),  _
  Assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0"),  _

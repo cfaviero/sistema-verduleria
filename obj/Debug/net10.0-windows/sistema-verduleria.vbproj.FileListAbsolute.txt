@@ -3,7 +3,6 @@ D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\sistema-verduleria.dep
 D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\sistema-verduleria.runtimeconfig.json
 D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\sistema-verduleria.dll
 D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\sistema-verduleria.pdb
-D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Form1.resources
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Resources.resources
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema-verduleria.vbproj.GenerateResource.cache
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema-verduleria.GeneratedMSBuildEditorConfig.editorconfig
@@ -28,3 +27,4 @@ D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema-verduleria.vbp
 D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\fonts\Roboto-Bold.ttf
 D:\Proyectos\sistema-verduleria\bin\Debug\net10.0-windows\fonts\Roboto-Regular.ttf
 D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Login.resources
+D:\Proyectos\sistema-verduleria\obj\Debug\net10.0-windows\sistema_verduleria.Principal.resources

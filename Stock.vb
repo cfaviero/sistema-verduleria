@@ -9,13 +9,15 @@ Public Class Stock
                 cn.Open()
 
                 Dim consulta As String
-                consulta = "SELECT p.id_producto, p.nombre as Producto, p.descripcion as Descripcion, p.stock as Stock, p.precio_unitario as Precio, p.id_categoria, c.nombre_categoria as Categoria " &
-                           "FROM categorias AS c " & "INNER JOIN productos AS p ON c.id_categoria = p.id_categoria"
+                consulta = "SELECT p.id_producto, p.nombre as Producto, p.descripcion as Descripcion, p.precio_unitario as Precio, p.id_categoria, c.nombre_categoria as Categoria, s.stock " &
+           "FROM categorias AS c " & "INNER JOIN productos AS p ON c.id_categoria = p.id_categoria " &
+           "INNER JOIN v_stock AS s ON s.id_producto = p.id_producto " &
+           "WHERE p.activo = 1"
 
                 If filtro = "" Then
                     consulta = consulta & " ORDER BY nombre;"
                 Else
-                    consulta = consulta & " WHERE nombre Like @filtro" & " ORDER BY nombre"
+                    consulta = consulta & " AND nombre Like @filtro" & " ORDER BY nombre"
                 End If
 
                 Using comando As New MySqlCommand(consulta, cn)
@@ -137,7 +139,7 @@ Public Class Stock
 
     Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
 
-        If String.IsNullOrWhiteSpace(txtNombre.Text.Trim) OrElse cmbCategoria.SelectedIndex = -1 OrElse String.IsNullOrWhiteSpace(txtStock.Text) Then
+        If String.IsNullOrWhiteSpace(txtNombre.Text.Trim) OrElse cmbCategoria.SelectedIndex = -1 Then
             MessageBox.Show("Seleccione un registro antes de modificar.",
                             "Campos vacios", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
@@ -161,7 +163,6 @@ Public Class Stock
                                              "nombre = @nombre, " &
                                              "descripcion = @descripcion, " &
                                              "precio_unitario = @precio_unitario, " &
-                                             "stock = @stock, " &
                                              "id_categoria = @id_categoria " &
                                              "WHERE id_producto = @id_producto"
 
@@ -170,7 +171,6 @@ Public Class Stock
                         comando.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim())
                         comando.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim())
                         comando.Parameters.AddWithValue("@precio_unitario", CDbl(txtPrecio.Text))
-                        comando.Parameters.AddWithValue("@stock", CInt(txtStock.Text))
                         comando.Parameters.AddWithValue("@id_categoria", CInt(cmbCategoria.SelectedValue))
                         comando.Parameters.AddWithValue("@id_producto", CInt(lblId.Text))
 
@@ -265,20 +265,6 @@ Public Class Stock
         e.Handled = True
     End Sub
 
-    Private Sub txtStock_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtStock.KeyPress
-        Dim separador As String = Globalization.CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator
-
-        If Char.IsControl(e.KeyChar) OrElse Char.IsDigit(e.KeyChar) Then
-            Return
-        End If
-
-        If e.KeyChar = separador AndAlso Not txtStock.Text.Contains(separador) Then
-            Return
-        End If
-
-        e.Handled = True
-    End Sub
-
     Private Sub dgvStock_SelectionChanged(sender As Object, e As EventArgs) Handles dgvStock.SelectionChanged
         Dim registroSeleccionado As Boolean = dgvStock.SelectedRows.Count > 0
 
@@ -299,10 +285,9 @@ Public Class Stock
 
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
         Dim precio As Decimal
-        Dim stock As Integer
 
         If String.IsNullOrWhiteSpace(txtNombre.Text) OrElse cmbCategoria.SelectedIndex = -1 OrElse
-            Not Decimal.TryParse(txtPrecio.Text, precio) OrElse precio <= 0 OrElse Not Integer.TryParse(txtStock.Text, stock) OrElse stock < 0 Then
+            Not Decimal.TryParse(txtPrecio.Text, precio) OrElse precio <= 0 Then
             MessageBox.Show("Complete los campos requeridos.",
                             "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
@@ -323,15 +308,14 @@ Public Class Stock
             Using cn As New MySqlConnection(ConnectionString)
                 cn.Open()
                 Dim consulta As String = "INSERT INTO productos " &
-                                             "(nombre, descripcion, precio_unitario, stock, id_categoria) " &
-                                             "VALUES (@nombre, @descripcion, @precio_unitario, @stock, @id_categoria)"
+                                             "(nombre, descripcion, precio_unitario, id_categoria) " &
+                                             "VALUES (@nombre, @descripcion, @precio_unitario, @id_categoria)"
 
                 Using comando As New MySqlCommand(consulta, cn)
 
                     comando.Parameters.AddWithValue("@nombre", txtNombre.Text.Trim())
                     comando.Parameters.AddWithValue("@descripcion", txtDescripcion.Text.Trim())
                     comando.Parameters.AddWithValue("@precio_unitario", CDbl(txtPrecio.Text))
-                    comando.Parameters.AddWithValue("@stock", CInt(txtStock.Text))
                     comando.Parameters.AddWithValue("@id_categoria", CInt(cmbCategoria.SelectedValue))
 
                     comando.ExecuteNonQuery()

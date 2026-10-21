@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class Principal
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -22,11 +22,14 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         PictureBox1 = New PictureBox()
         btnStock = New Button()
         btnClientes = New Button()
         lblHoraActual = New Label()
+        btnSalir = New Button()
+        btnCerrarSesion = New Button()
+        lblBienvenido = New Label()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
@@ -68,6 +71,7 @@ Partial Class Form1
         btnClientes.TabIndex = 3
         btnClientes.Text = "CLIENTES"
         btnClientes.UseVisualStyleBackColor = False
+        btnClientes.Visible = False
         ' 
         ' lblHoraActual
         ' 
@@ -81,18 +85,48 @@ Partial Class Form1
         lblHoraActual.Text = "..."
         lblHoraActual.TextAlign = ContentAlignment.MiddleCenter
         ' 
-        ' Form1
+        ' btnSalir
+        ' 
+        btnSalir.Location = New Point(792, 12)
+        btnSalir.Name = "btnSalir"
+        btnSalir.Size = New Size(75, 23)
+        btnSalir.TabIndex = 5
+        btnSalir.Text = "Salir"
+        btnSalir.UseVisualStyleBackColor = True
+        ' 
+        ' btnCerrarSesion
+        ' 
+        btnCerrarSesion.Location = New Point(686, 12)
+        btnCerrarSesion.Name = "btnCerrarSesion"
+        btnCerrarSesion.Size = New Size(100, 23)
+        btnCerrarSesion.TabIndex = 6
+        btnCerrarSesion.Text = "Cerrar Sesion"
+        btnCerrarSesion.UseVisualStyleBackColor = True
+        ' 
+        ' lblBienvenido
+        ' 
+        lblBienvenido.AutoSize = True
+        lblBienvenido.Location = New Point(107, 28)
+        lblBienvenido.Name = "lblBienvenido"
+        lblBienvenido.Size = New Size(12, 15)
+        lblBienvenido.TabIndex = 7
+        lblBienvenido.Text = "-"
+        ' 
+        ' Principal
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(879, 491)
+        Controls.Add(lblBienvenido)
+        Controls.Add(btnCerrarSesion)
+        Controls.Add(btnSalir)
         Controls.Add(lblHoraActual)
         Controls.Add(btnClientes)
         Controls.Add(btnStock)
         Controls.Add(PictureBox1)
-        FormBorderStyle = FormBorderStyle.FixedSingle
+        FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Name = "Form1"
+        Name = "Principal"
         Text = "Verduleria ""THIAN"""
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
@@ -103,5 +137,8 @@ Partial Class Form1
     Friend WithEvents btnStock As Button
     Friend WithEvents btnClientes As Button
     Friend WithEvents lblHoraActual As Label
+    Friend WithEvents btnSalir As Button
+    Friend WithEvents btnCerrarSesion As Button
+    Friend WithEvents lblBienvenido As Label
 
 End Class
