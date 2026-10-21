@@ -1,4 +1,6 @@
-﻿Imports MySqlConnector
+﻿Imports System.Drawing.Imaging
+Imports System.IO
+Imports MySqlConnector
 
 Public Class Stock
     '# PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ##
@@ -81,6 +83,36 @@ Public Class Stock
         Me.ActiveControl = Nothing
     End Sub
 
+    Sub CargarImagen(id As Integer)
+        Try
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+                Dim sql As String = "select imagen_producto from productos where id_producto = @id;"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@id", CInt(lblId.Text))
+                    Dim valor = cmd.ExecuteScalar
+
+                    'Verifico que el valor no sea null
+                    If valor Is Nothing OrElse valor Is DBNull.Value Then
+                        PictureBox1.Image = Nothing
+                        Exit Sub
+                    End If
+
+                    Dim datos() As Byte = DirectCast(valor, Byte())
+
+                    Using memoria As New MemoryStream(datos)
+                        Using temporal As Image = Image.FromStream(memoria)
+                            PictureBox1.Image = New Bitmap(temporal)
+                        End Using
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error" + ex.Message)
+        End Try
+    End Sub
+
     Private Sub ValidarParaBuscar()
         Dim txtUsado As Boolean = Not String.IsNullOrWhiteSpace(txtBuscar.Text)
 
@@ -98,7 +130,19 @@ Public Class Stock
 
         btnCrear.Enabled = camposCompletos
     End Sub
-    '# PROCEDIMIENTOS ^^^ PROCEDIMIENTOS ^^^ PROCEDIMIENTOS ^^^ PROCEDIMIENTOS ^^^ PROCEDIMIENTOS ^^^
+
+    Private Function ImagenaBytes(img As Image) As Byte()
+        'Verifica si la imagen es null
+        If img Is Nothing Then
+            Return Nothing
+        End If
+
+        Using memoria As New MemoryStream()
+            img.Save(memoria, ImageFormat.Jpeg)
+            Return memoria.ToArray()
+        End Using
+    End Function
+    '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub stock_Load(sender As Object, e As EventArgs) Handles Me.Load
@@ -128,12 +172,19 @@ Public Class Stock
             txtDescripcion.Text = fila.Cells("Descripcion").Value.ToString
             txtPrecio.Text = fila.Cells("Precio").Value.ToString
             txtStock.Text = fila.Cells("stock").Value.ToString
+            CargarImagen(CInt(lblId.Text))
 
             If fila.Cells("id_categoria").Value IsNot DBNull.Value Then
                 cmbCategoria.SelectedValue = fila.Cells("id_categoria").Value
             Else
                 cmbCategoria.SelectedIndex = -1
             End If
+        End If
+        If PictureBox1.Image Is Nothing Then
+            btnQuitar.Enabled = False
+        Else
+            btnQuitar.Enabled = True
+        Exit Sub
         End If
     End Sub
 
@@ -249,6 +300,7 @@ Public Class Stock
     Private Sub Stock_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         dgvStock.ClearSelection()
         dgvStock.CurrentCell = Nothing
+        btnQuitar.Enabled = False
     End Sub
 
     Private Sub txtPrecio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrecio.KeyPress
@@ -270,6 +322,7 @@ Public Class Stock
 
         btnBorrar.Enabled = registroSeleccionado
         btnModificar.Enabled = registroSeleccionado
+
     End Sub
 
     Private Sub Stock_Click(sender As Object, e As EventArgs) Handles MyBase.Click
@@ -355,7 +408,88 @@ Public Class Stock
         'llamo al form
         Proveedores.ShowDialog()
     End Sub
-    '# EVENTOS ^^^ EVENTOS ^^^ EVENTOS ^^^ EVENTOS ^^^ EVENTOS ^^^ EVENTOS ^^^ EVENTOS ^^^
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        Using dlg As New OpenFileDialog()
+            dlg.Filter = "Imagenes|*.jpg;*.jpeg;*.png;*.bmp"
+
+            If dlg.ShowDialog() = DialogResult.OK Then
+                Using temporal As Image = Image.FromFile(dlg.FileName)
+                    PictureBox1.Image = New Bitmap(temporal)
+                End Using
+            End If
+        End Using
+    End Sub
+
+    Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
+        If txtNombre.Text = "" Then
+            Exit Sub
+        End If
+
+        Dim datos() As Byte = ImagenaBytes(PictureBox1.Image)
+
+        If datos.Length > 1000000 Then
+            MessageBox.Show("La imagen no puede superar los 1MB")
+            Exit Sub
+        End If
+
+        Try
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+
+                Dim sql = "update productos set imagen_producto = @imagen " &
+                    "where id_producto = @id"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    'Verifica si hay imagen
+                    If datos Is Nothing Then
+                        cmd.Parameters.AddWithValue("@imagen", DBNull.Value)
+                    Else
+                        cmd.Parameters.AddWithValue("@imagen", MySqlDbType.LongBlob).Value = datos
+                    End If
+
+                    cmd.Parameters.AddWithValue("@id", CInt(lblId.Text))
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+            MessageBox.Show("Se guardo la imagen")
+        Catch ex As Exception
+            MessageBox.Show("Error" + ex.Message)
+        End Try
+
+    End Sub
+
+    Private Sub btnQuitar_Click(sender As Object, e As EventArgs) Handles btnQuitar.Click
+        If txtNombre.Text = "" Then
+            Exit Sub
+        End If
+
+        Dim respuesta As DialogResult = MessageBox.Show("Seguro desea eliminar la imagen de este producto?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        If respuesta = DialogResult.No Then
+            Exit Sub
+        End If
+
+        Try
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+
+                Dim sql = "update productos set imagen_producto = null " &
+                    "where id_producto = @id"
+
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.ExecuteNonQuery()
+                End Using
+            End Using
+
+            MessageBox.Show("Imagen eliminada correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        Catch ex As Exception
+            MessageBox.Show("Error" + ex.Message)
+        End Try
+        CargarImagen(lblId.Text)
+    End Sub
+
+
+    '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
 
 End Class

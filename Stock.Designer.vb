@@ -46,7 +46,12 @@ Partial Class stock
         btnProveedores = New Button()
         ToolTip1 = New ToolTip(components)
         GroupBox1 = New GroupBox()
+        PictureBox1 = New PictureBox()
+        btnAgregar = New Button()
+        btnQuitar = New Button()
+        btnGuardar = New Button()
         CType(dgvStock, ComponentModel.ISupportInitialize).BeginInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' dgvStock
@@ -258,11 +263,54 @@ Partial Class stock
         GroupBox1.TabStop = False
         GroupBox1.Text = "Datos del Producto"
         ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Location = New Point(363, 16)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(216, 150)
+        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox1.TabIndex = 22
+        PictureBox1.TabStop = False
+        ' 
+        ' btnAgregar
+        ' 
+        btnAgregar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnAgregar.Location = New Point(363, 172)
+        btnAgregar.Name = "btnAgregar"
+        btnAgregar.Size = New Size(33, 23)
+        btnAgregar.TabIndex = 23
+        btnAgregar.Text = "+"
+        btnAgregar.UseVisualStyleBackColor = True
+        ' 
+        ' btnQuitar
+        ' 
+        btnQuitar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
+        btnQuitar.Location = New Point(504, 172)
+        btnQuitar.Name = "btnQuitar"
+        btnQuitar.Size = New Size(75, 23)
+        btnQuitar.TabIndex = 24
+        btnQuitar.Text = "Quitar"
+        btnQuitar.UseVisualStyleBackColor = True
+        ' 
+        ' btnGuardar
+        ' 
+        btnGuardar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnGuardar.Location = New Point(402, 172)
+        btnGuardar.Name = "btnGuardar"
+        btnGuardar.Size = New Size(75, 23)
+        btnGuardar.TabIndex = 25
+        btnGuardar.Text = "Guardar"
+        btnGuardar.UseVisualStyleBackColor = True
+        ' 
         ' stock
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 448)
+        Controls.Add(btnGuardar)
+        Controls.Add(btnQuitar)
+        Controls.Add(btnAgregar)
+        Controls.Add(PictureBox1)
         Controls.Add(btnProveedores)
         Controls.Add(btnBorrar)
         Controls.Add(Label6)
@@ -288,6 +336,7 @@ Partial Class stock
         Name = "stock"
         Text = "Stock"
         CType(dgvStock, ComponentModel.ISupportInitialize).EndInit()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -314,4 +363,8 @@ Partial Class stock
     Friend WithEvents btnProveedores As Button
     Friend WithEvents ToolTip1 As ToolTip
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnAgregar As Button
+    Friend WithEvents btnQuitar As Button
+    Friend WithEvents btnGuardar As Button
 End Class
