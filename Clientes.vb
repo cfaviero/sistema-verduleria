@@ -11,16 +11,16 @@ Public Class Clientes
                 cn.Open()
 
                 Dim consulta As String =
-                    "SELECT id_cliente, nombre AS Nombre, telefono AS Telefono, " &
-                    "direccion AS Direccion, email AS Email " &
+                    "SELECT id_cliente, nombre as Nombre, telefono as Telefono, " &
+                    "direccion AS Direccion, email as Email " &
                     "FROM clientes " &
                     "WHERE activo = 1 "
 
                 If Not String.IsNullOrWhiteSpace(filtro) Then
-                    consulta &= "AND nombre LIKE @filtro "
+                    consulta &= "AND Nombre LIKE @filtro "
                 End If
 
-                consulta &= "ORDER BY nombre;"
+                consulta &= "ORDER BY Nombre;"
 
                 Using comando As New MySqlCommand(consulta, cn)
 
@@ -56,8 +56,7 @@ Public Class Clientes
     End Sub
 
     Private Sub ValidarCamposParaAgregar()
-        Dim camposCompletos As Boolean =
-        Not String.IsNullOrWhiteSpace(txtNombre.Text) AndAlso
+        Dim camposCompletos As Boolean = Not String.IsNullOrWhiteSpace(txtNombre.Text) AndAlso
         String.IsNullOrWhiteSpace(lblId.Text)
 
         btnAgregar.Enabled = camposCompletos
