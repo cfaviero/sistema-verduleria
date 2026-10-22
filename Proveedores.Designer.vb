@@ -32,9 +32,9 @@ Partial Class Proveedores
         ' 
         lblProducto.AutoSize = True
         lblProducto.Font = New Font("Segoe UI", 27F, FontStyle.Bold)
-        lblProducto.Location = New Point(24, 25)
+        lblProducto.Location = New Point(27, 33)
         lblProducto.Name = "lblProducto"
-        lblProducto.Size = New Size(175, 48)
+        lblProducto.Size = New Size(224, 61)
         lblProducto.TabIndex = 0
         lblProducto.Text = "Producto"
         ' 
@@ -43,17 +43,19 @@ Partial Class Proveedores
         cklProveedores.BorderStyle = BorderStyle.None
         cklProveedores.CheckOnClick = True
         cklProveedores.FormattingEnabled = True
-        cklProveedores.Location = New Point(24, 105)
+        cklProveedores.Location = New Point(27, 140)
+        cklProveedores.Margin = New Padding(3, 4, 3, 4)
         cklProveedores.Name = "cklProveedores"
-        cklProveedores.Size = New Size(209, 234)
+        cklProveedores.Size = New Size(239, 308)
         cklProveedores.TabIndex = 1
         ' 
         ' btnGuardar
         ' 
         btnGuardar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnGuardar.Location = New Point(24, 360)
+        btnGuardar.Location = New Point(27, 480)
+        btnGuardar.Margin = New Padding(3, 4, 3, 4)
         btnGuardar.Name = "btnGuardar"
-        btnGuardar.Size = New Size(209, 43)
+        btnGuardar.Size = New Size(239, 57)
         btnGuardar.TabIndex = 2
         btnGuardar.Text = "Guardar"
         btnGuardar.UseVisualStyleBackColor = True
@@ -63,21 +65,22 @@ Partial Class Proveedores
         Label1.AutoSize = True
         Label1.FlatStyle = FlatStyle.Popup
         Label1.Font = New Font("Segoe UI", 27F)
-        Label1.Location = New Point(335, 355)
+        Label1.Location = New Point(300, 42)
         Label1.Name = "Label1"
-        Label1.Size = New Size(453, 48)
+        Label1.Size = New Size(568, 61)
         Label1.TabIndex = 4
         Label1.Text = "Seleccione los proveedores"
         ' 
         ' Proveedores
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(800, 450)
+        ClientSize = New Size(914, 600)
         Controls.Add(Label1)
         Controls.Add(btnGuardar)
         Controls.Add(cklProveedores)
         Controls.Add(lblProducto)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "Proveedores"
         Text = "Proveedores"
         ResumeLayout(False)

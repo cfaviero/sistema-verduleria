@@ -23,82 +23,65 @@ Partial Class Principal
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
-        PictureBox1 = New PictureBox()
         btnStock = New Button()
-        btnClientes = New Button()
         lblHoraActual = New Label()
         btnSalir = New Button()
         btnCerrarSesion = New Button()
         lblBienvenido = New Label()
-        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        pnlCabecera = New Panel()
+        btnProveedores = New Button()
+        btnInicio = New Button()
+        btnClientes = New Button()
+        pnlContenido = New Panel()
+        pnlCabecera.SuspendLayout()
         SuspendLayout()
-        ' 
-        ' PictureBox1
-        ' 
-        PictureBox1.BackColor = Color.Transparent
-        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
-        PictureBox1.Location = New Point(417, 122)
-        PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(450, 259)
-        PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
-        PictureBox1.TabIndex = 0
-        PictureBox1.TabStop = False
         ' 
         ' btnStock
         ' 
-        btnStock.BackColor = SystemColors.Control
+        btnStock.BackColor = Color.Green
         btnStock.Cursor = Cursors.Hand
         btnStock.FlatAppearance.BorderSize = 0
         btnStock.FlatStyle = FlatStyle.Flat
-        btnStock.Font = New Font("Segoe UI Semibold", 27F, FontStyle.Bold)
-        btnStock.Location = New Point(86, 146)
+        btnStock.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnStock.ForeColor = Color.White
+        btnStock.Location = New Point(161, 12)
+        btnStock.Margin = New Padding(3, 4, 3, 4)
         btnStock.Name = "btnStock"
-        btnStock.Size = New Size(273, 83)
+        btnStock.Size = New Size(134, 36)
         btnStock.TabIndex = 1
-        btnStock.Text = "STOCK"
+        btnStock.Text = "Inventario"
         btnStock.UseVisualStyleBackColor = False
-        ' 
-        ' btnClientes
-        ' 
-        btnClientes.BackColor = SystemColors.Control
-        btnClientes.Cursor = Cursors.Hand
-        btnClientes.FlatAppearance.BorderSize = 0
-        btnClientes.FlatStyle = FlatStyle.Flat
-        btnClientes.Font = New Font("Segoe UI Semibold", 27F, FontStyle.Bold)
-        btnClientes.Location = New Point(86, 271)
-        btnClientes.Name = "btnClientes"
-        btnClientes.Size = New Size(273, 83)
-        btnClientes.TabIndex = 3
-        btnClientes.Text = "CLIENTES"
-        btnClientes.UseVisualStyleBackColor = False
-        btnClientes.Visible = False
         ' 
         ' lblHoraActual
         ' 
         lblHoraActual.AutoSize = True
         lblHoraActual.Font = New Font("Segoe UI", 12F)
         lblHoraActual.ForeColor = Color.Black
-        lblHoraActual.Location = New Point(686, 461)
+        lblHoraActual.Location = New Point(784, 615)
         lblHoraActual.Name = "lblHoraActual"
-        lblHoraActual.Size = New Size(19, 21)
+        lblHoraActual.Size = New Size(24, 28)
         lblHoraActual.TabIndex = 4
         lblHoraActual.Text = "..."
         lblHoraActual.TextAlign = ContentAlignment.MiddleCenter
         ' 
         ' btnSalir
         ' 
-        btnSalir.Location = New Point(792, 12)
+        btnSalir.ForeColor = Color.Black
+        btnSalir.Location = New Point(1179, 18)
+        btnSalir.Margin = New Padding(3, 4, 3, 4)
         btnSalir.Name = "btnSalir"
-        btnSalir.Size = New Size(75, 23)
+        btnSalir.Size = New Size(86, 31)
         btnSalir.TabIndex = 5
         btnSalir.Text = "Salir"
         btnSalir.UseVisualStyleBackColor = True
         ' 
         ' btnCerrarSesion
         ' 
-        btnCerrarSesion.Location = New Point(686, 12)
+        btnCerrarSesion.ForeColor = Color.Black
+        btnCerrarSesion.Location = New Point(1059, 18)
+        btnCerrarSesion.Margin = New Padding(3, 4, 3, 4)
         btnCerrarSesion.Name = "btnCerrarSesion"
-        btnCerrarSesion.Size = New Size(100, 23)
+        btnCerrarSesion.Size = New Size(114, 31)
         btnCerrarSesion.TabIndex = 6
         btnCerrarSesion.Text = "Cerrar Sesion"
         btnCerrarSesion.UseVisualStyleBackColor = True
@@ -106,39 +89,112 @@ Partial Class Principal
         ' lblBienvenido
         ' 
         lblBienvenido.AutoSize = True
-        lblBienvenido.Location = New Point(107, 28)
+        lblBienvenido.Location = New Point(122, 37)
         lblBienvenido.Name = "lblBienvenido"
-        lblBienvenido.Size = New Size(12, 15)
+        lblBienvenido.Size = New Size(15, 20)
         lblBienvenido.TabIndex = 7
         lblBienvenido.Text = "-"
         ' 
+        ' pnlCabecera
+        ' 
+        pnlCabecera.BackColor = Color.DarkGreen
+        pnlCabecera.Controls.Add(btnProveedores)
+        pnlCabecera.Controls.Add(btnInicio)
+        pnlCabecera.Controls.Add(btnClientes)
+        pnlCabecera.Controls.Add(btnCerrarSesion)
+        pnlCabecera.Controls.Add(btnSalir)
+        pnlCabecera.Controls.Add(btnStock)
+        pnlCabecera.Dock = DockStyle.Top
+        pnlCabecera.ForeColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
+        pnlCabecera.Location = New Point(0, 0)
+        pnlCabecera.Name = "pnlCabecera"
+        pnlCabecera.Size = New Size(1290, 65)
+        pnlCabecera.TabIndex = 8
+        ' 
+        ' btnProveedores
+        ' 
+        btnProveedores.BackColor = Color.Green
+        btnProveedores.Cursor = Cursors.Hand
+        btnProveedores.FlatAppearance.BorderSize = 0
+        btnProveedores.FlatStyle = FlatStyle.Flat
+        btnProveedores.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnProveedores.ForeColor = Color.White
+        btnProveedores.Location = New Point(466, 12)
+        btnProveedores.Margin = New Padding(3, 4, 3, 4)
+        btnProveedores.Name = "btnProveedores"
+        btnProveedores.Size = New Size(161, 36)
+        btnProveedores.TabIndex = 9
+        btnProveedores.Text = "Proveedores"
+        btnProveedores.UseVisualStyleBackColor = False
+        ' 
+        ' btnInicio
+        ' 
+        btnInicio.BackColor = Color.Green
+        btnInicio.Cursor = Cursors.Hand
+        btnInicio.FlatAppearance.BorderSize = 0
+        btnInicio.FlatStyle = FlatStyle.Flat
+        btnInicio.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnInicio.ForeColor = Color.White
+        btnInicio.Location = New Point(12, 13)
+        btnInicio.Margin = New Padding(3, 4, 3, 4)
+        btnInicio.Name = "btnInicio"
+        btnInicio.Size = New Size(134, 36)
+        btnInicio.TabIndex = 8
+        btnInicio.Text = "Inicio"
+        btnInicio.UseVisualStyleBackColor = False
+        ' 
+        ' btnClientes
+        ' 
+        btnClientes.BackColor = Color.Green
+        btnClientes.Cursor = Cursors.Hand
+        btnClientes.FlatAppearance.BorderSize = 0
+        btnClientes.FlatStyle = FlatStyle.Flat
+        btnClientes.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnClientes.ForeColor = Color.White
+        btnClientes.Location = New Point(314, 12)
+        btnClientes.Margin = New Padding(3, 4, 3, 4)
+        btnClientes.Name = "btnClientes"
+        btnClientes.Size = New Size(134, 36)
+        btnClientes.TabIndex = 7
+        btnClientes.Text = "Clientes"
+        btnClientes.UseVisualStyleBackColor = False
+        ' 
+        ' pnlContenido
+        ' 
+        pnlContenido.Dock = DockStyle.Fill
+        pnlContenido.Location = New Point(0, 65)
+        pnlContenido.Name = "pnlContenido"
+        pnlContenido.Size = New Size(1290, 590)
+        pnlContenido.TabIndex = 9
+        ' 
         ' Principal
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(8F, 20F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(879, 491)
+        BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        ClientSize = New Size(1290, 655)
+        Controls.Add(pnlContenido)
+        Controls.Add(pnlCabecera)
         Controls.Add(lblBienvenido)
-        Controls.Add(btnCerrarSesion)
-        Controls.Add(btnSalir)
         Controls.Add(lblHoraActual)
-        Controls.Add(btnClientes)
-        Controls.Add(btnStock)
-        Controls.Add(PictureBox1)
         FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
+        Margin = New Padding(3, 4, 3, 4)
         Name = "Principal"
-        Text = "Verduleria ""THIAN"""
-        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        Text = "  "
+        pnlCabecera.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnStock As Button
-    Friend WithEvents btnClientes As Button
     Friend WithEvents lblHoraActual As Label
     Friend WithEvents btnSalir As Button
     Friend WithEvents btnCerrarSesion As Button
     Friend WithEvents lblBienvenido As Label
+    Friend WithEvents pnlCabecera As Panel
+    Friend WithEvents btnClientes As Button
+    Friend WithEvents pnlContenido As Panel
+    Friend WithEvents btnInicio As Button
+    Friend WithEvents btnProveedores As Button
 
 End Class
