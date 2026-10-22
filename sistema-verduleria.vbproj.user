@@ -7,6 +7,9 @@
     <Compile Update="Clientes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Contra.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="frmDashboard.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -23,6 +26,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Stock.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Usuarios.vb">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>

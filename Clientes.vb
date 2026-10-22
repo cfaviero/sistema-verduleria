@@ -63,7 +63,6 @@ Public Class Clientes
     End Sub
 
     Private Sub LimpiarCampos()
-        lblId.Text = ""
         txtNombre.Clear()
         txtTelefono.Clear()
         txtDireccion.Clear()

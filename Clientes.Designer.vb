@@ -27,8 +27,6 @@ Partial Class Clientes
         txtTelefono = New TextBox()
         lblId = New Label()
         Label5 = New Label()
-        Label4 = New Label()
-        Label3 = New Label()
         Label2 = New Label()
         Label1 = New Label()
         txtEmail = New TextBox()
@@ -52,7 +50,7 @@ Partial Class Clientes
         btnBorrar.Enabled = False
         btnBorrar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnBorrar.ForeColor = Color.Red
-        btnBorrar.Location = New Point(23, 262)
+        btnBorrar.Location = New Point(10, 386)
         btnBorrar.Name = "btnBorrar"
         btnBorrar.Size = New Size(90, 23)
         btnBorrar.TabIndex = 34
@@ -94,22 +92,6 @@ Partial Class Clientes
         Label5.Size = New Size(46, 15)
         Label5.TabIndex = 31
         Label5.Text = "Codigo"
-        ' 
-        ' Label4
-        ' 
-        Label4.AutoSize = True
-        Label4.Location = New Point(153, 192)
-        Label4.Name = "Label4"
-        Label4.Size = New Size(0, 15)
-        Label4.TabIndex = 30
-        ' 
-        ' Label3
-        ' 
-        Label3.AutoSize = True
-        Label3.Location = New Point(153, 134)
-        Label3.Name = "Label3"
-        Label3.Size = New Size(0, 15)
-        Label3.TabIndex = 29
         ' 
         ' Label2
         ' 
@@ -159,12 +141,12 @@ Partial Class Clientes
         GroupBox1.Controls.Add(txtNombre)
         GroupBox1.Controls.Add(txtEmail)
         GroupBox1.Controls.Add(Label2)
-        GroupBox1.Location = New Point(23, 12)
+        GroupBox1.Location = New Point(12, 21)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(514, 223)
+        GroupBox1.Size = New Size(525, 260)
         GroupBox1.TabIndex = 35
         GroupBox1.TabStop = False
-        GroupBox1.Text = "Datos del cliente"
+        GroupBox1.Text = "Datos del usuario"
         ' 
         ' Label7
         ' 
@@ -255,15 +237,14 @@ Partial Class Clientes
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1113, 407)
+        ClientSize = New Size(1113, 412)
         Controls.Add(btnBuscar)
         Controls.Add(Label8)
         Controls.Add(txtBuscar)
         Controls.Add(dgvClientes)
         Controls.Add(btnBorrar)
-        Controls.Add(Label4)
-        Controls.Add(Label3)
         Controls.Add(GroupBox1)
+        FormBorderStyle = FormBorderStyle.FixedSingle
         Name = "Clientes"
         Text = "Clientes"
         GroupBox1.ResumeLayout(False)
@@ -278,8 +259,6 @@ Partial Class Clientes
     Friend WithEvents txtTelefono As TextBox
     Friend WithEvents lblId As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents txtEmail As TextBox

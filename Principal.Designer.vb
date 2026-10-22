@@ -29,6 +29,7 @@ Partial Class Principal
         btnCerrarSesion = New Button()
         lblBienvenido = New Label()
         pnlCabecera = New Panel()
+        btnUsuarios = New Button()
         btnProveedores = New Button()
         btnInicio = New Button()
         btnClientes = New Button()
@@ -44,10 +45,9 @@ Partial Class Principal
         btnStock.FlatStyle = FlatStyle.Flat
         btnStock.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnStock.ForeColor = Color.White
-        btnStock.Location = New Point(161, 12)
-        btnStock.Margin = New Padding(3, 4, 3, 4)
+        btnStock.Location = New Point(141, 9)
         btnStock.Name = "btnStock"
-        btnStock.Size = New Size(134, 36)
+        btnStock.Size = New Size(117, 27)
         btnStock.TabIndex = 1
         btnStock.Text = "Inventario"
         btnStock.UseVisualStyleBackColor = False
@@ -57,9 +57,9 @@ Partial Class Principal
         lblHoraActual.AutoSize = True
         lblHoraActual.Font = New Font("Segoe UI", 12F)
         lblHoraActual.ForeColor = Color.Black
-        lblHoraActual.Location = New Point(784, 615)
+        lblHoraActual.Location = New Point(686, 461)
         lblHoraActual.Name = "lblHoraActual"
-        lblHoraActual.Size = New Size(24, 28)
+        lblHoraActual.Size = New Size(19, 21)
         lblHoraActual.TabIndex = 4
         lblHoraActual.Text = "..."
         lblHoraActual.TextAlign = ContentAlignment.MiddleCenter
@@ -67,10 +67,9 @@ Partial Class Principal
         ' btnSalir
         ' 
         btnSalir.ForeColor = Color.Black
-        btnSalir.Location = New Point(1179, 18)
-        btnSalir.Margin = New Padding(3, 4, 3, 4)
+        btnSalir.Location = New Point(1032, 14)
         btnSalir.Name = "btnSalir"
-        btnSalir.Size = New Size(86, 31)
+        btnSalir.Size = New Size(75, 23)
         btnSalir.TabIndex = 5
         btnSalir.Text = "Salir"
         btnSalir.UseVisualStyleBackColor = True
@@ -78,10 +77,9 @@ Partial Class Principal
         ' btnCerrarSesion
         ' 
         btnCerrarSesion.ForeColor = Color.Black
-        btnCerrarSesion.Location = New Point(1059, 18)
-        btnCerrarSesion.Margin = New Padding(3, 4, 3, 4)
+        btnCerrarSesion.Location = New Point(927, 14)
         btnCerrarSesion.Name = "btnCerrarSesion"
-        btnCerrarSesion.Size = New Size(114, 31)
+        btnCerrarSesion.Size = New Size(100, 23)
         btnCerrarSesion.TabIndex = 6
         btnCerrarSesion.Text = "Cerrar Sesion"
         btnCerrarSesion.UseVisualStyleBackColor = True
@@ -89,15 +87,16 @@ Partial Class Principal
         ' lblBienvenido
         ' 
         lblBienvenido.AutoSize = True
-        lblBienvenido.Location = New Point(122, 37)
+        lblBienvenido.Location = New Point(107, 28)
         lblBienvenido.Name = "lblBienvenido"
-        lblBienvenido.Size = New Size(15, 20)
+        lblBienvenido.Size = New Size(12, 15)
         lblBienvenido.TabIndex = 7
         lblBienvenido.Text = "-"
         ' 
         ' pnlCabecera
         ' 
         pnlCabecera.BackColor = Color.DarkGreen
+        pnlCabecera.Controls.Add(btnUsuarios)
         pnlCabecera.Controls.Add(btnProveedores)
         pnlCabecera.Controls.Add(btnInicio)
         pnlCabecera.Controls.Add(btnClientes)
@@ -107,9 +106,26 @@ Partial Class Principal
         pnlCabecera.Dock = DockStyle.Top
         pnlCabecera.ForeColor = Color.FromArgb(CByte(0), CByte(192), CByte(0))
         pnlCabecera.Location = New Point(0, 0)
+        pnlCabecera.Margin = New Padding(3, 2, 3, 2)
         pnlCabecera.Name = "pnlCabecera"
-        pnlCabecera.Size = New Size(1290, 65)
+        pnlCabecera.Size = New Size(1129, 49)
         pnlCabecera.TabIndex = 8
+        ' 
+        ' btnUsuarios
+        ' 
+        btnUsuarios.BackColor = Color.Green
+        btnUsuarios.Cursor = Cursors.Hand
+        btnUsuarios.FlatAppearance.BorderSize = 0
+        btnUsuarios.FlatStyle = FlatStyle.Flat
+        btnUsuarios.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnUsuarios.ForeColor = Color.White
+        btnUsuarios.Location = New Point(820, 10)
+        btnUsuarios.Name = "btnUsuarios"
+        btnUsuarios.Size = New Size(87, 29)
+        btnUsuarios.TabIndex = 10
+        btnUsuarios.Text = "Usuarios"
+        btnUsuarios.TextAlign = ContentAlignment.TopCenter
+        btnUsuarios.UseVisualStyleBackColor = False
         ' 
         ' btnProveedores
         ' 
@@ -119,10 +135,9 @@ Partial Class Principal
         btnProveedores.FlatStyle = FlatStyle.Flat
         btnProveedores.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnProveedores.ForeColor = Color.White
-        btnProveedores.Location = New Point(466, 12)
-        btnProveedores.Margin = New Padding(3, 4, 3, 4)
+        btnProveedores.Location = New Point(408, 9)
         btnProveedores.Name = "btnProveedores"
-        btnProveedores.Size = New Size(161, 36)
+        btnProveedores.Size = New Size(141, 27)
         btnProveedores.TabIndex = 9
         btnProveedores.Text = "Proveedores"
         btnProveedores.UseVisualStyleBackColor = False
@@ -135,10 +150,9 @@ Partial Class Principal
         btnInicio.FlatStyle = FlatStyle.Flat
         btnInicio.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnInicio.ForeColor = Color.White
-        btnInicio.Location = New Point(12, 13)
-        btnInicio.Margin = New Padding(3, 4, 3, 4)
+        btnInicio.Location = New Point(10, 10)
         btnInicio.Name = "btnInicio"
-        btnInicio.Size = New Size(134, 36)
+        btnInicio.Size = New Size(117, 27)
         btnInicio.TabIndex = 8
         btnInicio.Text = "Inicio"
         btnInicio.UseVisualStyleBackColor = False
@@ -151,35 +165,36 @@ Partial Class Principal
         btnClientes.FlatStyle = FlatStyle.Flat
         btnClientes.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnClientes.ForeColor = Color.White
-        btnClientes.Location = New Point(314, 12)
-        btnClientes.Margin = New Padding(3, 4, 3, 4)
+        btnClientes.Location = New Point(275, 9)
         btnClientes.Name = "btnClientes"
-        btnClientes.Size = New Size(134, 36)
+        btnClientes.Size = New Size(117, 27)
         btnClientes.TabIndex = 7
         btnClientes.Text = "Clientes"
         btnClientes.UseVisualStyleBackColor = False
         ' 
         ' pnlContenido
         ' 
+        pnlContenido.AutoSizeMode = AutoSizeMode.GrowAndShrink
         pnlContenido.Dock = DockStyle.Fill
-        pnlContenido.Location = New Point(0, 65)
+        pnlContenido.Font = New Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
+        pnlContenido.Location = New Point(0, 49)
+        pnlContenido.Margin = New Padding(3, 2, 3, 2)
         pnlContenido.Name = "pnlContenido"
-        pnlContenido.Size = New Size(1290, 590)
+        pnlContenido.Size = New Size(1129, 442)
         pnlContenido.TabIndex = 9
         ' 
         ' Principal
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        ClientSize = New Size(1290, 655)
+        ClientSize = New Size(1129, 491)
         Controls.Add(pnlContenido)
         Controls.Add(pnlCabecera)
         Controls.Add(lblBienvenido)
         Controls.Add(lblHoraActual)
         FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
-        Margin = New Padding(3, 4, 3, 4)
         Name = "Principal"
         Text = "  "
         pnlCabecera.ResumeLayout(False)
@@ -196,5 +211,6 @@ Partial Class Principal
     Friend WithEvents pnlContenido As Panel
     Friend WithEvents btnInicio As Button
     Friend WithEvents btnProveedores As Button
+    Friend WithEvents btnUsuarios As Button
 
 End Class

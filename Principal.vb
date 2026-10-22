@@ -108,4 +108,9 @@
         MostrarFormulario(New Proveedores_ABM())
         DeshabilitarBotones()
     End Sub
+
+    Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
+        MostrarFormulario(New Usuarios())
+        DeshabilitarBotones()
+    End Sub
 End Class

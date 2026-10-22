@@ -1,6 +1,6 @@
-﻿Imports System.Security.Cryptography
+﻿
+Imports System.Security.Cryptography
 Module Seguridad
-
     Public Function CrearSalt() As String
         Dim saltBytes() As Byte = RandomNumberGenerator.GetBytes(16)
         Return Convert.ToBase64String(saltBytes)
