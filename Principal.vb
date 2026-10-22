@@ -1,15 +1,41 @@
 ﻿Public Class Principal
 
-
-
     Private formularioActual As Form = Nothing
+
+    Sub DeshabilitarBotones()
+        If TypeOf formularioActual Is frmDashboard Then
+            btnInicio.Enabled = False
+        Else
+            btnInicio.Enabled = True
+        End If
+
+        If TypeOf formularioActual Is stock Then
+            btnStock.Enabled = False
+        Else
+            btnStock.Enabled = True
+        End If
+
+        If TypeOf formularioActual Is Clientes Then
+            btnClientes.Enabled = False
+        Else
+            btnClientes.Enabled = True
+        End If
+
+        If TypeOf formularioActual Is Proveedores_ABM Then
+            btnProveedores.Enabled = False
+        Else
+            btnProveedores.Enabled = True
+        End If
+    End Sub
 
     Private Sub MostrarFormulario(formulario As Form)
 
         If formularioActual IsNot Nothing Then
             pnlContenido.Controls.Remove(formularioActual)
             formularioActual.Dispose()
+
         End If
+
 
         formularioActual = formulario
 
@@ -40,17 +66,19 @@
             btnClientes.Visible = True
         End If
 
-        MostrarFormulario(New FrmDashboard())
-
+        MostrarFormulario(New frmDashboard())
+        btnInicio.Enabled = False
     End Sub
 
     Private Sub btnProv_Click(sender As Object, e As EventArgs)
         MostrarFormulario(New Proveedores())
+        DeshabilitarBotones()
     End Sub
 
 
     Private Sub btnStock_Click(sender As Object, e As EventArgs) Handles btnStock.Click
         MostrarFormulario(New stock())
+        DeshabilitarBotones()
     End Sub
 
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
@@ -68,14 +96,16 @@
 
     Private Sub btnClientes_Click_1(sender As Object, e As EventArgs) Handles btnClientes.Click
         MostrarFormulario(New Clientes)
-
+        DeshabilitarBotones()
     End Sub
 
     Private Sub btnInicio_Click(sender As Object, e As EventArgs) Handles btnInicio.Click
-        MostrarFormulario(New FrmDashboard())
+        MostrarFormulario(New frmDashboard())
+        DeshabilitarBotones()
     End Sub
 
     Private Sub btnProveedores_Click(sender As Object, e As EventArgs) Handles btnProveedores.Click
         MostrarFormulario(New Proveedores_ABM())
+        DeshabilitarBotones()
     End Sub
 End Class

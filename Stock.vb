@@ -155,6 +155,9 @@ Public Class Stock
         txtDescripcion.PlaceholderText = "Ej. Precio por kg.. En temporada.."
         txtPrecio.PlaceholderText = "Ej. 35,07"
         txtStock.PlaceholderText = "Ej. 35,7"
+        btnAgregar.Enabled = False
+        btnGuardar.Enabled = False
+        btnQuitar.Enabled = False
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -182,9 +185,12 @@ Public Class Stock
         End If
         If PictureBox1.Image Is Nothing Then
             btnQuitar.Enabled = False
+            btnGuardar.Enabled = False
+            btnAgregar.Enabled = True
         Else
             btnQuitar.Enabled = True
-        Exit Sub
+            btnGuardar.Enabled = True
+            btnAgregar.Enabled = False
         End If
     End Sub
 
@@ -300,7 +306,6 @@ Public Class Stock
     Private Sub Stock_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         dgvStock.ClearSelection()
         dgvStock.CurrentCell = Nothing
-        btnQuitar.Enabled = False
     End Sub
 
     Private Sub txtPrecio_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPrecio.KeyPress
@@ -419,6 +424,11 @@ Public Class Stock
                 End Using
             End If
         End Using
+        If PictureBox1.Image IsNot Nothing Then
+            btnGuardar.Enabled = True
+            btnQuitar.Enabled = True
+            btnAgregar.Enabled = False
+        End If
     End Sub
 
     Private Sub btnGuardar_Click(sender As Object, e As EventArgs) Handles btnGuardar.Click
@@ -463,6 +473,7 @@ Public Class Stock
         If txtNombre.Text = "" Then
             Exit Sub
         End If
+        Dim idProducto As Integer = CInt(dgvStock.SelectedRows(0).Cells("id_producto").Value)
 
         Dim respuesta As DialogResult = MessageBox.Show("Seguro desea eliminar la imagen de este producto?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If respuesta = DialogResult.No Then
@@ -477,6 +488,7 @@ Public Class Stock
                     "where id_producto = @id"
 
                 Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@id", idProducto)
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
@@ -485,6 +497,9 @@ Public Class Stock
         Catch ex As Exception
             MessageBox.Show("Error" + ex.Message)
         End Try
+        btnGuardar.Enabled = False
+        btnQuitar.Enabled = False
+        btnAgregar.Enabled = True
         CargarImagen(lblId.Text)
     End Sub
 
