@@ -176,7 +176,6 @@ Partial Class Principal
         ' 
         pnlContenido.AutoSizeMode = AutoSizeMode.GrowAndShrink
         pnlContenido.Dock = DockStyle.Fill
-        pnlContenido.Font = New Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         pnlContenido.Location = New Point(0, 49)
         pnlContenido.Margin = New Padding(3, 2, 3, 2)
         pnlContenido.Name = "pnlContenido"
