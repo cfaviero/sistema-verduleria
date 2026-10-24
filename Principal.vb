@@ -1,4 +1,5 @@
-﻿Public Class Principal
+﻿Imports System.Runtime.InteropServices
+Public Class Principal
 
     Private formularioActual As Form = Nothing
 
@@ -112,5 +113,23 @@
     Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
         MostrarFormulario(New Usuarios())
         DeshabilitarBotones()
+    End Sub
+
+    <DllImport("user32.dll")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+
+    <DllImport("user32.dll")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, Msg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+
+    Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+    Private Const HTCAPTION As Integer = 2
+
+    Private Sub pnlCabecera_MouseDown(sender As Object, e As MouseEventArgs) Handles pnlCabecera.MouseDown
+        If e.Button = MouseButtons.Left Then
+            ReleaseCapture()
+            SendMessage(Me.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0)
+        End If
     End Sub
 End Class
