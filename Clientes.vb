@@ -56,13 +56,13 @@ Public Class Clientes
     End Sub
 
     Private Sub ValidarCamposParaAgregar()
-        Dim camposCompletos As Boolean = Not String.IsNullOrWhiteSpace(txtNombre.Text) AndAlso
-        String.IsNullOrWhiteSpace(lblId.Text)
+        Dim camposCompletos As Boolean = Not String.IsNullOrWhiteSpace(txtNombre.Text)
 
         btnAgregar.Enabled = camposCompletos
     End Sub
 
     Private Sub LimpiarCampos()
+        lblId.Text = ""
         txtNombre.Clear()
         txtTelefono.Clear()
         txtDireccion.Clear()
@@ -136,18 +136,18 @@ Public Class Clientes
     Private Sub Clientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Tema.AplicarTema(Me)
         CargarGrilla()
-        LimpiarCampos()
 
         txtBuscar.PlaceholderText = "Buscar cliente..."
-        txtNombre.PlaceholderText = "Nombre del cliente"
-        txtTelefono.PlaceholderText = "Teléfono (opcional)"
-        txtDireccion.PlaceholderText = "Dirección (opcional)"
-        txtEmail.PlaceholderText = "Email (opcional)"
+        txtNombre.PlaceholderText = "Ej. Miguel Garcia"
+        txtTelefono.PlaceholderText = "Ej. 3764777777"
+        txtDireccion.PlaceholderText = "Ej. Av. Aguado 7777"
+        txtEmail.PlaceholderText = "Ej. correo@email.com"
 
         btnBuscar.Enabled = False
         btnModificar.Enabled = False
         btnBorrar.Enabled = False
 
+        LimpiarCampos()
         ValidarCamposParaAgregar()
     End Sub
 
@@ -194,6 +194,14 @@ Public Class Clientes
             txtEmail.Clear()
         Else
             txtEmail.Text = fila.Cells("Email").Value.ToString()
+        End If
+
+        If btnModificar.Enabled Then
+            btnAgregar.Enabled = False
+            btnModificar.Enabled = True
+        Else
+            btnAgregar.Enabled = True
+            btnModificar.Enabled = False
         End If
     End Sub
 
@@ -377,9 +385,35 @@ Public Class Clientes
         ValidarCamposParaAgregar()
     End Sub
 
+    Private Sub txtTelefono_TextChanged(sender As Object, e As EventArgs) Handles txtTelefono.TextChanged
+        ValidarCamposParaAgregar()
+    End Sub
+
+    Private Sub txtEmail_TextChanged(sender As Object, e As EventArgs) Handles txtEmail.TextChanged
+        ValidarCamposParaAgregar()
+    End Sub
+
     Private Sub Clientes_Click(sender As Object, e As EventArgs) Handles Me.Click
+        LimpiarCampos()
+        If btnModificar.Enabled Then
+            btnAgregar.Enabled = False
+            btnModificar.Enabled = True
+        Else
+            btnAgregar.Enabled = True
+            btnModificar.Enabled = False
+        End If
+
+        ValidarCamposParaAgregar()
+    End Sub
+
+    Private Sub Clientes_Shown(sender As Object, e As EventArgs) Handles Me.Shown
         LimpiarCampos()
     End Sub
 
-
+    Private Sub txtTelefono_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTelefono.KeyPress
+        If Not Char.IsDigit(e.KeyChar) AndAlso Not Char.IsControl(e.KeyChar) AndAlso
+   "+- ".IndexOf(e.KeyChar) = -1 Then
+            e.Handled = True
+        End If
+    End Sub
 End Class

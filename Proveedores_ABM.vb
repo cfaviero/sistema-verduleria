@@ -130,7 +130,6 @@ Public Class Proveedores_ABM
     Private Sub Proveedores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Tema.AplicarTema(Me)
         CargarGrilla()
-        LimpiarCampos()
 
         txtBuscar.PlaceholderText = "Buscar proveedor..."
         txtNombre.PlaceholderText = "Nombre del proveedor"
@@ -140,6 +139,7 @@ Public Class Proveedores_ABM
         btnBuscar.Enabled = False
         btnModificar.Enabled = False
         btnBorrar.Enabled = False
+        LimpiarCampos()
 
         ValidarCamposParaAgregar()
     End Sub
@@ -367,4 +367,8 @@ Public Class Proveedores_ABM
         ValidarCamposParaAgregar()
     End Sub
 
+    Private Sub Proveedores_ABM_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+        LimpiarCampos()
+
+    End Sub
 End Class

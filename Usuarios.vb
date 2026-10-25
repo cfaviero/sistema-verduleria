@@ -65,31 +65,46 @@ Public Class Usuarios
         End If
     End Sub
 
-    Private Function usuarioExiste() As Boolean
+    Private Sub ValidarCamposParaAgregar()
+        Dim camposCompletos As Boolean = Not String.IsNullOrWhiteSpace(txtUsuario.Text)
+
+        btnAgregar.Enabled = camposCompletos
+    End Sub
+
+    Private Function usuarioExiste(Optional actual As String = "") As Boolean
 
         Dim resultado As Boolean = False
+        Try
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+                Dim sql = "select count(*) from usuarios where usuario = @usuario "
 
-        Using cn As New MySqlConnection(ConnectionString)
-            cn.Open()
-            Dim sql = "select count(*) from usuarios where usuario = @usuario"
-
-            Using cmd As New MySqlCommand(sql, cn)
-                cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text)
-
-                Dim resul As Integer = Convert.ToInt32(cmd.ExecuteScalar())
-                If resul > 0 Then
-                    resultado = True
+                If Not String.IsNullOrWhiteSpace(actual) Then
+                    sql &= "AND usuario not LIKE @actual "
                 End If
 
+                Using cmd As New MySqlCommand(sql, cn)
+                    cmd.Parameters.AddWithValue("@usuario", txtUsuario.Text)
+                    cmd.Parameters.AddWithValue("@actual", actual)
+
+                    Dim resul As Integer = Convert.ToInt32(cmd.ExecuteScalar())
+                    If resul > 0 Then
+                        resultado = True
+                    End If
+
+                End Using
             End Using
-        End Using
+        Catch ex As Exception
+            MessageBox.Show("Error al verificar usuario: " & ex.Message,
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+
         Return resultado
     End Function
 
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Tema.AplicarTema(Me)
         CargarGrilla()
-        LimpiarCampos()
 
         txtBuscar.PlaceholderText = "Buscar usuario..."
         txtUsuario.PlaceholderText = "Ej. Usuario"
@@ -98,9 +113,10 @@ Public Class Usuarios
         btnBuscar.Enabled = False
         btnModificar.Enabled = False
         btnBorrar.Enabled = False
-        btnAgregar.Enabled = True
+        btnAgregar.Enabled = False
 
-        'ValidarCamposParaAgregar()
+        LimpiarCampos()
+
     End Sub
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
@@ -143,6 +159,53 @@ Public Class Usuarios
         txtBuscar.Focus()
     End Sub
 
+    Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
+
+        Dim id As Integer = Convert.ToInt32(dgvUsuarios.CurrentRow.Cells("id_usuario").Value)
+
+        If Not id >= 0 Then
+            MessageBox.Show("Seleccione un cliente antes de modificar.",
+                            "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
+
+        Dim existe As Boolean = usuarioExiste(dgvUsuarios.CurrentRow.Cells("usuario").Value)
+        If existe Then
+            MessageBox.Show("El usuario ya existe, elija otro.")
+            txtUsuario.Focus()
+            Exit Sub
+        End If
+        Try
+            Using cn As New MySqlConnection(ConexionBD.ConnectionString)
+                cn.Open()
+
+                Dim consulta As String =
+                    "UPDATE usuarios SET usuario = @usuario, descripcion = @descripcion " &
+                    "WHERE id_usuario = @id_usuario AND activo = 1;"
+
+                Using comando As New MySqlCommand(consulta, cn)
+                    comando.Parameters.AddWithValue("@id_usuario", id)
+                    comando.Parameters.AddWithValue("@usuario", txtUsuario.Text.Trim())
+                    comando.Parameters.AddWithValue("@descripcion", txtDescripUser.Text.Trim())
+
+                    comando.ExecuteNonQuery()
+                End Using
+            End Using
+
+            MessageBox.Show("Cliente modificado correctamente.",
+                            "Modificado",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information)
+
+            CargarGrilla()
+            LimpiarCampos()
+            btnModificar.Enabled = False
+        Catch ex As Exception
+            MessageBox.Show("Error al modificar el cliente: " & ex.Message,
+                            "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     Private Sub dgvUsuarios_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUsuarios.CellClick
         If e.RowIndex >= 0 Then
             Dim fila As DataGridViewRow = dgvUsuarios.Rows(e.RowIndex)
@@ -150,7 +213,8 @@ Public Class Usuarios
             txtUsuario.Text = fila.Cells("Usuario").Value.ToString
             txtDescripUser.Text = fila.Cells("Descripcion").Value.ToString
             btnBorrar.Enabled = True
-
+            btnAgregar.Enabled = False
+            btnModificar.Enabled = True
         End If
     End Sub
 
@@ -160,9 +224,9 @@ Public Class Usuarios
             Exit Sub
         End If
 
-        Dim id_usuario As Integer = CInt(dgvUsuarios.SelectedRows(0).Cells("id_usuario").Value)
+        Dim id_usuario As Integer = dgvUsuarios.SelectedRows(0).Cells("id_usuario").Value
 
-        Dim respuesta As DialogResult = MessageBox.Show("Esta seguro de que desea eliminar este producto definitivamente?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+        Dim respuesta = MessageBox.Show("Seguro de que desea dar de baja este usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
         If respuesta = DialogResult.No Then Exit Sub
 
         Try
@@ -175,7 +239,7 @@ Public Class Usuarios
                 Using comando As New MySqlCommand(borrar, cn)
                     comando.Parameters.AddWithValue("@id_usuario", id_usuario)
 
-                    Dim filasAfectadas As Integer = comando.ExecuteNonQuery()
+                    Dim filasAfectadas = comando.ExecuteNonQuery
                     If filasAfectadas > 0 Then
                         MessageBox.Show("Producto eliminado correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         LimpiarCampos()
@@ -193,5 +257,19 @@ Public Class Usuarios
         End Try
 
     End Sub
+
+    Private Sub txtUsuario_TextChanged(sender As Object, e As EventArgs) Handles txtUsuario.TextChanged
+        If Not dgvUsuarios.SelectedRows.Count > 0 Then
+            ValidarCamposParaAgregar()
+        End If
+    End Sub
+
+    Private Sub Usuarios_Click(sender As Object, e As EventArgs) Handles Me.Click
+        LimpiarCampos()
+        ValidarCamposParaAgregar()
+        btnModificar.Enabled = False
+        btnBorrar.Enabled = False
+    End Sub
+
 
 End Class

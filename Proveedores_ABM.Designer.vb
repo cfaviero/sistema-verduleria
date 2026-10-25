@@ -29,7 +29,6 @@ Partial Class Proveedores_ABM
         btnBorrar = New Button()
         txtTelefono = New TextBox()
         lblId = New Label()
-        Label5 = New Label()
         txtNombre = New TextBox()
         GroupBox1 = New GroupBox()
         Label7 = New Label()
@@ -37,6 +36,7 @@ Partial Class Proveedores_ABM
         Label6 = New Label()
         btnModificar = New Button()
         btnAgregar = New Button()
+        Label5 = New Label()
         Label1 = New Label()
         CType(dgvProveedores, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
@@ -48,9 +48,9 @@ Partial Class Proveedores_ABM
         btnBuscar.Cursor = Cursors.Hand
         btnBuscar.Enabled = False
         btnBuscar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnBuscar.Location = New Point(891, 265)
+        btnBuscar.Location = New Point(1060, 316)
         btnBuscar.Name = "btnBuscar"
-        btnBuscar.Size = New Size(41, 23)
+        btnBuscar.Size = New Size(41, 30)
         btnBuscar.TabIndex = 53
         btnBuscar.Text = "🔍"
         btnBuscar.UseVisualStyleBackColor = False
@@ -58,7 +58,7 @@ Partial Class Proveedores_ABM
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(635, 270)
+        Label8.Location = New Point(803, 325)
         Label8.Name = "Label8"
         Label8.Size = New Size(42, 15)
         Label8.TabIndex = 52
@@ -66,7 +66,7 @@ Partial Class Proveedores_ABM
         ' 
         ' txtBuscar
         ' 
-        txtBuscar.Location = New Point(683, 266)
+        txtBuscar.Location = New Point(851, 314)
         txtBuscar.Name = "txtBuscar"
         txtBuscar.Size = New Size(203, 23)
         txtBuscar.TabIndex = 51
@@ -80,13 +80,13 @@ Partial Class Proveedores_ABM
         dgvProveedores.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvProveedores.Cursor = Cursors.Hand
         dgvProveedores.GridColor = SystemColors.ControlDark
-        dgvProveedores.Location = New Point(11, 296)
+        dgvProveedores.Location = New Point(12, 360)
         dgvProveedores.MultiSelect = False
         dgvProveedores.Name = "dgvProveedores"
         dgvProveedores.ReadOnly = True
         dgvProveedores.RowHeadersWidth = 51
         dgvProveedores.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvProveedores.Size = New Size(1090, 90)
+        dgvProveedores.Size = New Size(1090, 203)
         dgvProveedores.TabIndex = 50
         ' 
         ' btnBorrar
@@ -95,7 +95,7 @@ Partial Class Proveedores_ABM
         btnBorrar.Enabled = False
         btnBorrar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnBorrar.ForeColor = Color.Red
-        btnBorrar.Location = New Point(24, 266)
+        btnBorrar.Location = New Point(12, 322)
         btnBorrar.Name = "btnBorrar"
         btnBorrar.Size = New Size(90, 23)
         btnBorrar.TabIndex = 48
@@ -105,7 +105,7 @@ Partial Class Proveedores_ABM
         ' txtTelefono
         ' 
         txtTelefono.BorderStyle = BorderStyle.FixedSingle
-        txtTelefono.Location = New Point(142, 81)
+        txtTelefono.Location = New Point(101, 103)
         txtTelefono.Name = "txtTelefono"
         txtTelefono.Size = New Size(356, 23)
         txtTelefono.TabIndex = 2
@@ -114,25 +114,16 @@ Partial Class Proveedores_ABM
         ' 
         lblId.AutoSize = True
         lblId.Font = New Font("Segoe UI", 16F, FontStyle.Bold)
-        lblId.Location = New Point(327, 17)
+        lblId.Location = New Point(250, 27)
         lblId.Name = "lblId"
         lblId.Size = New Size(22, 30)
         lblId.TabIndex = 47
         lblId.Text = "-"
         ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.Location = New Point(63, 29)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(46, 15)
-        Label5.TabIndex = 46
-        Label5.Text = "Codigo"
-        ' 
         ' txtNombre
         ' 
         txtNombre.BorderStyle = BorderStyle.FixedSingle
-        txtNombre.Location = New Point(142, 52)
+        txtNombre.Location = New Point(101, 59)
         txtNombre.Name = "txtNombre"
         txtNombre.Size = New Size(356, 23)
         txtNombre.TabIndex = 1
@@ -149,9 +140,9 @@ Partial Class Proveedores_ABM
         GroupBox1.Controls.Add(Label5)
         GroupBox1.Controls.Add(Label1)
         GroupBox1.Controls.Add(txtNombre)
-        GroupBox1.Location = New Point(24, 12)
+        GroupBox1.Location = New Point(12, 24)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(514, 199)
+        GroupBox1.Size = New Size(501, 255)
         GroupBox1.TabIndex = 49
         GroupBox1.TabStop = False
         GroupBox1.Text = "Datos del proveedor"
@@ -159,7 +150,7 @@ Partial Class Proveedores_ABM
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Location = New Point(52, 118)
+        Label7.Location = New Point(25, 154)
         Label7.Name = "Label7"
         Label7.Size = New Size(57, 15)
         Label7.TabIndex = 36
@@ -168,7 +159,7 @@ Partial Class Proveedores_ABM
         ' txtDireccion
         ' 
         txtDireccion.BorderStyle = BorderStyle.FixedSingle
-        txtDireccion.Location = New Point(142, 110)
+        txtDireccion.Location = New Point(101, 147)
         txtDireccion.Name = "txtDireccion"
         txtDireccion.Size = New Size(356, 23)
         txtDireccion.TabIndex = 3
@@ -176,7 +167,7 @@ Partial Class Proveedores_ABM
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Location = New Point(57, 83)
+        Label6.Location = New Point(24, 110)
         Label6.Name = "Label6"
         Label6.Size = New Size(52, 15)
         Label6.TabIndex = 33
@@ -185,9 +176,9 @@ Partial Class Proveedores_ABM
         ' btnModificar
         ' 
         btnModificar.Cursor = Cursors.Hand
-        btnModificar.Location = New Point(86, 154)
+        btnModificar.Location = New Point(101, 195)
         btnModificar.Name = "btnModificar"
-        btnModificar.Size = New Size(125, 23)
+        btnModificar.Size = New Size(167, 23)
         btnModificar.TabIndex = 14
         btnModificar.Text = "Modificar"
         btnModificar.UseVisualStyleBackColor = True
@@ -196,17 +187,26 @@ Partial Class Proveedores_ABM
         ' 
         btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Enabled = False
-        btnAgregar.Location = New Point(224, 154)
+        btnAgregar.Location = New Point(290, 195)
         btnAgregar.Name = "btnAgregar"
-        btnAgregar.Size = New Size(125, 23)
+        btnAgregar.Size = New Size(167, 23)
         btnAgregar.TabIndex = 6
         btnAgregar.Text = "Agregar"
         btnAgregar.UseVisualStyleBackColor = True
         ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Location = New Point(25, 35)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(46, 15)
+        Label5.TabIndex = 46
+        Label5.Text = "Codigo"
+        ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(58, 54)
+        Label1.Location = New Point(24, 66)
         Label1.Name = "Label1"
         Label1.Size = New Size(51, 15)
         Label1.TabIndex = 27
@@ -216,7 +216,7 @@ Partial Class Proveedores_ABM
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1113, 407)
+        ClientSize = New Size(1113, 575)
         Controls.Add(btnBuscar)
         Controls.Add(Label8)
         Controls.Add(txtBuscar)
@@ -240,7 +240,6 @@ Partial Class Proveedores_ABM
     Friend WithEvents btnBorrar As Button
     Friend WithEvents txtTelefono As TextBox
     Friend WithEvents lblId As Label
-    Friend WithEvents Label5 As Label
     Friend WithEvents txtNombre As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents Label7 As Label
@@ -249,4 +248,5 @@ Partial Class Proveedores_ABM
     Friend WithEvents btnModificar As Button
     Friend WithEvents btnAgregar As Button
     Friend WithEvents Label1 As Label
+    Friend WithEvents Label5 As Label
 End Class

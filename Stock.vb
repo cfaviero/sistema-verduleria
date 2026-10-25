@@ -95,7 +95,13 @@ Public Class Stock
 
                     'Verifico que el valor no sea null
                     If valor Is Nothing OrElse valor Is DBNull.Value Then
-
+                        If PictureBox1.Image Is Nothing Then
+                            Dim rutaImagen As String = IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images", "images (1).png")
+                            PictureBox1.Image = Image.FromFile(rutaImagen)
+                            btnQuitar.Enabled = False
+                            btnGuardar.Enabled = False
+                            btnAgregar.Enabled = True
+                        End If
                         Exit Sub
                     End If
 
@@ -108,6 +114,9 @@ Public Class Stock
                     End Using
                 End Using
             End Using
+            btnQuitar.Enabled = True
+            btnGuardar.Enabled = False
+            btnAgregar.Enabled = False
         Catch ex As Exception
             MessageBox.Show("Error" + ex.Message)
         End Try
@@ -184,17 +193,6 @@ Public Class Stock
             Else
                 cmbCategoria.SelectedIndex = -1
             End If
-        End If
-        If PictureBox1.Image Is Nothing Then
-            Dim rutaImagen As String = IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images", "images (1).png")
-            PictureBox1.Image = Image.FromFile(rutaImagen)
-            btnQuitar.Enabled = False
-            btnGuardar.Enabled = False
-            btnAgregar.Enabled = True
-        Else
-            btnQuitar.Enabled = True
-            btnGuardar.Enabled = True
-            btnAgregar.Enabled = False
         End If
     End Sub
 
@@ -466,6 +464,7 @@ Public Class Stock
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
+            btnGuardar.Enabled = False
             MessageBox.Show("Se guardo la imagen")
         Catch ex As Exception
             MessageBox.Show("Error" + ex.Message)
@@ -496,7 +495,7 @@ Public Class Stock
                     cmd.ExecuteNonQuery()
                 End Using
             End Using
-
+            PictureBox1.Image = Nothing
             MessageBox.Show("Imagen eliminada correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MessageBox.Show("Error" + ex.Message)

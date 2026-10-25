@@ -16,7 +16,7 @@ Public Class Proveedores
                 cn.Open()
 
 
-                Dim sql As String = "SELECT * FROM proveedores ORDER BY nombre;"
+                Dim sql As String = "SELECT * FROM proveedores where activo = 1 ORDER BY nombre;"
 
                 Using cmd As New MySqlCommand(sql, cn)
 
@@ -97,6 +97,7 @@ Public Class Proveedores
 
     Private Sub ProveedoresProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+        Tema.AplicarTema(Me)
         'Muestro el producto seleccionado
         lblProducto.Text = "Producto: " & nombreProductoSeleccionado
 

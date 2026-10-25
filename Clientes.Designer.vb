@@ -146,7 +146,7 @@ Partial Class Clientes
         GroupBox1.Size = New Size(501, 260)
         GroupBox1.TabIndex = 35
         GroupBox1.TabStop = False
-        GroupBox1.Text = "Datos del usuario"
+        GroupBox1.Text = "Datos del cliente"
         ' 
         ' Label7
         ' 
