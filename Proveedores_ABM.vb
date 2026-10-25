@@ -128,6 +128,7 @@ Public Class Proveedores_ABM
     '# EVENTOS
 
     Private Sub Proveedores_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Tema.AplicarTema(Me)
         CargarGrilla()
         LimpiarCampos()
 

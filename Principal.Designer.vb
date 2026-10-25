@@ -179,15 +179,15 @@ Partial Class Principal
         pnlContenido.Location = New Point(0, 49)
         pnlContenido.Margin = New Padding(3, 2, 3, 2)
         pnlContenido.Name = "pnlContenido"
-        pnlContenido.Size = New Size(1129, 442)
+        pnlContenido.Size = New Size(1129, 515)
         pnlContenido.TabIndex = 9
         ' 
         ' Principal
         ' 
-        AutoScaleDimensions = New SizeF(7F, 15F)
+        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        ClientSize = New Size(1129, 491)
+        ClientSize = New Size(1129, 564)
         Controls.Add(pnlContenido)
         Controls.Add(pnlCabecera)
         Controls.Add(lblBienvenido)

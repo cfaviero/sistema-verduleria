@@ -31,8 +31,8 @@ Partial Class frmDashboard
         PicMermas = New PictureBox()
         pnlTarjetaMermas = New Panel()
         pnlGrafico = New Panel()
-        Label3 = New Label()
         formsPlotMermas = New ScottPlot.WinForms.FormsPlot()
+        Label3 = New Label()
         pnlTarjetaProductos.SuspendLayout()
         CType(PicProductos, ComponentModel.ISupportInitialize).BeginInit()
         CType(PicMermas, ComponentModel.ISupportInitialize).BeginInit()
@@ -46,9 +46,10 @@ Partial Class frmDashboard
         pnlTarjetaProductos.Controls.Add(Label1)
         pnlTarjetaProductos.Controls.Add(lblCantidadProductos)
         pnlTarjetaProductos.Controls.Add(PicProductos)
-        pnlTarjetaProductos.Location = New Point(190, 39)
+        pnlTarjetaProductos.Location = New Point(166, 29)
+        pnlTarjetaProductos.Margin = New Padding(3, 2, 3, 2)
         pnlTarjetaProductos.Name = "pnlTarjetaProductos"
-        pnlTarjetaProductos.Size = New Size(263, 125)
+        pnlTarjetaProductos.Size = New Size(230, 94)
         pnlTarjetaProductos.TabIndex = 0
         ' 
         ' Label1
@@ -56,9 +57,9 @@ Partial Class frmDashboard
         Label1.AutoSize = True
         Label1.Font = New Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label1.ForeColor = Color.White
-        Label1.Location = New Point(26, 20)
+        Label1.Location = New Point(23, 15)
         Label1.Name = "Label1"
-        Label1.Size = New Size(213, 27)
+        Label1.Size = New Size(174, 22)
         Label1.TabIndex = 4
         Label1.Text = "Productos activos"
         ' 
@@ -67,17 +68,18 @@ Partial Class frmDashboard
         lblCantidadProductos.AutoSize = True
         lblCantidadProductos.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblCantidadProductos.ForeColor = Color.White
-        lblCantidadProductos.Location = New Point(137, 47)
+        lblCantidadProductos.Location = New Point(120, 35)
         lblCantidadProductos.Name = "lblCantidadProductos"
-        lblCantidadProductos.Size = New Size(46, 54)
+        lblCantidadProductos.Size = New Size(38, 45)
         lblCantidadProductos.TabIndex = 2
         lblCantidadProductos.Text = "1"
         ' 
         ' PicProductos
         ' 
-        PicProductos.Location = New Point(91, 61)
+        PicProductos.Location = New Point(80, 46)
+        PicProductos.Margin = New Padding(3, 2, 3, 2)
         PicProductos.Name = "PicProductos"
-        PicProductos.Size = New Size(40, 40)
+        PicProductos.Size = New Size(35, 30)
         PicProductos.SizeMode = PictureBoxSizeMode.Zoom
         PicProductos.TabIndex = 0
         PicProductos.TabStop = False
@@ -87,9 +89,9 @@ Partial Class frmDashboard
         Label2.AutoSize = True
         Label2.Font = New Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label2.ForeColor = Color.White
-        Label2.Location = New Point(34, 20)
+        Label2.Location = New Point(30, 15)
         Label2.Name = "Label2"
-        Label2.Size = New Size(193, 27)
+        Label2.Size = New Size(159, 22)
         Label2.TabIndex = 5
         Label2.Text = "Mermas del mes"
         ' 
@@ -98,17 +100,18 @@ Partial Class frmDashboard
         lblCantidadMermas.AutoSize = True
         lblCantidadMermas.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblCantidadMermas.ForeColor = Color.White
-        lblCantidadMermas.Location = New Point(154, 47)
+        lblCantidadMermas.Location = New Point(135, 35)
         lblCantidadMermas.Name = "lblCantidadMermas"
-        lblCantidadMermas.Size = New Size(46, 54)
+        lblCantidadMermas.Size = New Size(38, 45)
         lblCantidadMermas.TabIndex = 3
         lblCantidadMermas.Text = "1"
         ' 
         ' PicMermas
         ' 
-        PicMermas.Location = New Point(108, 61)
+        PicMermas.Location = New Point(94, 46)
+        PicMermas.Margin = New Padding(3, 2, 3, 2)
         PicMermas.Name = "PicMermas"
-        PicMermas.Size = New Size(40, 40)
+        PicMermas.Size = New Size(35, 30)
         PicMermas.SizeMode = PictureBoxSizeMode.Zoom
         PicMermas.TabIndex = 1
         PicMermas.TabStop = False
@@ -119,46 +122,50 @@ Partial Class frmDashboard
         pnlTarjetaMermas.Controls.Add(lblCantidadMermas)
         pnlTarjetaMermas.Controls.Add(Label2)
         pnlTarjetaMermas.Controls.Add(PicMermas)
-        pnlTarjetaMermas.Location = New Point(821, 39)
+        pnlTarjetaMermas.Location = New Point(718, 29)
+        pnlTarjetaMermas.Margin = New Padding(3, 2, 3, 2)
         pnlTarjetaMermas.Name = "pnlTarjetaMermas"
-        pnlTarjetaMermas.Size = New Size(263, 125)
+        pnlTarjetaMermas.Size = New Size(230, 94)
         pnlTarjetaMermas.TabIndex = 6
         ' 
         ' pnlGrafico
         ' 
         pnlGrafico.Controls.Add(formsPlotMermas)
-        pnlGrafico.Location = New Point(12, 238)
+        pnlGrafico.Location = New Point(10, 239)
+        pnlGrafico.Margin = New Padding(3, 2, 3, 2)
         pnlGrafico.Name = "pnlGrafico"
-        pnlGrafico.Size = New Size(1248, 295)
+        pnlGrafico.Size = New Size(1092, 293)
         pnlGrafico.TabIndex = 7
+        ' 
+        ' formsPlotMermas
+        ' 
+        formsPlotMermas.Location = New Point(2, 9)
+        formsPlotMermas.Margin = New Padding(3, 2, 3, 2)
+        formsPlotMermas.Name = "formsPlotMermas"
+        formsPlotMermas.Size = New Size(1087, 282)
+        formsPlotMermas.TabIndex = 0
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Arial Rounded MT Bold", 13.8F, FontStyle.Regular, GraphicsUnit.Point, CByte(0))
         Label3.ForeColor = Color.Black
-        Label3.Location = New Point(29, 197)
+        Label3.Location = New Point(25, 148)
         Label3.Name = "Label3"
-        Label3.Size = New Size(373, 27)
+        Label3.Size = New Size(304, 22)
         Label3.TabIndex = 8
         Label3.Text = "Productos con mayores mermas"
         ' 
-        ' formsPlotMermas
-        ' 
-        formsPlotMermas.Location = New Point(3, 3)
-        formsPlotMermas.Name = "formsPlotMermas"
-        formsPlotMermas.Size = New Size(1242, 292)
-        formsPlotMermas.TabIndex = 0
-        ' 
         ' frmDashboard
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1272, 603)
+        ClientSize = New Size(1113, 543)
         Controls.Add(Label3)
         Controls.Add(pnlGrafico)
         Controls.Add(pnlTarjetaMermas)
         Controls.Add(pnlTarjetaProductos)
+        Margin = New Padding(3, 2, 3, 2)
         Name = "frmDashboard"
         Text = "frmDashboard"
         pnlTarjetaProductos.ResumeLayout(False)

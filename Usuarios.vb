@@ -87,6 +87,7 @@ Public Class Usuarios
     End Function
 
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Tema.AplicarTema(Me)
         CargarGrilla()
         LimpiarCampos()
 

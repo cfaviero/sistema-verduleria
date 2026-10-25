@@ -59,6 +59,8 @@ Public Class Login
     End Sub
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Tema.AplicarTema(Me)
+        Label3.Font = Tema.Fuente(18, FontStyle.Bold)
         MyBase.AcceptButton = btnEntrar
     End Sub
 End Class

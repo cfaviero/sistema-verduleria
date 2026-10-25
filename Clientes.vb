@@ -134,6 +134,7 @@ Public Class Clientes
     '# EVENTOS
 
     Private Sub Clientes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Tema.AplicarTema(Me)
         CargarGrilla()
         LimpiarCampos()
 
@@ -150,8 +151,8 @@ Public Class Clientes
         ValidarCamposParaAgregar()
     End Sub
 
-    Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
-        CargarGrilla(txtBuscar.Text.Trim())
+    Private Sub btnBuscar_Click(sender As Object, e As EventArgs)
+        CargarGrilla(txtBuscar.Text.Trim)
 
         dgvClientes.ClearSelection()
         dgvClientes.CurrentCell = Nothing
@@ -379,4 +380,6 @@ Public Class Clientes
     Private Sub Clientes_Click(sender As Object, e As EventArgs) Handles Me.Click
         LimpiarCampos()
     End Sub
+
+
 End Class

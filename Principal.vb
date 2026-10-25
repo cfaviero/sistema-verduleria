@@ -60,6 +60,8 @@ Public Class Principal
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Tema.AplicarTema(Me)
+        Tema.MarcarActivo(btnInicio)
         EfectoVisual.AplicarTransicionHora(lblHoraActual)
         lblBienvenido.Text = "Bienvenido " + Sesion.descripcion + " - " + Sesion.rolusuario
 
@@ -132,4 +134,6 @@ Public Class Principal
             SendMessage(Me.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0)
         End If
     End Sub
+
+
 End Class

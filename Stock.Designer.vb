@@ -64,86 +64,83 @@ Partial Class stock
         dgvStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvStock.Cursor = Cursors.Hand
         dgvStock.GridColor = SystemColors.ControlDark
-        dgvStock.Location = New Point(12, 388)
-        dgvStock.Margin = New Padding(3, 4, 3, 4)
+        dgvStock.Location = New Point(10, 346)
         dgvStock.MultiSelect = False
         dgvStock.Name = "dgvStock"
         dgvStock.ReadOnly = True
         dgvStock.RowHeadersWidth = 51
+        dgvStock.RowTemplate.Height = 70
         dgvStock.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvStock.Size = New Size(1246, 120)
+        dgvStock.Size = New Size(1090, 217)
         dgvStock.TabIndex = 0
         ' 
         ' txtNombre
         ' 
         txtNombre.BorderStyle = BorderStyle.FixedSingle
-        txtNombre.Location = New Point(127, 81)
-        txtNombre.Margin = New Padding(3, 4, 3, 4)
+        txtNombre.Location = New Point(111, 61)
         txtNombre.Name = "txtNombre"
-        txtNombre.Size = New Size(324, 27)
+        txtNombre.Size = New Size(284, 23)
         txtNombre.TabIndex = 1
         ' 
         ' txtPrecio
         ' 
         txtPrecio.BorderStyle = BorderStyle.FixedSingle
-        txtPrecio.Location = New Point(127, 197)
-        txtPrecio.Margin = New Padding(3, 4, 3, 4)
+        txtPrecio.Location = New Point(99, 181)
         txtPrecio.Name = "txtPrecio"
-        txtPrecio.Size = New Size(324, 27)
+        txtPrecio.Size = New Size(284, 23)
         txtPrecio.TabIndex = 4
         ' 
         ' txtStock
         ' 
         txtStock.BorderStyle = BorderStyle.FixedSingle
-        txtStock.Location = New Point(127, 159)
-        txtStock.Margin = New Padding(3, 4, 3, 4)
+        txtStock.Location = New Point(99, 139)
         txtStock.Name = "txtStock"
         txtStock.ReadOnly = True
-        txtStock.Size = New Size(324, 27)
+        txtStock.Size = New Size(284, 23)
         txtStock.TabIndex = 3
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(24, 85)
+        Label1.Location = New Point(21, 64)
         Label1.Name = "Label1"
-        Label1.Size = New Size(64, 20)
+        Label1.Size = New Size(51, 15)
         Label1.TabIndex = 5
         Label1.Text = "Nombre"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(24, 201)
+        Label2.Location = New Point(9, 184)
         Label2.Name = "Label2"
-        Label2.Size = New Size(50, 20)
+        Label2.Size = New Size(40, 15)
         Label2.TabIndex = 6
         Label2.Text = "Precio"
         ' 
         ' Label3
         ' 
         Label3.AutoSize = True
-        Label3.Location = New Point(24, 163)
+        Label3.Location = New Point(9, 142)
         Label3.Name = "Label3"
-        Label3.Size = New Size(91, 20)
+        Label3.Size = New Size(73, 15)
         Label3.TabIndex = 7
         Label3.Text = "Stock Actual"
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(24, 240)
+        Label4.Location = New Point(9, 227)
         Label4.Name = "Label4"
-        Label4.Size = New Size(74, 20)
+        Label4.Size = New Size(58, 15)
         Label4.TabIndex = 8
         Label4.Text = "Categoría"
         ' 
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(24, 45)
+        Label5.Location = New Point(21, 34)
         Label5.Name = "Label5"
-        Label5.Size = New Size(58, 20)
+        Label5.Size = New Size(46, 15)
         Label5.TabIndex = 9
         Label5.Text = "Codigo"
         ' 
@@ -151,9 +148,9 @@ Partial Class stock
         ' 
         lblId.AutoSize = True
         lblId.Font = New Font("Segoe UI", 16F, FontStyle.Bold)
-        lblId.Location = New Point(151, 33)
+        lblId.Location = New Point(226, 27)
         lblId.Name = "lblId"
-        lblId.Size = New Size(28, 37)
+        lblId.Size = New Size(22, 30)
         lblId.TabIndex = 10
         lblId.Text = "-"
         ' 
@@ -161,36 +158,33 @@ Partial Class stock
         ' 
         cmbCategoria.FlatStyle = FlatStyle.Popup
         cmbCategoria.FormattingEnabled = True
-        cmbCategoria.Location = New Point(127, 236)
-        cmbCategoria.Margin = New Padding(3, 4, 3, 4)
+        cmbCategoria.Location = New Point(99, 224)
         cmbCategoria.Name = "cmbCategoria"
-        cmbCategoria.Size = New Size(324, 28)
+        cmbCategoria.Size = New Size(284, 23)
         cmbCategoria.TabIndex = 5
         ' 
         ' txtBuscar
         ' 
-        txtBuscar.Location = New Point(701, 331)
-        txtBuscar.Margin = New Padding(3, 4, 3, 4)
+        txtBuscar.Location = New Point(851, 292)
         txtBuscar.Name = "txtBuscar"
-        txtBuscar.Size = New Size(231, 27)
+        txtBuscar.Size = New Size(203, 23)
         txtBuscar.TabIndex = 12
         ' 
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Location = New Point(646, 336)
+        Label7.Location = New Point(803, 304)
         Label7.Name = "Label7"
-        Label7.Size = New Size(52, 20)
+        Label7.Size = New Size(42, 15)
         Label7.TabIndex = 13
         Label7.Text = "Buscar"
         ' 
         ' btnModificar
         ' 
         btnModificar.Cursor = Cursors.Hand
-        btnModificar.Location = New Point(95, 271)
-        btnModificar.Margin = New Padding(3, 4, 3, 4)
+        btnModificar.Location = New Point(99, 260)
         btnModificar.Name = "btnModificar"
-        btnModificar.Size = New Size(143, 31)
+        btnModificar.Size = New Size(120, 23)
         btnModificar.TabIndex = 14
         btnModificar.Text = "Modificar"
         btnModificar.UseVisualStyleBackColor = True
@@ -199,10 +193,9 @@ Partial Class stock
         ' 
         btnCrear.Cursor = Cursors.Hand
         btnCrear.Enabled = False
-        btnCrear.Location = New Point(244, 271)
-        btnCrear.Margin = New Padding(3, 4, 3, 4)
+        btnCrear.Location = New Point(263, 260)
         btnCrear.Name = "btnCrear"
-        btnCrear.Size = New Size(143, 31)
+        btnCrear.Size = New Size(120, 23)
         btnCrear.TabIndex = 6
         btnCrear.Text = "Crear"
         btnCrear.UseVisualStyleBackColor = True
@@ -213,10 +206,9 @@ Partial Class stock
         btnBuscar.Cursor = Cursors.Hand
         btnBuscar.Enabled = False
         btnBuscar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnBuscar.Location = New Point(938, 329)
-        btnBuscar.Margin = New Padding(3, 4, 3, 4)
+        btnBuscar.Location = New Point(1059, 292)
         btnBuscar.Name = "btnBuscar"
-        btnBuscar.Size = New Size(47, 31)
+        btnBuscar.Size = New Size(41, 39)
         btnBuscar.TabIndex = 16
         btnBuscar.Text = "🔍"
         btnBuscar.UseVisualStyleBackColor = False
@@ -224,19 +216,18 @@ Partial Class stock
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Location = New Point(24, 124)
+        Label6.Location = New Point(21, 106)
         Label6.Name = "Label6"
-        Label6.Size = New Size(87, 20)
+        Label6.Size = New Size(69, 15)
         Label6.TabIndex = 18
         Label6.Text = "Descripcion"
         ' 
         ' txtDescripcion
         ' 
         txtDescripcion.BorderStyle = BorderStyle.FixedSingle
-        txtDescripcion.Location = New Point(127, 120)
-        txtDescripcion.Margin = New Padding(3, 4, 3, 4)
+        txtDescripcion.Location = New Point(111, 103)
         txtDescripcion.Name = "txtDescripcion"
-        txtDescripcion.Size = New Size(324, 27)
+        txtDescripcion.Size = New Size(284, 23)
         txtDescripcion.TabIndex = 2
         ' 
         ' btnBorrar
@@ -245,10 +236,9 @@ Partial Class stock
         btnBorrar.Enabled = False
         btnBorrar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnBorrar.ForeColor = Color.Red
-        btnBorrar.Location = New Point(14, 331)
-        btnBorrar.Margin = New Padding(3, 4, 3, 4)
+        btnBorrar.Location = New Point(10, 317)
         btnBorrar.Name = "btnBorrar"
-        btnBorrar.Size = New Size(143, 31)
+        btnBorrar.Size = New Size(125, 23)
         btnBorrar.TabIndex = 19
         btnBorrar.Text = "Eliminar Producto"
         btnBorrar.UseVisualStyleBackColor = True
@@ -261,10 +251,9 @@ Partial Class stock
         btnProveedores.FlatStyle = FlatStyle.Flat
         btnProveedores.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
         btnProveedores.Image = CType(resources.GetObject("btnProveedores.Image"), Image)
-        btnProveedores.Location = New Point(1114, 9)
-        btnProveedores.Margin = New Padding(3, 4, 3, 4)
+        btnProveedores.Location = New Point(975, 7)
         btnProveedores.Name = "btnProveedores"
-        btnProveedores.Size = New Size(137, 138)
+        btnProveedores.Size = New Size(120, 104)
         btnProveedores.TabIndex = 20
         btnProveedores.UseVisualStyleBackColor = False
         ' 
@@ -272,21 +261,26 @@ Partial Class stock
         ' 
         GroupBox1.Controls.Add(btnModificar)
         GroupBox1.Controls.Add(btnCrear)
-        GroupBox1.Location = New Point(14, 9)
-        GroupBox1.Margin = New Padding(3, 4, 3, 4)
+        GroupBox1.Controls.Add(cmbCategoria)
+        GroupBox1.Controls.Add(Label4)
+        GroupBox1.Controls.Add(txtPrecio)
+        GroupBox1.Controls.Add(Label2)
+        GroupBox1.Controls.Add(txtStock)
+        GroupBox1.Controls.Add(Label3)
+        GroupBox1.Controls.Add(lblId)
+        GroupBox1.Location = New Point(12, 7)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Padding = New Padding(3, 4, 3, 4)
-        GroupBox1.Size = New Size(449, 313)
+        GroupBox1.Size = New Size(393, 304)
         GroupBox1.TabIndex = 21
         GroupBox1.TabStop = False
         GroupBox1.Text = "Datos del Producto"
         ' 
         ' PictureBox1
         ' 
-        PictureBox1.Location = New Point(559, 22)
-        PictureBox1.Margin = New Padding(3, 4, 3, 4)
+        PictureBox1.InitialImage = Nothing
+        PictureBox1.Location = New Point(489, 16)
         PictureBox1.Name = "PictureBox1"
-        PictureBox1.Size = New Size(373, 226)
+        PictureBox1.Size = New Size(326, 170)
         PictureBox1.SizeMode = PictureBoxSizeMode.Zoom
         PictureBox1.TabIndex = 22
         PictureBox1.TabStop = False
@@ -294,10 +288,9 @@ Partial Class stock
         ' btnAgregar
         ' 
         btnAgregar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnAgregar.Location = New Point(569, 256)
-        btnAgregar.Margin = New Padding(3, 4, 3, 4)
+        btnAgregar.Location = New Point(498, 192)
         btnAgregar.Name = "btnAgregar"
-        btnAgregar.Size = New Size(38, 31)
+        btnAgregar.Size = New Size(33, 23)
         btnAgregar.TabIndex = 23
         btnAgregar.Text = "+"
         btnAgregar.UseVisualStyleBackColor = True
@@ -305,10 +298,9 @@ Partial Class stock
         ' btnQuitar
         ' 
         btnQuitar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnQuitar.Location = New Point(729, 256)
-        btnQuitar.Margin = New Padding(3, 4, 3, 4)
+        btnQuitar.Location = New Point(638, 192)
         btnQuitar.Name = "btnQuitar"
-        btnQuitar.Size = New Size(100, 31)
+        btnQuitar.Size = New Size(88, 23)
         btnQuitar.TabIndex = 24
         btnQuitar.Text = "Quitar"
         btnQuitar.UseVisualStyleBackColor = True
@@ -316,19 +308,18 @@ Partial Class stock
         ' btnGuardar
         ' 
         btnGuardar.Font = New Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnGuardar.Location = New Point(623, 256)
-        btnGuardar.Margin = New Padding(3, 4, 3, 4)
+        btnGuardar.Location = New Point(545, 192)
         btnGuardar.Name = "btnGuardar"
-        btnGuardar.Size = New Size(100, 31)
+        btnGuardar.Size = New Size(88, 23)
         btnGuardar.TabIndex = 25
         btnGuardar.Text = "Guardar"
         btnGuardar.UseVisualStyleBackColor = True
         ' 
         ' stock
         ' 
-        AutoScaleDimensions = New SizeF(8F, 20F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1272, 608)
+        ClientSize = New Size(1113, 575)
         Controls.Add(btnGuardar)
         Controls.Add(btnQuitar)
         Controls.Add(btnAgregar)
@@ -340,24 +331,17 @@ Partial Class stock
         Controls.Add(btnBuscar)
         Controls.Add(Label7)
         Controls.Add(txtBuscar)
-        Controls.Add(cmbCategoria)
-        Controls.Add(lblId)
         Controls.Add(Label5)
-        Controls.Add(Label4)
-        Controls.Add(Label3)
-        Controls.Add(Label2)
         Controls.Add(Label1)
-        Controls.Add(txtStock)
-        Controls.Add(txtPrecio)
         Controls.Add(txtNombre)
         Controls.Add(dgvStock)
         Controls.Add(GroupBox1)
         FormBorderStyle = FormBorderStyle.FixedSingle
-        Margin = New Padding(3, 4, 3, 4)
         Name = "stock"
         Text = "Stock"
         CType(dgvStock, ComponentModel.ISupportInitialize).EndInit()
         GroupBox1.ResumeLayout(False)
+        GroupBox1.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()

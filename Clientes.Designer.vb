@@ -50,7 +50,7 @@ Partial Class Clientes
         btnBorrar.Enabled = False
         btnBorrar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
         btnBorrar.ForeColor = Color.Red
-        btnBorrar.Location = New Point(10, 386)
+        btnBorrar.Location = New Point(12, 320)
         btnBorrar.Name = "btnBorrar"
         btnBorrar.Size = New Size(90, 23)
         btnBorrar.TabIndex = 34
@@ -60,7 +60,7 @@ Partial Class Clientes
         ' Label6
         ' 
         Label6.AutoSize = True
-        Label6.Location = New Point(67, 84)
+        Label6.Location = New Point(28, 98)
         Label6.Name = "Label6"
         Label6.Size = New Size(52, 15)
         Label6.TabIndex = 33
@@ -69,7 +69,7 @@ Partial Class Clientes
         ' txtTelefono
         ' 
         txtTelefono.BorderStyle = BorderStyle.FixedSingle
-        txtTelefono.Location = New Point(142, 82)
+        txtTelefono.Location = New Point(108, 90)
         txtTelefono.Name = "txtTelefono"
         txtTelefono.Size = New Size(356, 23)
         txtTelefono.TabIndex = 2
@@ -78,7 +78,7 @@ Partial Class Clientes
         ' 
         lblId.AutoSize = True
         lblId.Font = New Font("Segoe UI", 16F, FontStyle.Bold)
-        lblId.Location = New Point(317, 15)
+        lblId.Location = New Point(283, 17)
         lblId.Name = "lblId"
         lblId.Size = New Size(22, 30)
         lblId.TabIndex = 32
@@ -87,7 +87,7 @@ Partial Class Clientes
         ' Label5
         ' 
         Label5.AutoSize = True
-        Label5.Location = New Point(58, 23)
+        Label5.Location = New Point(28, 30)
         Label5.Name = "Label5"
         Label5.Size = New Size(46, 15)
         Label5.TabIndex = 31
@@ -96,7 +96,7 @@ Partial Class Clientes
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(83, 150)
+        Label2.Location = New Point(28, 186)
         Label2.Name = "Label2"
         Label2.Size = New Size(36, 15)
         Label2.TabIndex = 28
@@ -105,7 +105,7 @@ Partial Class Clientes
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(68, 50)
+        Label1.Location = New Point(28, 56)
         Label1.Name = "Label1"
         Label1.Size = New Size(51, 15)
         Label1.TabIndex = 27
@@ -114,7 +114,7 @@ Partial Class Clientes
         ' txtEmail
         ' 
         txtEmail.BorderStyle = BorderStyle.FixedSingle
-        txtEmail.Location = New Point(142, 148)
+        txtEmail.Location = New Point(108, 178)
         txtEmail.Name = "txtEmail"
         txtEmail.Size = New Size(356, 23)
         txtEmail.TabIndex = 4
@@ -122,7 +122,7 @@ Partial Class Clientes
         ' txtNombre
         ' 
         txtNombre.BorderStyle = BorderStyle.FixedSingle
-        txtNombre.Location = New Point(142, 48)
+        txtNombre.Location = New Point(108, 48)
         txtNombre.Name = "txtNombre"
         txtNombre.Size = New Size(356, 23)
         txtNombre.TabIndex = 1
@@ -143,7 +143,7 @@ Partial Class Clientes
         GroupBox1.Controls.Add(Label2)
         GroupBox1.Location = New Point(12, 21)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(525, 260)
+        GroupBox1.Size = New Size(501, 260)
         GroupBox1.TabIndex = 35
         GroupBox1.TabStop = False
         GroupBox1.Text = "Datos del usuario"
@@ -151,7 +151,7 @@ Partial Class Clientes
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Location = New Point(62, 115)
+        Label7.Location = New Point(28, 142)
         Label7.Name = "Label7"
         Label7.Size = New Size(57, 15)
         Label7.TabIndex = 36
@@ -160,7 +160,7 @@ Partial Class Clientes
         ' txtDireccion
         ' 
         txtDireccion.BorderStyle = BorderStyle.FixedSingle
-        txtDireccion.Location = New Point(142, 113)
+        txtDireccion.Location = New Point(108, 134)
         txtDireccion.Name = "txtDireccion"
         txtDireccion.Size = New Size(356, 23)
         txtDireccion.TabIndex = 3
@@ -168,9 +168,9 @@ Partial Class Clientes
         ' btnModificar
         ' 
         btnModificar.Cursor = Cursors.Hand
-        btnModificar.Location = New Point(83, 184)
+        btnModificar.Location = New Point(108, 228)
         btnModificar.Name = "btnModificar"
-        btnModificar.Size = New Size(125, 23)
+        btnModificar.Size = New Size(167, 23)
         btnModificar.TabIndex = 14
         btnModificar.Text = "Modificar"
         btnModificar.UseVisualStyleBackColor = True
@@ -179,9 +179,9 @@ Partial Class Clientes
         ' 
         btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Enabled = False
-        btnAgregar.Location = New Point(214, 184)
+        btnAgregar.Location = New Point(297, 228)
         btnAgregar.Name = "btnAgregar"
-        btnAgregar.Size = New Size(125, 23)
+        btnAgregar.Size = New Size(167, 23)
         btnAgregar.TabIndex = 6
         btnAgregar.Text = "Agregar"
         btnAgregar.UseVisualStyleBackColor = True
@@ -195,13 +195,13 @@ Partial Class Clientes
         dgvClientes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvClientes.Cursor = Cursors.Hand
         dgvClientes.GridColor = SystemColors.ControlDark
-        dgvClientes.Location = New Point(10, 291)
+        dgvClientes.Location = New Point(12, 358)
         dgvClientes.MultiSelect = False
         dgvClientes.Name = "dgvClientes"
         dgvClientes.ReadOnly = True
         dgvClientes.RowHeadersWidth = 51
         dgvClientes.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-        dgvClientes.Size = New Size(1090, 90)
+        dgvClientes.Size = New Size(1090, 205)
         dgvClientes.TabIndex = 36
         ' 
         ' btnBuscar
@@ -210,9 +210,9 @@ Partial Class Clientes
         btnBuscar.Cursor = Cursors.Hand
         btnBuscar.Enabled = False
         btnBuscar.Font = New Font("Segoe UI", 9F, FontStyle.Bold)
-        btnBuscar.Location = New Point(890, 260)
+        btnBuscar.Location = New Point(1061, 311)
         btnBuscar.Name = "btnBuscar"
-        btnBuscar.Size = New Size(41, 23)
+        btnBuscar.Size = New Size(41, 32)
         btnBuscar.TabIndex = 39
         btnBuscar.Text = "🔍"
         btnBuscar.UseVisualStyleBackColor = False
@@ -220,7 +220,7 @@ Partial Class Clientes
         ' Label8
         ' 
         Label8.AutoSize = True
-        Label8.Location = New Point(634, 266)
+        Label8.Location = New Point(804, 323)
         Label8.Name = "Label8"
         Label8.Size = New Size(42, 15)
         Label8.TabIndex = 38
@@ -228,7 +228,7 @@ Partial Class Clientes
         ' 
         ' txtBuscar
         ' 
-        txtBuscar.Location = New Point(682, 262)
+        txtBuscar.Location = New Point(852, 311)
         txtBuscar.Name = "txtBuscar"
         txtBuscar.Size = New Size(203, 23)
         txtBuscar.TabIndex = 37
@@ -237,7 +237,7 @@ Partial Class Clientes
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(1113, 412)
+        ClientSize = New Size(1113, 575)
         Controls.Add(btnBuscar)
         Controls.Add(Label8)
         Controls.Add(txtBuscar)

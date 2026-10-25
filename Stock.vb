@@ -95,7 +95,7 @@ Public Class Stock
 
                     'Verifico que el valor no sea null
                     If valor Is Nothing OrElse valor Is DBNull.Value Then
-                        PictureBox1.Image = Nothing
+
                         Exit Sub
                     End If
 
@@ -146,6 +146,7 @@ Public Class Stock
 
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub stock_Load(sender As Object, e As EventArgs) Handles Me.Load
+        Tema.AplicarTema(Me)
         CargarGrilla()
         CargarCategorias()
         LimpiarCampos()
@@ -168,6 +169,7 @@ Public Class Stock
 
     Private Sub dgvStock_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvStock.CellClick
         If e.RowIndex >= 0 Then
+            PictureBox1.Image = Nothing
             Dim fila As DataGridViewRow = dgvStock.Rows(e.RowIndex)
 
             lblId.Text = fila.Cells("id_producto").Value.ToString
@@ -184,6 +186,8 @@ Public Class Stock
             End If
         End If
         If PictureBox1.Image Is Nothing Then
+            Dim rutaImagen As String = IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images", "images (1).png")
+            PictureBox1.Image = Image.FromFile(rutaImagen)
             btnQuitar.Enabled = False
             btnGuardar.Enabled = False
             btnAgregar.Enabled = True
@@ -505,6 +509,5 @@ Public Class Stock
 
 
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
-
 
 End Class
