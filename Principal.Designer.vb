@@ -29,6 +29,7 @@ Partial Class Principal
         btnCerrarSesion = New Button()
         lblBienvenido = New Label()
         pnlCabecera = New Panel()
+        btnCaja = New Button()
         btnUsuarios = New Button()
         btnProveedores = New Button()
         btnInicio = New Button()
@@ -45,7 +46,7 @@ Partial Class Principal
         btnStock.FlatStyle = FlatStyle.Flat
         btnStock.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnStock.ForeColor = Color.White
-        btnStock.Location = New Point(141, 9)
+        btnStock.Location = New Point(133, 10)
         btnStock.Name = "btnStock"
         btnStock.Size = New Size(117, 27)
         btnStock.TabIndex = 1
@@ -67,7 +68,7 @@ Partial Class Principal
         ' btnSalir
         ' 
         btnSalir.ForeColor = Color.Black
-        btnSalir.Location = New Point(1032, 14)
+        btnSalir.Location = New Point(1042, 12)
         btnSalir.Name = "btnSalir"
         btnSalir.Size = New Size(75, 23)
         btnSalir.TabIndex = 5
@@ -77,7 +78,7 @@ Partial Class Principal
         ' btnCerrarSesion
         ' 
         btnCerrarSesion.ForeColor = Color.Black
-        btnCerrarSesion.Location = New Point(927, 14)
+        btnCerrarSesion.Location = New Point(936, 12)
         btnCerrarSesion.Name = "btnCerrarSesion"
         btnCerrarSesion.Size = New Size(100, 23)
         btnCerrarSesion.TabIndex = 6
@@ -96,6 +97,7 @@ Partial Class Principal
         ' pnlCabecera
         ' 
         pnlCabecera.BackColor = Color.DarkGreen
+        pnlCabecera.Controls.Add(btnCaja)
         pnlCabecera.Controls.Add(btnUsuarios)
         pnlCabecera.Controls.Add(btnProveedores)
         pnlCabecera.Controls.Add(btnInicio)
@@ -111,6 +113,21 @@ Partial Class Principal
         pnlCabecera.Size = New Size(1129, 49)
         pnlCabecera.TabIndex = 8
         ' 
+        ' btnCaja
+        ' 
+        btnCaja.BackColor = Color.Green
+        btnCaja.Cursor = Cursors.Hand
+        btnCaja.FlatAppearance.BorderSize = 0
+        btnCaja.FlatStyle = FlatStyle.Flat
+        btnCaja.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnCaja.ForeColor = Color.White
+        btnCaja.Location = New Point(526, 10)
+        btnCaja.Name = "btnCaja"
+        btnCaja.Size = New Size(141, 27)
+        btnCaja.TabIndex = 11
+        btnCaja.Text = "Caja"
+        btnCaja.UseVisualStyleBackColor = False
+        ' 
         ' btnUsuarios
         ' 
         btnUsuarios.BackColor = Color.Green
@@ -119,12 +136,11 @@ Partial Class Principal
         btnUsuarios.FlatStyle = FlatStyle.Flat
         btnUsuarios.Font = New Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnUsuarios.ForeColor = Color.White
-        btnUsuarios.Location = New Point(820, 10)
+        btnUsuarios.Location = New Point(829, 10)
         btnUsuarios.Name = "btnUsuarios"
         btnUsuarios.Size = New Size(87, 29)
         btnUsuarios.TabIndex = 10
         btnUsuarios.Text = "Usuarios"
-        btnUsuarios.TextAlign = ContentAlignment.TopCenter
         btnUsuarios.UseVisualStyleBackColor = False
         ' 
         ' btnProveedores
@@ -135,7 +151,7 @@ Partial Class Principal
         btnProveedores.FlatStyle = FlatStyle.Flat
         btnProveedores.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnProveedores.ForeColor = Color.White
-        btnProveedores.Location = New Point(408, 9)
+        btnProveedores.Location = New Point(379, 10)
         btnProveedores.Name = "btnProveedores"
         btnProveedores.Size = New Size(141, 27)
         btnProveedores.TabIndex = 9
@@ -165,7 +181,7 @@ Partial Class Principal
         btnClientes.FlatStyle = FlatStyle.Flat
         btnClientes.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnClientes.ForeColor = Color.White
-        btnClientes.Location = New Point(275, 9)
+        btnClientes.Location = New Point(256, 10)
         btnClientes.Name = "btnClientes"
         btnClientes.Size = New Size(117, 27)
         btnClientes.TabIndex = 7
@@ -184,7 +200,7 @@ Partial Class Principal
         ' 
         ' Principal
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
         ClientSize = New Size(1129, 564)
@@ -211,5 +227,6 @@ Partial Class Principal
     Friend WithEvents btnInicio As Button
     Friend WithEvents btnProveedores As Button
     Friend WithEvents btnUsuarios As Button
+    Friend WithEvents btnCaja As Button
 
 End Class

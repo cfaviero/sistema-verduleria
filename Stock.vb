@@ -1,4 +1,5 @@
 ﻿Imports System.Drawing.Imaging
+Imports System.Drawing.Printing
 Imports System.IO
 Imports MySqlConnector
 
@@ -407,10 +408,9 @@ Public Class Stock
             Exit Sub
         End If
 
-
         Proveedores.idProductoSeleccionado = CInt(lblId.Text)
         Proveedores.nombreProductoSeleccionado = txtNombre.Text
-
+        Proveedores.descriProd = txtDescripcion.Text
 
         'llamo al form
         Proveedores.ShowDialog()
@@ -509,4 +509,120 @@ Public Class Stock
 
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
+
+
+    ' Cantidad de productos que aparecen en el informe (caben hasta 6 en la hoja)
+    Private Const CANTIDAD_INFORME As Integer = 5
+
+    ' Datos del informe, cargados al hacer clic y usados al dibujar la hoja
+    Private informeProductos As DataTable
+    Private indiceFila As Integer
+
+    Private Sub btnInforme_Click(sender As Object, e As EventArgs) Handles btnInforme.Click
+        Try
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+
+                Dim consulta As String =
+                    "SELECT p.nombre, c.nombre_categoria, p.precio_unitario, s.stock, p.imagen_producto " &
+                    "FROM productos AS p " &
+                    "INNER JOIN categorias AS c ON c.id_categoria = p.id_categoria " &
+                    "INNER JOIN v_stock AS s ON s.id_producto = p.id_producto " &
+                    "WHERE p.activo = 1 " &
+                    "ORDER BY s.stock asc;" '&
+                '"LIMIT " & CANTIDAD_INFORME
+
+                Using cmd As New MySqlCommand(consulta, cn)
+                    informeProductos = New DataTable()
+                    Using lector As MySqlDataReader = cmd.ExecuteReader()
+                        informeProductos.Load(lector)
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error al generar el informe: " & ex.Message)
+            Exit Sub
+        End Try
+
+        If informeProductos.Rows.Count = 0 Then
+            MessageBox.Show("No hay productos para el informe.")
+            Exit Sub
+        End If
+
+        PrintPreviewDialog1.Document = PrintDocument1
+        PrintPreviewDialog1.WindowState = FormWindowState.Maximized
+        PrintPreviewDialog1.ShowDialog()
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Const ALTO_FILA As Integer = 130
+        Const LADO_IMG As Integer = 110
+
+        Dim g As Graphics = e.Graphics
+        Dim marco As Rectangle = e.MarginBounds
+        Dim centrado As New StringFormat() With {.Alignment = StringAlignment.Center}
+
+        Using fTitulo As New Font("Arial", 18, FontStyle.Bold),
+              fNormal As New Font("Arial", 12, FontStyle.Regular),
+              fNegrita As New Font("Arial", 12, FontStyle.Bold),
+              lapizMarco As New Pen(Color.Black, 2)
+
+            ' Recuadro alrededor de toda la información
+            g.DrawRectangle(lapizMarco, marco)
+
+            ' Encabezado
+            g.DrawString("Informe de productos con menos stock", fTitulo, Brushes.Black,
+                         New RectangleF(marco.Left, marco.Top + 15, marco.Width, 40), centrado)
+            g.DrawString("Fecha: " & Now.ToString("dd/MM/yyyy HH:mm"), fNormal, Brushes.Black,
+                         marco.Left + 15, marco.Top + 60)
+            g.DrawLine(Pens.Black, marco.Left, marco.Top + 90, marco.Right, marco.Top + 90)
+
+            ' Una fila por producto
+            Dim y As Integer = marco.Top + 100
+            Do While indiceFila < informeProductos.Rows.Count
+
+                ' Si no entra otra fila en esta hoja, corto y sigo en la siguiente
+                If y + ALTO_FILA > marco.Bottom - 40 Then Exit Do
+
+                Dim fila As DataRow = informeProductos.Rows(indiceFila)
+
+                ' Imagen (ajustada sin deformarla) o aviso si no tiene
+                Dim rectImg As New Rectangle(marco.Left + 15, y, LADO_IMG, LADO_IMG)
+                If Not IsDBNull(fila("imagen_producto")) Then
+                    Using memoria As New MemoryStream(DirectCast(fila("imagen_producto"), Byte()))
+                        Using img As Image = Image.FromStream(memoria)
+                            Dim escala As Single = Math.Min(LADO_IMG / img.Width, LADO_IMG / img.Height)
+                            Dim ancho As Integer = CInt(img.Width * escala)
+                            Dim alto As Integer = CInt(img.Height * escala)
+                            g.DrawImage(img, rectImg.X + (LADO_IMG - ancho) \ 2,
+                                        rectImg.Y + (LADO_IMG - alto) \ 2, ancho, alto)
+                        End Using
+                    End Using
+                Else
+                    g.DrawString("Sin imagen", fNormal, Brushes.Gray, rectImg.X + 10, rectImg.Y + 45)
+                End If
+                g.DrawRectangle(Pens.Gray, rectImg)
+
+                ' Datos del producto
+                Dim xTexto As Integer = rectImg.Right + 20
+                g.DrawString(fila("nombre").ToString(), fNegrita, Brushes.Black, xTexto, y + 5)
+                g.DrawString("Categoría: " & fila("nombre_categoria").ToString(), fNormal, Brushes.Black, xTexto, y + 35)
+                g.DrawString("Precio: " & Convert.ToDecimal(fila("precio_unitario")).ToString("C2"),
+                             fNormal, Brushes.Black, xTexto, y + 60)
+                g.DrawString("Stock: " & Convert.ToDecimal(fila("stock")).ToString("0.###"),
+                             fNegrita, Brushes.Black, xTexto, y + 85)
+
+                y += ALTO_FILA
+                g.DrawLine(Pens.LightGray, marco.Left + 15, y - 10, marco.Right - 15, y - 10)
+
+                indiceFila += 1   ' paso al siguiente producto
+            Loop
+
+            ' Si quedan productos, la impresión genera otra hoja
+            e.HasMorePages = (indiceFila < informeProductos.Rows.Count)
+        End Using
+    End Sub
+    Private Sub PrintDocument1_BeginPrint(sender As Object, e As Printing.PrintEventArgs) Handles PrintDocument1.BeginPrint
+        indiceFila = 0
+    End Sub
 End Class

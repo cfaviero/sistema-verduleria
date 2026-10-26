@@ -135,5 +135,8 @@ Public Class Principal
         End If
     End Sub
 
-
+    Private Sub btnCaja_Click(sender As Object, e As EventArgs) Handles btnCaja.Click
+        MostrarFormulario(New Caja())
+        DeshabilitarBotones()
+    End Sub
 End Class

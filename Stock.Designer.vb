@@ -50,6 +50,9 @@ Partial Class stock
         btnAgregar = New Button()
         btnQuitar = New Button()
         btnGuardar = New Button()
+        PrintPreviewDialog1 = New PrintPreviewDialog()
+        PrintDocument1 = New Printing.PrintDocument()
+        btnInforme = New Button()
         CType(dgvStock, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -251,7 +254,7 @@ Partial Class stock
         btnProveedores.FlatStyle = FlatStyle.Flat
         btnProveedores.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
         btnProveedores.Image = CType(resources.GetObject("btnProveedores.Image"), Image)
-        btnProveedores.Location = New Point(975, 7)
+        btnProveedores.Location = New Point(980, 16)
         btnProveedores.Name = "btnProveedores"
         btnProveedores.Size = New Size(120, 104)
         btnProveedores.TabIndex = 20
@@ -315,11 +318,34 @@ Partial Class stock
         btnGuardar.Text = "Guardar"
         btnGuardar.UseVisualStyleBackColor = True
         ' 
+        ' PrintPreviewDialog1
+        ' 
+        PrintPreviewDialog1.AutoScrollMargin = New Size(0, 0)
+        PrintPreviewDialog1.AutoScrollMinSize = New Size(0, 0)
+        PrintPreviewDialog1.ClientSize = New Size(400, 300)
+        PrintPreviewDialog1.Enabled = True
+        PrintPreviewDialog1.Icon = CType(resources.GetObject("PrintPreviewDialog1.Icon"), Icon)
+        PrintPreviewDialog1.Name = "PrintPreviewDialog1"
+        PrintPreviewDialog1.Visible = False
+        ' 
+        ' PrintDocument1
+        ' 
+        ' 
+        ' btnInforme
+        ' 
+        btnInforme.Location = New Point(1041, 160)
+        btnInforme.Name = "btnInforme"
+        btnInforme.Size = New Size(60, 55)
+        btnInforme.TabIndex = 26
+        btnInforme.Text = "Informe"
+        btnInforme.UseVisualStyleBackColor = True
+        ' 
         ' stock
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1113, 575)
+        Controls.Add(btnInforme)
         Controls.Add(btnGuardar)
         Controls.Add(btnQuitar)
         Controls.Add(btnAgregar)
@@ -373,4 +399,7 @@ Partial Class stock
     Friend WithEvents btnAgregar As Button
     Friend WithEvents btnQuitar As Button
     Friend WithEvents btnGuardar As Button
+    Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
+    Friend WithEvents PrintDocument1 As Printing.PrintDocument
+    Friend WithEvents btnInforme As Button
 End Class

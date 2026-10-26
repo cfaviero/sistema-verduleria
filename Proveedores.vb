@@ -4,6 +4,7 @@ Public Class Proveedores
     'Declaro variables públicas (los valores vienen del form stock)
     Public idProductoSeleccionado As Integer
     Public nombreProductoSeleccionado As String
+    Public descriProd As String
 
     Sub cargarCheckListProveedores()
 
@@ -98,8 +99,10 @@ Public Class Proveedores
     Private Sub ProveedoresProducto_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
         Tema.AplicarTema(Me)
+        Label1.Font = Tema.Fuente(22, FontStyle.Bold)
         'Muestro el producto seleccionado
-        lblProducto.Text = "Producto: " & nombreProductoSeleccionado
+        Label1.Text = "Seleccione los proveedores para '" & nombreProductoSeleccionado & "'"
+        lblDescrip.Text = descriProd
 
         'Cargo lista de proveedores
         cargarCheckListProveedores()
