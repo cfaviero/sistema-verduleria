@@ -53,6 +53,7 @@ Partial Class stock
         PrintPreviewDialog1 = New PrintPreviewDialog()
         PrintDocument1 = New Printing.PrintDocument()
         btnInforme = New Button()
+        Button1 = New Button()
         CType(dgvStock, ComponentModel.ISupportInitialize).BeginInit()
         GroupBox1.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -253,11 +254,11 @@ Partial Class stock
         btnProveedores.FlatAppearance.BorderSize = 0
         btnProveedores.FlatStyle = FlatStyle.Flat
         btnProveedores.Font = New Font("Segoe UI", 12F, FontStyle.Bold)
-        btnProveedores.Image = CType(resources.GetObject("btnProveedores.Image"), Image)
-        btnProveedores.Location = New Point(980, 16)
+        btnProveedores.Location = New Point(978, 16)
         btnProveedores.Name = "btnProveedores"
-        btnProveedores.Size = New Size(120, 104)
+        btnProveedores.Size = New Size(123, 68)
         btnProveedores.TabIndex = 20
+        btnProveedores.Text = "Proveedores"
         btnProveedores.UseVisualStyleBackColor = False
         ' 
         ' GroupBox1
@@ -333,18 +334,28 @@ Partial Class stock
         ' 
         ' btnInforme
         ' 
-        btnInforme.Location = New Point(1041, 160)
+        btnInforme.Location = New Point(1041, 151)
         btnInforme.Name = "btnInforme"
         btnInforme.Size = New Size(60, 55)
         btnInforme.TabIndex = 26
         btnInforme.Text = "Informe"
         btnInforme.UseVisualStyleBackColor = True
         ' 
+        ' Button1
+        ' 
+        Button1.Location = New Point(978, 90)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(123, 55)
+        Button1.TabIndex = 27
+        Button1.Text = "Control de Mermas"
+        Button1.UseVisualStyleBackColor = True
+        ' 
         ' stock
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1113, 575)
+        Controls.Add(Button1)
         Controls.Add(btnInforme)
         Controls.Add(btnGuardar)
         Controls.Add(btnQuitar)
@@ -402,4 +413,5 @@ Partial Class stock
     Friend WithEvents PrintPreviewDialog1 As PrintPreviewDialog
     Friend WithEvents PrintDocument1 As Printing.PrintDocument
     Friend WithEvents btnInforme As Button
+    Friend WithEvents Button1 As Button
 End Class

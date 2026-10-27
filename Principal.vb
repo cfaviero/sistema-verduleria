@@ -27,6 +27,12 @@ Public Class Principal
         Else
             btnProveedores.Enabled = True
         End If
+
+        If TypeOf formularioActual Is Caja Then
+            btnCaja.Enabled = False
+        Else
+            btnCaja.Enabled = True
+        End If
     End Sub
 
     Private Sub MostrarFormulario(formulario As Form)
@@ -101,19 +107,20 @@ Public Class Principal
         MostrarFormulario(New Clientes)
         DeshabilitarBotones()
     End Sub
-
     Private Sub btnInicio_Click(sender As Object, e As EventArgs) Handles btnInicio.Click
         MostrarFormulario(New frmDashboard())
         DeshabilitarBotones()
     End Sub
-
     Private Sub btnProveedores_Click(sender As Object, e As EventArgs) Handles btnProveedores.Click
         MostrarFormulario(New Proveedores_ABM())
         DeshabilitarBotones()
     End Sub
-
     Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
         MostrarFormulario(New Usuarios())
+        DeshabilitarBotones()
+    End Sub
+    Private Sub btnCaja_Click(sender As Object, e As EventArgs) Handles btnCaja.Click
+        MostrarFormulario(New Caja())
         DeshabilitarBotones()
     End Sub
 
@@ -135,8 +142,6 @@ Public Class Principal
         End If
     End Sub
 
-    Private Sub btnCaja_Click(sender As Object, e As EventArgs) Handles btnCaja.Click
-        MostrarFormulario(New Caja())
-        DeshabilitarBotones()
-    End Sub
+
+
 End Class

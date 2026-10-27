@@ -523,7 +523,7 @@ Public Class Stock
             Using cn As New MySqlConnection(ConnectionString)
                 cn.Open()
 
-                Dim consulta As String =
+                Dim consulta =
                     "SELECT p.nombre, c.nombre_categoria, p.precio_unitario, s.stock, p.imagen_producto " &
                     "FROM productos AS p " &
                     "INNER JOIN categorias AS c ON c.id_categoria = p.id_categoria " &
@@ -533,8 +533,8 @@ Public Class Stock
                 '"LIMIT " & CANTIDAD_INFORME
 
                 Using cmd As New MySqlCommand(consulta, cn)
-                    informeProductos = New DataTable()
-                    Using lector As MySqlDataReader = cmd.ExecuteReader()
+                    informeProductos = New DataTable
+                    Using lector = cmd.ExecuteReader
                         informeProductos.Load(lector)
                     End Using
                 End Using
@@ -624,5 +624,9 @@ Public Class Stock
     End Sub
     Private Sub PrintDocument1_BeginPrint(sender As Object, e As Printing.PrintEventArgs) Handles PrintDocument1.BeginPrint
         indiceFila = 0
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Mermas.ShowDialog()
     End Sub
 End Class
