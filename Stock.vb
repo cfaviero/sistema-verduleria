@@ -160,6 +160,7 @@ Public Class Stock
         CargarGrilla()
         CargarCategorias()
         LimpiarCampos()
+        ToolTip1.SetToolTip(btnFichaProducto, "Imprimir la ficha del producto seleccionado")
         ToolTip1.SetToolTip(btnProveedores, "Modificar los proveedores del producto")
         txtBuscar.PlaceholderText = "Buscar producto..."
         txtNombre.PlaceholderText = "Ej. Manzana"
@@ -169,6 +170,11 @@ Public Class Stock
         btnAgregar.Enabled = False
         btnGuardar.Enabled = False
         btnQuitar.Enabled = False
+        btnFichaProducto.Enabled = False
+
+
+
+
     End Sub
 
     Private Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
@@ -330,6 +336,7 @@ Public Class Stock
 
         btnBorrar.Enabled = registroSeleccionado
         btnModificar.Enabled = registroSeleccionado
+        btnFichaProducto.Enabled = registroSeleccionado
 
     End Sub
 
@@ -626,7 +633,190 @@ Public Class Stock
         indiceFila = 0
     End Sub
 
+
+
+    Private WithEvents docFicha As New PrintDocument
+
+    ' Datos de la ficha, cargados al hacer clic y usados al dibujar la hoja
+    Private fichaProducto As DataRow
+    Private fichaProveedores As DataTable
+
+    Private Sub btnFichaProducto_Click(sender As Object, e As EventArgs) Handles btnFichaProducto.Click
+        If lblId.Text = "" Then
+            MessageBox.Show("Seleccione un producto de la grilla.", "Aviso",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Try
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+
+                ' 1) Datos del producto
+                Dim consulta As String =
+                "SELECT p.id_producto, p.nombre, p.descripcion, p.precio_unitario, p.unidad_medida, " &
+                "p.imagen_producto, c.nombre_categoria, s.stock, " &
+                "(SELECT MAX(l.fecha_entrada) FROM productos_lote AS pl " &
+                "   INNER JOIN lotes AS l ON l.id_lote = pl.id_lote " &
+                "   WHERE pl.id_producto = p.id_producto) AS ultimo_ingreso, " &
+                "(SELECT pl.costo FROM productos_lote AS pl " &
+                "   INNER JOIN lotes AS l ON l.id_lote = pl.id_lote " &
+                "   WHERE pl.id_producto = p.id_producto " &
+                "   ORDER BY l.fecha_entrada DESC, pl.id_prod_lote DESC LIMIT 1) AS ultimo_costo " &
+                "FROM productos AS p " &
+                "INNER JOIN categorias AS c ON c.id_categoria = p.id_categoria " &
+                "INNER JOIN v_stock AS s ON s.id_producto = p.id_producto " &
+                "WHERE p.id_producto = @id"
+
+                Dim tablaProducto As New DataTable
+                Using cmd As New MySqlCommand(consulta, cn)
+                    cmd.Parameters.AddWithValue("@id", CInt(lblId.Text))
+                    Using lector = cmd.ExecuteReader
+                        tablaProducto.Load(lector)
+                    End Using
+                End Using
+
+                If tablaProducto.Rows.Count = 0 Then
+                    MessageBox.Show("No se encontró el producto seleccionado.")
+                    Exit Sub
+                End If
+                fichaProducto = tablaProducto.Rows(0)
+
+                ' 2) Proveedores del producto
+                Dim consultaProv As String =
+                "SELECT pr.nombre, pr.telefono " &
+                "FROM productos_proveedores AS pp " &
+                "INNER JOIN proveedores AS pr ON pr.id_proveedor = pp.id_proveedor " &
+                "WHERE pp.id_producto = @id AND pr.activo = 1 " &
+                "ORDER BY pr.nombre"
+
+                fichaProveedores = New DataTable
+                Using cmd As New MySqlCommand(consultaProv, cn)
+                    cmd.Parameters.AddWithValue("@id", CInt(lblId.Text))
+                    Using lector = cmd.ExecuteReader
+                        fichaProveedores.Load(lector)
+                    End Using
+                End Using
+            End Using
+        Catch ex As Exception
+            MessageBox.Show("Error al generar la ficha: " & ex.Message)
+            Exit Sub
+        End Try
+
+        PrintPreviewDialog1.Document = docFicha
+        PrintPreviewDialog1.WindowState = FormWindowState.Maximized
+        PrintPreviewDialog1.ShowDialog()
+    End Sub
+
+    Private Sub docFicha_PrintPage(sender As Object, e As PrintPageEventArgs) Handles docFicha.PrintPage
+        Const LADO_IMG As Integer = 220
+        Const MARGEN As Integer = 20
+
+        Dim g As Graphics = e.Graphics
+        Dim marco As Rectangle = e.MarginBounds
+        Dim unidad As String = fichaProducto("unidad_medida").ToString()
+
+        Using centrado As New StringFormat() With {.Alignment = StringAlignment.Center},
+          fTitulo As New Font("Arial", 18, FontStyle.Bold),
+          fNombre As New Font("Arial", 16, FontStyle.Bold),
+          fNormal As New Font("Arial", 12, FontStyle.Regular),
+          fNegrita As New Font("Arial", 12, FontStyle.Bold),
+          lapizMarco As New Pen(Color.Black, 2)
+
+            ' Recuadro alrededor de toda la información
+            g.DrawRectangle(lapizMarco, marco)
+
+            ' Encabezado (mismo estilo que el informe de stock)
+            g.DrawString("Ficha de producto", fTitulo, Brushes.Black,
+                     New RectangleF(marco.Left, marco.Top + 15, marco.Width, 40), centrado)
+            g.DrawString("Fecha: " & Now.ToString("dd/MM/yyyy HH:mm"), fNormal, Brushes.Black,
+                     marco.Left + 15, marco.Top + 60)
+            g.DrawLine(Pens.Black, marco.Left, marco.Top + 90, marco.Right, marco.Top + 90)
+
+            ' ---------- Imagen (ajustada sin deformarla) o aviso si no tiene ----------
+            Dim y As Integer = marco.Top + 110
+            Dim rectImg As New Rectangle(marco.Left + MARGEN, y, LADO_IMG, LADO_IMG)
+            If Not IsDBNull(fichaProducto("imagen_producto")) Then
+                Using memoria As New MemoryStream(DirectCast(fichaProducto("imagen_producto"), Byte()))
+                    Using img As Image = Image.FromStream(memoria)
+                        Dim escala As Single = Math.Min(LADO_IMG / img.Width, LADO_IMG / img.Height)
+                        Dim ancho As Integer = CInt(img.Width * escala)
+                        Dim alto As Integer = CInt(img.Height * escala)
+                        g.DrawImage(img, rectImg.X + (LADO_IMG - ancho) \ 2,
+                                rectImg.Y + (LADO_IMG - alto) \ 2, ancho, alto)
+                    End Using
+                End Using
+            Else
+                g.DrawString("Sin imagen", fNormal, Brushes.Gray, rectImg.X + 55, rectImg.Y + 100)
+            End If
+            g.DrawRectangle(Pens.Gray, rectImg)
+
+            ' ---------- Datos principales (a la derecha de la imagen) ----------
+            Dim xTexto As Integer = rectImg.Right + 25
+            Dim yTexto As Integer = y
+
+            g.DrawString(fichaProducto("nombre").ToString(), fNombre, Brushes.Black, xTexto, yTexto)
+            yTexto += 45
+
+            Dim filas As New List(Of KeyValuePair(Of String, String))
+            filas.Add(New KeyValuePair(Of String, String)("Código: ", fichaProducto("id_producto").ToString()))
+            filas.Add(New KeyValuePair(Of String, String)("Categoría: ", fichaProducto("nombre_categoria").ToString()))
+            filas.Add(New KeyValuePair(Of String, String)("Precio: ",
+            Convert.ToDecimal(fichaProducto("precio_unitario")).ToString("C2") & " / " & unidad))
+            filas.Add(New KeyValuePair(Of String, String)("Stock actual: ",
+            Convert.ToDecimal(fichaProducto("stock")).ToString("0.###") & " " & unidad))
+            filas.Add(New KeyValuePair(Of String, String)("Último ingreso: ",
+            If(IsDBNull(fichaProducto("ultimo_ingreso")), "Sin registros",
+               Convert.ToDateTime(fichaProducto("ultimo_ingreso")).ToString("dd/MM/yyyy"))))
+            filas.Add(New KeyValuePair(Of String, String)("Último costo: ",
+            If(IsDBNull(fichaProducto("ultimo_costo")), "Sin registros",
+               Convert.ToDecimal(fichaProducto("ultimo_costo")).ToString("C2") & " / " & unidad)))
+
+            For Each fila In filas
+                g.DrawString(fila.Key, fNegrita, Brushes.Black, xTexto, yTexto)
+                Dim anchoEtiqueta As Single = g.MeasureString(fila.Key, fNegrita).Width - 8
+                g.DrawString(fila.Value, fNormal, Brushes.Black, xTexto + anchoEtiqueta, yTexto)
+                yTexto += 28
+            Next
+
+            ' ---------- Descripción (a todo el ancho, con salto de línea automático) ----------
+            y = rectImg.Bottom + 20
+            g.DrawLine(Pens.LightGray, marco.Left + MARGEN, y, marco.Right - MARGEN, y)
+            y += 10
+            g.DrawString("Descripción", fNegrita, Brushes.Black, marco.Left + MARGEN, y)
+            y += 28
+            Dim descripcion As String = fichaProducto("descripcion").ToString()
+            If String.IsNullOrWhiteSpace(descripcion) Then descripcion = "Sin descripción"
+            g.DrawString(descripcion, fNormal, Brushes.Black,
+                     New RectangleF(marco.Left + MARGEN, y, marco.Width - 2 * MARGEN, 60))
+            y += 70
+
+            ' ---------- Proveedores ----------
+            g.DrawLine(Pens.LightGray, marco.Left + MARGEN, y, marco.Right - MARGEN, y)
+            y += 10
+            g.DrawString("Proveedores", fNegrita, Brushes.Black, marco.Left + MARGEN, y)
+            y += 28
+
+            If fichaProveedores.Rows.Count = 0 Then
+                g.DrawString("Sin proveedores asignados", fNormal, Brushes.Gray, marco.Left + MARGEN, y)
+            Else
+                For Each prov As DataRow In fichaProveedores.Rows
+                    If y > marco.Bottom - 30 Then Exit For ' por si la lista fuera muy larga
+
+                    Dim telefono As String = If(IsDBNull(prov("telefono")), "sin teléfono", prov("telefono").ToString())
+                    g.DrawString("• " & prov("nombre").ToString() & "  -  Tel: " & telefono,
+                             fNormal, Brushes.Black, marco.Left + MARGEN, y)
+                    y += 26
+                Next
+            End If
+        End Using
+
+        e.HasMorePages = False
+    End Sub
+
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Mermas.ShowDialog()
     End Sub
+
+
 End Class
