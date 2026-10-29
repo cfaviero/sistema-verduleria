@@ -7,7 +7,8 @@ Public Class Usuarios
                 cn.Open()
 
                 Dim consulta As String =
-                    "SELECT id_usuario, usuario as Usuario, descripcion as Descripcion " &
+                    "SELECT id_usuario, usuario as Usuario, descripcion as Descripcion, " &
+                    "case id_rol when 1 then 'Admin' when 2 then 'Usuario' END AS Rol " &
                     "FROM usuarios " &
                     "WHERE activo = 1 "
 
@@ -130,10 +131,11 @@ Public Class Usuarios
             MessageBox.Show("El usuario ya existe, elija otro.")
             Exit Sub
         End If
+        Dim rol As Integer = If(rbAdmin.Checked, 1, 2)
         Dim nuevousuario As New Contra()
         nuevousuario.UsuarioNuevo = txtUsuario.Text
         nuevousuario.descNuevo = txtDescripUser.Text
-
+        nuevousuario.rolNuevo = rol
         nuevousuario.ShowDialog()
         CargarGrilla()
         LimpiarCampos()
@@ -212,6 +214,13 @@ Public Class Usuarios
 
             txtUsuario.Text = fila.Cells("Usuario").Value.ToString
             txtDescripUser.Text = fila.Cells("Descripcion").Value.ToString
+
+            If fila.Cells("Rol").Value = "Admin" Then
+                rbAdmin.Checked = True
+            Else
+                rbUsuario.Checked = True
+            End If
+
             btnBorrar.Enabled = True
             btnAgregar.Enabled = False
             btnModificar.Enabled = True

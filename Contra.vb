@@ -5,6 +5,8 @@ Public Class Contra
     Public Property UsuarioNuevo As String
     <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
     Public Property descNuevo As String
+    <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
+    Public Property rolNuevo As String
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
 
         Dim respuesta As DialogResult
@@ -24,7 +26,7 @@ Public Class Contra
                 cn.Open()
                 Dim consulta As String = "INSERT INTO usuarios " &
                                              "(usuario, descripcion, clavehash, salt, id_rol, activo) " &
-                                             "VALUES (@usuario, @descripcion, @clavehash, @salt, 2, 1)"
+                                             "VALUES (@usuario, @descripcion, @clavehash, @salt, @rol, 1)"
 
                 Using comando As New MySqlCommand(consulta, cn)
 
@@ -32,7 +34,7 @@ Public Class Contra
                     comando.Parameters.AddWithValue("@descripcion", descNuevo.Trim())
                     comando.Parameters.AddWithValue("@clavehash", hash)
                     comando.Parameters.AddWithValue("@salt", salt)
-
+                    comando.Parameters.AddWithValue("@rol", rolNuevo)
                     comando.ExecuteNonQuery()
                 End Using
             End Using

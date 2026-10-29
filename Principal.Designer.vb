@@ -24,10 +24,8 @@ Partial Class Principal
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Principal))
         btnStock = New Button()
-        lblHoraActual = New Label()
         btnSalir = New Button()
         btnCerrarSesion = New Button()
-        lblBienvenido = New Label()
         pnlCabecera = New Panel()
         btnCaja = New Button()
         btnUsuarios = New Button()
@@ -53,18 +51,6 @@ Partial Class Principal
         btnStock.Text = "Inventario"
         btnStock.UseVisualStyleBackColor = False
         ' 
-        ' lblHoraActual
-        ' 
-        lblHoraActual.AutoSize = True
-        lblHoraActual.Font = New Font("Segoe UI", 12F)
-        lblHoraActual.ForeColor = Color.Black
-        lblHoraActual.Location = New Point(686, 461)
-        lblHoraActual.Name = "lblHoraActual"
-        lblHoraActual.Size = New Size(19, 21)
-        lblHoraActual.TabIndex = 4
-        lblHoraActual.Text = "..."
-        lblHoraActual.TextAlign = ContentAlignment.MiddleCenter
-        ' 
         ' btnSalir
         ' 
         btnSalir.ForeColor = Color.Black
@@ -85,18 +71,9 @@ Partial Class Principal
         btnCerrarSesion.Text = "Cerrar Sesion"
         btnCerrarSesion.UseVisualStyleBackColor = True
         ' 
-        ' lblBienvenido
-        ' 
-        lblBienvenido.AutoSize = True
-        lblBienvenido.Location = New Point(107, 28)
-        lblBienvenido.Name = "lblBienvenido"
-        lblBienvenido.Size = New Size(12, 15)
-        lblBienvenido.TabIndex = 7
-        lblBienvenido.Text = "-"
-        ' 
         ' pnlCabecera
         ' 
-        pnlCabecera.BackColor = Color.DarkGreen
+        pnlCabecera.BackColor = SystemColors.Control
         pnlCabecera.Controls.Add(btnCaja)
         pnlCabecera.Controls.Add(btnUsuarios)
         pnlCabecera.Controls.Add(btnProveedores)
@@ -121,7 +98,7 @@ Partial Class Principal
         btnCaja.FlatStyle = FlatStyle.Flat
         btnCaja.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnCaja.ForeColor = Color.White
-        btnCaja.Location = New Point(526, 10)
+        btnCaja.Location = New Point(256, 10)
         btnCaja.Name = "btnCaja"
         btnCaja.Size = New Size(141, 27)
         btnCaja.TabIndex = 11
@@ -151,7 +128,7 @@ Partial Class Principal
         btnProveedores.FlatStyle = FlatStyle.Flat
         btnProveedores.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnProveedores.ForeColor = Color.White
-        btnProveedores.Location = New Point(379, 10)
+        btnProveedores.Location = New Point(527, 10)
         btnProveedores.Name = "btnProveedores"
         btnProveedores.Size = New Size(141, 27)
         btnProveedores.TabIndex = 9
@@ -181,7 +158,7 @@ Partial Class Principal
         btnClientes.FlatStyle = FlatStyle.Flat
         btnClientes.Font = New Font("Arial", 13.8F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnClientes.ForeColor = Color.White
-        btnClientes.Location = New Point(256, 10)
+        btnClientes.Location = New Point(404, 10)
         btnClientes.Name = "btnClientes"
         btnClientes.Size = New Size(117, 27)
         btnClientes.TabIndex = 7
@@ -206,21 +183,16 @@ Partial Class Principal
         ClientSize = New Size(1129, 564)
         Controls.Add(pnlContenido)
         Controls.Add(pnlCabecera)
-        Controls.Add(lblBienvenido)
-        Controls.Add(lblHoraActual)
         FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Principal"
         Text = "  "
         pnlCabecera.ResumeLayout(False)
         ResumeLayout(False)
-        PerformLayout()
     End Sub
     Friend WithEvents btnStock As Button
-    Friend WithEvents lblHoraActual As Label
     Friend WithEvents btnSalir As Button
     Friend WithEvents btnCerrarSesion As Button
-    Friend WithEvents lblBienvenido As Label
     Friend WithEvents pnlCabecera As Panel
     Friend WithEvents btnClientes As Button
     Friend WithEvents pnlContenido As Panel

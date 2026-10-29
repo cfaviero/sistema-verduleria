@@ -22,12 +22,15 @@ Partial Class Usuarios
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Usuarios))
         btnBuscar = New Button()
         Label8 = New Label()
         txtBuscar = New TextBox()
         dgvUsuarios = New DataGridView()
         btnBorrar = New Button()
         GroupBox1 = New GroupBox()
+        rbUsuario = New RadioButton()
+        rbAdmin = New RadioButton()
         txtDescripUser = New TextBox()
         Label6 = New Label()
         btnModificar = New Button()
@@ -100,6 +103,8 @@ Partial Class Usuarios
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.Controls.Add(rbUsuario)
+        GroupBox1.Controls.Add(rbAdmin)
         GroupBox1.Controls.Add(txtDescripUser)
         GroupBox1.Controls.Add(Label6)
         GroupBox1.Controls.Add(btnModificar)
@@ -112,6 +117,32 @@ Partial Class Usuarios
         GroupBox1.TabIndex = 43
         GroupBox1.TabStop = False
         GroupBox1.Text = "Datos del Usuario"
+        ' 
+        ' rbUsuario
+        ' 
+        rbUsuario.Appearance = Appearance.Button
+        rbUsuario.AutoSize = True
+        rbUsuario.Checked = True
+        rbUsuario.Location = New Point(400, 27)
+        rbUsuario.Name = "rbUsuario"
+        rbUsuario.Size = New Size(57, 25)
+        rbUsuario.TabIndex = 49
+        rbUsuario.TabStop = True
+        rbUsuario.Text = "Usuario"
+        rbUsuario.TextAlign = ContentAlignment.MiddleCenter
+        rbUsuario.UseVisualStyleBackColor = True
+        ' 
+        ' rbAdmin
+        ' 
+        rbAdmin.Appearance = Appearance.Button
+        rbAdmin.AutoSize = True
+        rbAdmin.Location = New Point(289, 27)
+        rbAdmin.Name = "rbAdmin"
+        rbAdmin.Size = New Size(93, 25)
+        rbAdmin.TabIndex = 48
+        rbAdmin.Text = "Administrador"
+        rbAdmin.TextAlign = ContentAlignment.MiddleCenter
+        rbAdmin.UseVisualStyleBackColor = True
         ' 
         ' txtDescripUser
         ' 
@@ -133,7 +164,7 @@ Partial Class Usuarios
         ' btnModificar
         ' 
         btnModificar.Cursor = Cursors.Hand
-        btnModificar.Location = New Point(120, 160)
+        btnModificar.Location = New Point(120, 180)
         btnModificar.Name = "btnModificar"
         btnModificar.Size = New Size(168, 23)
         btnModificar.TabIndex = 14
@@ -144,7 +175,7 @@ Partial Class Usuarios
         ' 
         btnAgregar.Cursor = Cursors.Hand
         btnAgregar.Enabled = False
-        btnAgregar.Location = New Point(308, 160)
+        btnAgregar.Location = New Point(308, 180)
         btnAgregar.Name = "btnAgregar"
         btnAgregar.Size = New Size(168, 23)
         btnAgregar.TabIndex = 6
@@ -180,6 +211,7 @@ Partial Class Usuarios
         Controls.Add(btnBorrar)
         Controls.Add(GroupBox1)
         FormBorderStyle = FormBorderStyle.FixedSingle
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Usuarios"
         Text = "Usuarios"
         CType(dgvUsuarios, ComponentModel.ISupportInitialize).EndInit()
@@ -204,4 +236,6 @@ Partial Class Usuarios
     Friend WithEvents txtUsuario As TextBox
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtDescripUser As TextBox
+    Friend WithEvents rbUsuario As RadioButton
+    Friend WithEvents rbAdmin As RadioButton
 End Class

@@ -47,6 +47,9 @@ Partial Class frmDashboard
         Label3 = New Label()
         lblVencidos = New Label()
         Label4 = New Label()
+        Label5 = New Label()
+        lblBienvenido = New Label()
+        PictureBox1 = New PictureBox()
         pnlTarjetaProductos.SuspendLayout()
         CType(PicProductos, ComponentModel.ISupportInitialize).BeginInit()
         pnlFranjaInventario.SuspendLayout()
@@ -54,6 +57,7 @@ Partial Class frmDashboard
         CType(dgvPorVencer, ComponentModel.ISupportInitialize).BeginInit()
         pnlFranjaMermas.SuspendLayout()
         pnlFranjaVencidos.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' pnlTarjetaProductos
@@ -62,10 +66,10 @@ Partial Class frmDashboard
         pnlTarjetaProductos.Controls.Add(Label1)
         pnlTarjetaProductos.Controls.Add(lblCantidadProductos)
         pnlTarjetaProductos.Controls.Add(PicProductos)
-        pnlTarjetaProductos.Location = New Point(914, 27)
+        pnlTarjetaProductos.Location = New Point(922, 156)
         pnlTarjetaProductos.Margin = New Padding(3, 2, 3, 2)
         pnlTarjetaProductos.Name = "pnlTarjetaProductos"
-        pnlTarjetaProductos.Size = New Size(181, 94)
+        pnlTarjetaProductos.Size = New Size(173, 94)
         pnlTarjetaProductos.TabIndex = 0
         ' 
         ' Label1
@@ -84,7 +88,7 @@ Partial Class frmDashboard
         lblCantidadProductos.AutoSize = True
         lblCantidadProductos.Font = New Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         lblCantidadProductos.ForeColor = Color.White
-        lblCantidadProductos.Location = New Point(125, 49)
+        lblCantidadProductos.Location = New Point(100, 48)
         lblCantidadProductos.Name = "lblCantidadProductos"
         lblCantidadProductos.Size = New Size(38, 45)
         lblCantidadProductos.TabIndex = 2
@@ -93,7 +97,7 @@ Partial Class frmDashboard
         ' PicProductos
         ' 
         PicProductos.Image = CType(resources.GetObject("PicProductos.Image"), Image)
-        PicProductos.Location = New Point(84, 53)
+        PicProductos.Location = New Point(59, 52)
         PicProductos.Margin = New Padding(3, 2, 3, 2)
         PicProductos.Name = "PicProductos"
         PicProductos.Size = New Size(35, 30)
@@ -115,7 +119,7 @@ Partial Class frmDashboard
         ' 
         ' btnActualizar
         ' 
-        btnActualizar.Location = New Point(998, 296)
+        btnActualizar.Location = New Point(683, 523)
         btnActualizar.Name = "btnActualizar"
         btnActualizar.Size = New Size(100, 38)
         btnActualizar.TabIndex = 10
@@ -125,7 +129,7 @@ Partial Class frmDashboard
         ' lblValorInventario
         ' 
         lblValorInventario.AutoSize = True
-        lblValorInventario.Location = New Point(114, 9)
+        lblValorInventario.Location = New Point(572, 9)
         lblValorInventario.Name = "lblValorInventario"
         lblValorInventario.Size = New Size(89, 15)
         lblValorInventario.TabIndex = 11
@@ -134,7 +138,7 @@ Partial Class frmDashboard
         ' pnlFranjaInventario
         ' 
         pnlFranjaInventario.Controls.Add(formsPlotStock)
-        pnlFranjaInventario.Location = New Point(15, 27)
+        pnlFranjaInventario.Location = New Point(473, 27)
         pnlFranjaInventario.Name = "pnlFranjaInventario"
         pnlFranjaInventario.Size = New Size(438, 223)
         pnlFranjaInventario.TabIndex = 12
@@ -150,31 +154,31 @@ Partial Class frmDashboard
         ' 
         formsPlotMermas.Location = New Point(3, 3)
         formsPlotMermas.Name = "formsPlotMermas"
-        formsPlotMermas.Size = New Size(432, 215)
+        formsPlotMermas.Size = New Size(439, 215)
         formsPlotMermas.TabIndex = 23
         ' 
         ' lblPorVencer
         ' 
         lblPorVencer.AutoSize = True
-        lblPorVencer.Location = New Point(815, 319)
+        lblPorVencer.Location = New Point(840, 265)
         lblPorVencer.Name = "lblPorVencer"
-        lblPorVencer.Size = New Size(63, 15)
+        lblPorVencer.Size = New Size(13, 15)
         lblPorVencer.TabIndex = 13
-        lblPorVencer.Text = "Por Vencer"
+        lblPorVencer.Text = "0"
         ' 
         ' pnlFranjaPorVencer
         ' 
         pnlFranjaPorVencer.Controls.Add(formsPlotMotivos)
-        pnlFranjaPorVencer.Location = New Point(459, 27)
+        pnlFranjaPorVencer.Location = New Point(16, 27)
         pnlFranjaPorVencer.Name = "pnlFranjaPorVencer"
-        pnlFranjaPorVencer.Size = New Size(448, 223)
+        pnlFranjaPorVencer.Size = New Size(445, 223)
         pnlFranjaPorVencer.TabIndex = 14
         ' 
         ' formsPlotMotivos
         ' 
         formsPlotMotivos.Location = New Point(3, 3)
         formsPlotMotivos.Name = "formsPlotMotivos"
-        formsPlotMotivos.Size = New Size(442, 217)
+        formsPlotMotivos.Size = New Size(439, 217)
         formsPlotMotivos.TabIndex = 21
         ' 
         ' dgvPorVencer
@@ -182,7 +186,7 @@ Partial Class frmDashboard
         dgvPorVencer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         dgvPorVencer.Location = New Point(3, 3)
         dgvPorVencer.Name = "dgvPorVencer"
-        dgvPorVencer.Size = New Size(633, 158)
+        dgvPorVencer.Size = New Size(619, 215)
         dgvPorVencer.TabIndex = 20
         ' 
         ' lblPerdidaMermas
@@ -199,30 +203,30 @@ Partial Class frmDashboard
         pnlFranjaMermas.Controls.Add(formsPlotMermas)
         pnlFranjaMermas.Location = New Point(16, 283)
         pnlFranjaMermas.Name = "pnlFranjaMermas"
-        pnlFranjaMermas.Size = New Size(438, 221)
+        pnlFranjaMermas.Size = New Size(445, 221)
         pnlFranjaMermas.TabIndex = 18
         ' 
         ' pnlFranjaVencidos
         ' 
         pnlFranjaVencidos.Controls.Add(dgvPorVencer)
-        pnlFranjaVencidos.Location = New Point(459, 340)
+        pnlFranjaVencidos.Location = New Point(473, 283)
         pnlFranjaVencidos.Name = "pnlFranjaVencidos"
-        pnlFranjaVencidos.Size = New Size(639, 164)
+        pnlFranjaVencidos.Size = New Size(622, 221)
         pnlFranjaVencidos.TabIndex = 19
         ' 
         ' lblTituloPorVencer
         ' 
         lblTituloPorVencer.AutoSize = True
-        lblTituloPorVencer.Location = New Point(462, 319)
+        lblTituloPorVencer.Location = New Point(473, 265)
         lblTituloPorVencer.Name = "lblTituloPorVencer"
-        lblTituloPorVencer.Size = New Size(96, 15)
+        lblTituloPorVencer.Size = New Size(63, 15)
         lblTituloPorVencer.TabIndex = 24
-        lblTituloPorVencer.Text = "Titulo Por Vencer"
+        lblTituloPorVencer.Text = "Por Vencer"
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(16, 9)
+        Label2.Location = New Point(474, 9)
         Label2.Name = "Label2"
         Label2.Size = New Size(92, 15)
         Label2.TabIndex = 25
@@ -240,26 +244,56 @@ Partial Class frmDashboard
         ' lblVencidos
         ' 
         lblVencidos.AutoSize = True
-        lblVencidos.Location = New Point(705, 283)
+        lblVencidos.Location = New Point(729, 265)
         lblVencidos.Name = "lblVencidos"
-        lblVencidos.Size = New Size(54, 15)
+        lblVencidos.Size = New Size(13, 15)
         lblVencidos.TabIndex = 15
-        lblVencidos.Text = "Vencidos"
+        lblVencidos.Text = "0"
         ' 
         ' Label4
         ' 
         Label4.AutoSize = True
-        Label4.Location = New Point(743, 319)
+        Label4.Location = New Point(768, 265)
         Label4.Name = "Label4"
         Label4.Size = New Size(66, 15)
         Label4.TabIndex = 27
         Label4.Text = "Por Vencer:"
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Location = New Point(666, 265)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(57, 15)
+        Label5.TabIndex = 28
+        Label5.Text = "Vencidos:"
+        ' 
+        ' lblBienvenido
+        ' 
+        lblBienvenido.AutoSize = True
+        lblBienvenido.Location = New Point(19, 535)
+        lblBienvenido.Name = "lblBienvenido"
+        lblBienvenido.Size = New Size(12, 15)
+        lblBienvenido.TabIndex = 29
+        lblBienvenido.Text = "-"
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(899, 30)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(222, 121)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 30
+        PictureBox1.TabStop = False
         ' 
         ' frmDashboard
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1113, 575)
+        Controls.Add(lblBienvenido)
+        Controls.Add(Label5)
         Controls.Add(Label4)
         Controls.Add(Label3)
         Controls.Add(Label2)
@@ -275,6 +309,7 @@ Partial Class frmDashboard
         Controls.Add(btnActualizar)
         Controls.Add(lblFecha)
         Controls.Add(pnlTarjetaProductos)
+        Controls.Add(PictureBox1)
         Margin = New Padding(3, 2, 3, 2)
         Name = "frmDashboard"
         Text = "frmDashboard"
@@ -286,6 +321,7 @@ Partial Class frmDashboard
         CType(dgvPorVencer, ComponentModel.ISupportInitialize).EndInit()
         pnlFranjaMermas.ResumeLayout(False)
         pnlFranjaVencidos.ResumeLayout(False)
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -313,4 +349,7 @@ Partial Class frmDashboard
     Friend WithEvents Label3 As Label
     Friend WithEvents lblVencidos As Label
     Friend WithEvents Label4 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents lblBienvenido As Label
+    Friend WithEvents PictureBox1 As PictureBox
 End Class

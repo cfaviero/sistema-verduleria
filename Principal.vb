@@ -2,7 +2,11 @@
 Public Class Principal
 
     Private formularioActual As Form = Nothing
+    Private Const WM_NCLBUTTONDOWN As Integer = &HA1
+    Private Const HTCAPTION As Integer = 2
+    '# PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ##
 
+    'Desabilita botones dependiendo donde se este
     Sub DeshabilitarBotones()
         If TypeOf formularioActual Is frmDashboard Then
             btnInicio.Enabled = False
@@ -40,7 +44,6 @@ Public Class Principal
         If formularioActual IsNot Nothing Then
             pnlContenido.Controls.Remove(formularioActual)
             formularioActual.Dispose()
-
         End If
 
 
@@ -56,54 +59,54 @@ Public Class Principal
 
     End Sub
 
+    '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
-        If (Control.ModifierKeys And (Keys.Control Or Keys.Shift)) = (Keys.Control Or Keys.Shift) Then
-
-            Caja.Show()
-
-        End If
-    End Sub
-
+    '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Verifica admin
+        Dim esadmin As Boolean = Sesion.EsAdministrador
+        'Agrega tema
         Tema.AplicarTema(Me)
-        Tema.MarcarActivo(btnInicio)
-        EfectoVisual.AplicarTransicionHora(lblHoraActual)
-        lblBienvenido.Text = "Bienvenido " + Sesion.descripcion + " - " + Sesion.rolusuario
-
-        If Sesion.rolusuario = "administrador" Then
-            btnClientes.Visible = True
-        End If
 
         MostrarFormulario(New frmDashboard())
+        'Validaciones
         btnInicio.Enabled = False
+        btnClientes.Visible = esadmin
+        btnProveedores.Visible = esadmin
+        btnUsuarios.Visible = esadmin
     End Sub
-
+    '# EVENTOS CLICK BARRA ## 
     Private Sub btnProv_Click(sender As Object, e As EventArgs)
         MostrarFormulario(New Proveedores())
         DeshabilitarBotones()
     End Sub
-
-
     Private Sub btnStock_Click(sender As Object, e As EventArgs) Handles btnStock.Click
         MostrarFormulario(New stock())
         DeshabilitarBotones()
     End Sub
-
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Dim result As DialogResult = MessageBox.Show("Seguro que desea salir de la aplicación?", "Confirmar salida", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             Application.Exit()
         End If
     End Sub
-
     Private Sub btnCerrarSesion_Click(sender As Object, e As EventArgs) Handles btnCerrarSesion.Click
         Sesion.CerrarSession()
         Login.Show()
+        'Limpio campos
+        Login.txtUsuario.Clear()
+        Login.txtContra.Clear()
+        'Enfoco en usuario
+        Login.txtUsuario.Focus()
         Me.Close()
     End Sub
-
     Private Sub btnClientes_Click_1(sender As Object, e As EventArgs) Handles btnClientes.Click
+        'Valido usuario por las dudas
+        If Not Sesion.EsAdministrador() Then
+            MessageBox.Show("No tiene los permisos para acceder",
+                    "Acceso restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         MostrarFormulario(New Clientes)
         DeshabilitarBotones()
     End Sub
@@ -112,10 +115,22 @@ Public Class Principal
         DeshabilitarBotones()
     End Sub
     Private Sub btnProveedores_Click(sender As Object, e As EventArgs) Handles btnProveedores.Click
+        'Valido usuario por las dudas
+        If Not Sesion.EsAdministrador() Then
+            MessageBox.Show("No tiene los permisos para acceder",
+                    "Acceso restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         MostrarFormulario(New Proveedores_ABM())
         DeshabilitarBotones()
     End Sub
     Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
+        'Valido usuario por las dudas
+        If Not Sesion.EsAdministrador() Then
+            MessageBox.Show("No tiene los permisos para acceder",
+                    "Acceso restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Exit Sub
+        End If
         MostrarFormulario(New Usuarios())
         DeshabilitarBotones()
     End Sub
@@ -123,25 +138,20 @@ Public Class Principal
         MostrarFormulario(New Caja())
         DeshabilitarBotones()
     End Sub
-
-    <DllImport("user32.dll")>
-    Private Shared Sub ReleaseCapture()
-    End Sub
-
-    <DllImport("user32.dll")>
-    Private Shared Sub SendMessage(hWnd As IntPtr, Msg As Integer, wParam As Integer, lParam As Integer)
-    End Sub
-
-    Private Const WM_NCLBUTTONDOWN As Integer = &HA1
-    Private Const HTCAPTION As Integer = 2
-
+    'Evento para manipulacion del form con click izquierdo
     Private Sub pnlCabecera_MouseDown(sender As Object, e As MouseEventArgs) Handles pnlCabecera.MouseDown
         If e.Button = MouseButtons.Left Then
             ReleaseCapture()
             SendMessage(Me.Handle, WM_NCLBUTTONDOWN, HTCAPTION, 0)
         End If
     End Sub
+    '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
-
-
+    'Control para manipular la ventana con libreria nativa de windos
+    <DllImport("user32.dll")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+    <DllImport("user32.dll")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, Msg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
 End Class

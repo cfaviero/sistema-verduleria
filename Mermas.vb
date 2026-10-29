@@ -1,13 +1,11 @@
 ﻿Imports MySqlConnector
 
 Public Class Mermas
-
-    'reemplazar despues id_empleado del usuario que inicio sesion (empleados.id_empleado)
-    Private idEmpleadoActual As Integer = 1
-
+    'Empleado actual
+    Private idEmpleadoActual As Integer = Sesion.idEmpleado
     Private Const MOTIVO_VENCIMIENTO As String = "Vencimiento"
 
-    '# PROCEDIMIENTOS
+    '# PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ## PROCEDIMIENTOS ##
 
     Private Sub CargarLotes(Optional filtro As String = "")
         Try
@@ -15,8 +13,7 @@ Public Class Mermas
                 cn.Open()
 
                 ' Lotes con stock (incluye los vencidos: ahi es donde hay que dar de baja)
-                Dim consulta As String =
-                    "SELECT pl.id_prod_lote, p.nombre AS Producto, p.unidad_medida AS Unidad, " &
+                Dim consulta As String = "SELECT pl.id_prod_lote, p.nombre AS Producto, p.unidad_medida AS Unidad, " &
                     "pl.id_lote AS Lote, pv.nombre AS Proveedor, pl.fecha_vencimiento AS Vencimiento, " &
                     "IF(pl.fecha_vencimiento < CURDATE(), 'Vencido', 'Vigente') AS Estado, " &
                     "pl.cantidad_inicial " &
@@ -70,8 +67,7 @@ Public Class Mermas
 
     Private Sub CargarHistorial()
         If dtpDesde.Value.Date > dtpHasta.Value.Date Then
-            MessageBox.Show("La fecha Desde no puede ser mayor que la fecha Hasta.",
-                            "Fechas invalidas", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("La fecha Desde no puede ser mayor que la fecha Hasta.", "Fechas invalidas", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
 
@@ -80,8 +76,7 @@ Public Class Mermas
                 cn.Open()
 
                 ' Valor = cantidad x costo del lote
-                Dim consulta As String =
-                    "SELECT m.fecha AS Fecha, p.nombre AS Producto, pl.id_lote AS Lote, " &
+                Dim consulta As String = "SELECT m.fecha AS Fecha, p.nombre AS Producto, pl.id_lote AS Lote, " &
                     "m.cantidad AS Cantidad, p.unidad_medida AS Unidad, m.motivo AS Motivo, " &
                     "e.nombre AS Empleado, m.cantidad * pl.costo AS Valor " &
                     "FROM mermas AS m " &
@@ -145,30 +140,23 @@ Public Class Mermas
         LimpiarCampos()
     End Sub
 
-    ' Registra la merma dentro de una transaccion, revalidando el stock del lote.
-    ' Si bajaTotal es True, la cantidad es todo el saldo del lote.
-    ' "guardada" queda en 0 si no se registro nada; "disponible" es el saldo del lote al momento de guardar.
-    Private Sub GuardarMerma(idProdLote As Integer, cantidad As Decimal, motivo As String,
-                             bajaTotal As Boolean, ByRef guardada As Decimal, ByRef disponible As Decimal)
+    Private Sub GuardarMerma(idProdLote As Integer, cantidad As Decimal, motivo As String, bajaTotal As Boolean, ByRef guardada As Decimal, ByRef disponible As Decimal, ByRef idEmpleado As Integer)
         guardada = 0
         disponible = 0
 
         Using cn As New MySqlConnection(ConexionBD.ConnectionString)
             cn.Open()
 
-            ' ReadCommitted: cada lectura ve lo ultimo confirmado, incluso una venta de otro empleado
+            'Cada lectura ve lo ultimo confirmado
             Using tx As MySqlTransaction = cn.BeginTransaction(IsolationLevel.ReadCommitted)
 
-                ' 1) Bloqueo el lote: una venta de este lote espera a que termine esta merma
                 Using cmdBloqueo As New MySqlCommand("SELECT id_prod_lote FROM productos_lote " &
                                                      "WHERE id_prod_lote = @id_prod_lote FOR UPDATE;", cn, tx)
                     cmdBloqueo.Parameters.AddWithValue("@id_prod_lote", idProdLote)
                     cmdBloqueo.ExecuteNonQuery()
                 End Using
 
-                ' 2) Saldo actual del lote: lo que entro - lo vendido - las mermas
-                Dim consultaSaldo As String =
-                    "SELECT pl.cantidad_inicial " &
+                Dim consultaSaldo As String = "SELECT pl.cantidad_inicial " &
                     "- IFNULL((SELECT SUM(dv.cantidad) FROM detalles_venta AS dv WHERE dv.id_prod_lote = pl.id_prod_lote), 0) " &
                     "- IFNULL((SELECT SUM(m.cantidad) FROM mermas AS m WHERE m.id_prod_lote = pl.id_prod_lote), 0) " &
                     "FROM productos_lote AS pl WHERE pl.id_prod_lote = @id_prod_lote;"
@@ -182,22 +170,20 @@ Public Class Mermas
                     cantidad = disponible
                 End If
 
-                ' Sin saldo o pidiendo mas de lo que hay: no se registra nada
+                'No se registra nada sin saldo o pidiendo mas de lo que hay
                 If cantidad <= 0 OrElse cantidad > disponible Then
                     tx.Rollback()
                     Exit Sub
                 End If
 
-                ' 3) Registro la merma (la fecha la pone la BD)
-                Dim insertar As String =
-                    "INSERT INTO mermas (cantidad, id_prod_lote, motivo, id_empleado) " &
+                Dim insertar As String = "INSERT INTO mermas (cantidad, id_prod_lote, motivo, id_empleado) " &
                     "VALUES (@cantidad, @id_prod_lote, @motivo, @id_empleado);"
 
                 Using comando As New MySqlCommand(insertar, cn, tx)
                     comando.Parameters.AddWithValue("@cantidad", cantidad)
                     comando.Parameters.AddWithValue("@id_prod_lote", idProdLote)
                     comando.Parameters.AddWithValue("@motivo", motivo)
-                    comando.Parameters.AddWithValue("@id_empleado", idEmpleadoActual)
+                    comando.Parameters.AddWithValue("@id_empleado", idEmpleado)
                     comando.ExecuteNonQuery()
                 End Using
 
@@ -207,7 +193,7 @@ Public Class Mermas
         End Using
     End Sub
 
-    '# EVENTOS
+    '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
 
     Private Sub Mermas_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Tema.AplicarTema(Me)
@@ -306,7 +292,7 @@ Public Class Mermas
             Exit Sub
         End If
 
-        ' La BD guarda 3 decimales: redondeo antes de validar
+        'Redondeo antes de validar
         cantidad = Math.Round(cantidad, 3, MidpointRounding.AwayFromZero)
 
         If cantidad <= 0 Then
@@ -347,7 +333,7 @@ Public Class Mermas
             Dim guardada As Decimal
             Dim disponible As Decimal
 
-            GuardarMerma(idProdLote, cantidad, cmbMotivo.Text, False, guardada, disponible)
+            GuardarMerma(idProdLote, cantidad, cmbMotivo.Text, False, guardada, disponible, idEmpleadoActual)
 
             If guardada = 0 Then
                 MessageBox.Show("No se registro la merma: el stock del lote cambio." & vbCrLf &
@@ -397,7 +383,7 @@ Public Class Mermas
             Dim guardada As Decimal
             Dim disponible As Decimal
 
-            GuardarMerma(idProdLote, 0, MOTIVO_VENCIMIENTO, True, guardada, disponible)
+            GuardarMerma(idProdLote, 0, MOTIVO_VENCIMIENTO, True, guardada, disponible, idEmpleadoActual)
 
             If guardada = 0 Then
                 MessageBox.Show("El lote ya no tiene stock disponible.",

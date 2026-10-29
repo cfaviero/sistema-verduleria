@@ -180,6 +180,14 @@ Public Class Stock
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub stock_Load(sender As Object, e As EventArgs) Handles Me.Load
         Tema.AplicarTema(Me)
+        If Not Sesion.EsAdministrador() Then
+            btnCrear.Visible = False
+            btnModificar.Visible = False
+            btnBorrar.Visible = False
+            btnAgregar.Visible = False
+            btnGuardar.Visible = False
+            btnQuitar.Visible = False
+        End If
         CargarGrilla()
         CargarCategorias()
         LimpiarCampos()

@@ -30,7 +30,10 @@ Partial Class Login
         Label2 = New Label()
         PictureBox1 = New PictureBox()
         Label3 = New Label()
+        pnlCabecera = New Panel()
+        btnCerrrar = New Button()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        pnlCabecera.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnEntrar
@@ -89,12 +92,30 @@ Partial Class Login
         ' 
         Label3.AutoSize = True
         Label3.Font = New Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label3.Location = New Point(12, 9)
+        Label3.Location = New Point(76, 45)
         Label3.Name = "Label3"
         Label3.Size = New Size(235, 30)
         Label3.TabIndex = 5
         Label3.Text = "Ingrese para continuar"
         Label3.TextAlign = ContentAlignment.MiddleCenter
+        ' 
+        ' pnlCabecera
+        ' 
+        pnlCabecera.Controls.Add(btnCerrrar)
+        pnlCabecera.Location = New Point(0, 0)
+        pnlCabecera.Name = "pnlCabecera"
+        pnlCabecera.Size = New Size(427, 54)
+        pnlCabecera.TabIndex = 6
+        ' 
+        ' btnCerrrar
+        ' 
+        btnCerrrar.Location = New Point(392, 12)
+        btnCerrrar.Name = "btnCerrrar"
+        btnCerrrar.Size = New Size(22, 23)
+        btnCerrrar.TabIndex = 7
+        btnCerrrar.Text = "X"
+        btnCerrrar.TextAlign = ContentAlignment.MiddleLeft
+        btnCerrrar.UseVisualStyleBackColor = True
         ' 
         ' Login
         ' 
@@ -108,11 +129,13 @@ Partial Class Login
         Controls.Add(txtUsuario)
         Controls.Add(btnEntrar)
         Controls.Add(PictureBox1)
-        FormBorderStyle = FormBorderStyle.FixedSingle
+        Controls.Add(pnlCabecera)
+        FormBorderStyle = FormBorderStyle.None
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Login"
         Text = "Login"
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        pnlCabecera.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -124,4 +147,6 @@ Partial Class Login
     Friend WithEvents Label2 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents pnlCabecera As Panel
+    Friend WithEvents btnCerrrar As Button
 End Class
