@@ -8,7 +8,7 @@ Public Class Usuarios
 
                 Dim consulta As String =
                     "SELECT id_usuario, usuario as Usuario, descripcion as Descripcion, " &
-                    "case id_rol when 1 then 'Admin' when 2 then 'Usuario' END AS Rol " &
+                    "case id_rol when 1 then 'Admin' when 2 then 'Vendedor' when 3 then 'Repositor' END AS Rol " &
                     "FROM usuarios " &
                     "WHERE activo = 1 "
 
@@ -50,6 +50,9 @@ Public Class Usuarios
     Private Sub LimpiarCampos()
         txtUsuario.Clear()
         txtDescripUser.Clear()
+        rbAdmin.Checked = False
+        rbVendedor.Checked = False
+        rbVendedor.Checked = False
 
         dgvUsuarios.ClearSelection()
         dgvUsuarios.CurrentCell = Nothing
@@ -106,7 +109,7 @@ Public Class Usuarios
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Tema.AplicarTema(Me)
         CargarGrilla()
-
+        MessageBox.Show(Sesion.EsRepositor)
         txtBuscar.PlaceholderText = "Buscar usuario..."
         txtUsuario.PlaceholderText = "Ej. Usuario"
         txtDescripUser.PlaceholderText = "Ej. Claudio Altamirano"
@@ -122,8 +125,7 @@ Public Class Usuarios
 
     Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
         If String.IsNullOrWhiteSpace(txtUsuario.Text) OrElse String.IsNullOrWhiteSpace(txtDescripUser.Text) Then
-            MessageBox.Show("Complete los campos requeridos.",
-                            "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("Complete los campos requeridos.", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Exit Sub
         End If
         Dim existe As Boolean = usuarioExiste()
@@ -131,7 +133,14 @@ Public Class Usuarios
             MessageBox.Show("El usuario ya existe, elija otro.")
             Exit Sub
         End If
-        Dim rol As Integer = If(rbAdmin.Checked, 1, 2)
+        Dim rol As Integer = 0
+        If rbAdmin.Checked Then
+            rol = 1
+        ElseIf rbVendedor.Checked Then
+            rol = 2
+        Else
+            rol = 3
+        End If
         Dim nuevousuario As New Contra()
         nuevousuario.UsuarioNuevo = txtUsuario.Text
         nuevousuario.descNuevo = txtDescripUser.Text
@@ -139,7 +148,6 @@ Public Class Usuarios
         nuevousuario.ShowDialog()
         CargarGrilla()
         LimpiarCampos()
-
 
     End Sub
 
@@ -180,16 +188,23 @@ Public Class Usuarios
         Try
             Using cn As New MySqlConnection(ConexionBD.ConnectionString)
                 cn.Open()
-
+                Dim rol As Integer = 0
+                If rbAdmin.Checked Then
+                    rol = 1
+                ElseIf rbVendedor.Checked Then
+                    rol = 2
+                Else
+                    rol = 3
+                End If
                 Dim consulta As String =
-                    "UPDATE usuarios SET usuario = @usuario, descripcion = @descripcion " &
+                    "UPDATE usuarios SET usuario = @usuario, descripcion = @descripcion, id_rol = @id_rol " &
                     "WHERE id_usuario = @id_usuario AND activo = 1;"
 
                 Using comando As New MySqlCommand(consulta, cn)
                     comando.Parameters.AddWithValue("@id_usuario", id)
                     comando.Parameters.AddWithValue("@usuario", txtUsuario.Text.Trim())
                     comando.Parameters.AddWithValue("@descripcion", txtDescripUser.Text.Trim())
-
+                    comando.Parameters.AddWithValue("@id_rol", rol)
                     comando.ExecuteNonQuery()
                 End Using
             End Using
@@ -217,8 +232,10 @@ Public Class Usuarios
 
             If fila.Cells("Rol").Value = "Admin" Then
                 rbAdmin.Checked = True
+            ElseIf fila.Cells("Rol").Value = "Vendedor" Then
+                rbVendedor.Checked = True
             Else
-                rbUsuario.Checked = True
+                rbRepositor.Checked = True
             End If
 
             btnBorrar.Enabled = True
@@ -279,6 +296,5 @@ Public Class Usuarios
         btnModificar.Enabled = False
         btnBorrar.Enabled = False
     End Sub
-
 
 End Class

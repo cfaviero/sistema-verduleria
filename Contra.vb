@@ -8,12 +8,8 @@ Public Class Contra
     <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
     Public Property rolNuevo As String
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
-
         Dim respuesta As DialogResult
-        respuesta = MessageBox.Show("Seguro que desea crear este usuario?",
-                                    "Confirmar",
-                                    MessageBoxButtons.YesNo,
-                                    MessageBoxIcon.Question)
+        respuesta = MessageBox.Show("Seguro que desea crear este usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
 
         If respuesta <> DialogResult.Yes Then Exit Sub
@@ -25,8 +21,8 @@ Public Class Contra
             Using cn As New MySqlConnection(ConnectionString)
                 cn.Open()
                 Dim consulta As String = "INSERT INTO usuarios " &
-                                             "(usuario, descripcion, clavehash, salt, id_rol, activo) " &
-                                             "VALUES (@usuario, @descripcion, @clavehash, @salt, @rol, 1)"
+                    "(usuario, descripcion, clavehash, salt, id_rol, activo) " &
+                    "VALUES (@usuario, @descripcion, @clavehash, @salt, @rol, 1)"
 
                 Using comando As New MySqlCommand(consulta, cn)
 

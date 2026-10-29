@@ -28,10 +28,11 @@ Public Class FrmDashboard
                 CargarLotesVencidos(conexion)
                 CargarPerdidaMermas(conexion)
 
+                CargarProximosVencer(conexion)
+
                 CargarGraficoStockCategoria(conexion)
                 CargarGraficoMermas(conexion)
                 CargarGraficoMotivos(conexion)
-                CargarProximosVencer(conexion)
             End Using
         Catch ex As Exception
             ' En la actualizacion automatica no se muestra el error para no interrumpir
@@ -341,11 +342,23 @@ Public Class FrmDashboard
         'Aplicacion del tema
         Tema.AplicarTema(Me)
         'Verificar permiso
-        If Not Sesion.EsAdministrador() Then
+        If Sesion.EsAdministrador() = True Or Sesion.EsVendedor = True Then
+            formsPlotStock.Visible = True
+            lblValorInventario.Visible = True
+            Label2.Visible = True
+            pnlFranjaInventario.Visible = True
+        End If
+        If Sesion.EsRepositor() = True Then
             formsPlotStock.Visible = False
             lblValorInventario.Visible = False
             Label2.Visible = False
             pnlFranjaInventario.Visible = False
+            pnlFranjaMermas.Visible = False
+            formsPlotMermas.Visible = False
+            Label3.Visible = False
+            lblPerdidaMermas.Visible = False
+            formsPlotMotivos.Visible = False
+            pnlFranjaPorVencer.Visible = False
         End If
         'Aplicacion de disenos especificos
         pnlTarjetaProductos.BackColor = System.Drawing.Color.FromArgb(43, 47, 51)
@@ -354,7 +367,7 @@ Public Class FrmDashboard
         lblCantidadProductos.ForeColor = System.Drawing.Color.White
         lblCantidadProductos.Font = Fuente(16)
         'Actualizacion automatica mientra este bisible
-        tmrActualizar.Interval = 10000
+        tmrActualizar.Interval = 60000
         tmrActualizar.Start()
         CargarDashboard()
     End Sub

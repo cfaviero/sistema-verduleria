@@ -29,7 +29,8 @@ Partial Class Usuarios
         dgvUsuarios = New DataGridView()
         btnBorrar = New Button()
         GroupBox1 = New GroupBox()
-        rbUsuario = New RadioButton()
+        rbRepositor = New RadioButton()
+        rbVendedor = New RadioButton()
         rbAdmin = New RadioButton()
         txtDescripUser = New TextBox()
         Label6 = New Label()
@@ -103,7 +104,8 @@ Partial Class Usuarios
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(rbUsuario)
+        GroupBox1.Controls.Add(rbRepositor)
+        GroupBox1.Controls.Add(rbVendedor)
         GroupBox1.Controls.Add(rbAdmin)
         GroupBox1.Controls.Add(txtDescripUser)
         GroupBox1.Controls.Add(Label6)
@@ -118,25 +120,35 @@ Partial Class Usuarios
         GroupBox1.TabStop = False
         GroupBox1.Text = "Datos del Usuario"
         ' 
-        ' rbUsuario
+        ' rbRepositor
         ' 
-        rbUsuario.Appearance = Appearance.Button
-        rbUsuario.AutoSize = True
-        rbUsuario.Checked = True
-        rbUsuario.Location = New Point(400, 27)
-        rbUsuario.Name = "rbUsuario"
-        rbUsuario.Size = New Size(57, 25)
-        rbUsuario.TabIndex = 49
-        rbUsuario.TabStop = True
-        rbUsuario.Text = "Usuario"
-        rbUsuario.TextAlign = ContentAlignment.MiddleCenter
-        rbUsuario.UseVisualStyleBackColor = True
+        rbRepositor.Appearance = Appearance.Button
+        rbRepositor.AutoSize = True
+        rbRepositor.Location = New Point(400, 27)
+        rbRepositor.Name = "rbRepositor"
+        rbRepositor.Size = New Size(67, 25)
+        rbRepositor.TabIndex = 50
+        rbRepositor.Text = "Repositor"
+        rbRepositor.TextAlign = ContentAlignment.MiddleCenter
+        rbRepositor.UseVisualStyleBackColor = True
+        ' 
+        ' rbVendedor
+        ' 
+        rbVendedor.Appearance = Appearance.Button
+        rbVendedor.AutoSize = True
+        rbVendedor.Location = New Point(317, 27)
+        rbVendedor.Name = "rbVendedor"
+        rbVendedor.Size = New Size(67, 25)
+        rbVendedor.TabIndex = 49
+        rbVendedor.Text = "Vendedor"
+        rbVendedor.TextAlign = ContentAlignment.MiddleCenter
+        rbVendedor.UseVisualStyleBackColor = True
         ' 
         ' rbAdmin
         ' 
         rbAdmin.Appearance = Appearance.Button
         rbAdmin.AutoSize = True
-        rbAdmin.Location = New Point(289, 27)
+        rbAdmin.Location = New Point(208, 27)
         rbAdmin.Name = "rbAdmin"
         rbAdmin.Size = New Size(93, 25)
         rbAdmin.TabIndex = 48
@@ -236,6 +248,7 @@ Partial Class Usuarios
     Friend WithEvents txtUsuario As TextBox
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents txtDescripUser As TextBox
-    Friend WithEvents rbUsuario As RadioButton
+    Friend WithEvents rbVendedor As RadioButton
     Friend WithEvents rbAdmin As RadioButton
+    Friend WithEvents rbRepositor As RadioButton
 End Class

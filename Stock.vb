@@ -180,17 +180,36 @@ Public Class Stock
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub stock_Load(sender As Object, e As EventArgs) Handles Me.Load
         Tema.AplicarTema(Me)
-        If Not Sesion.EsAdministrador() Then
+        If Sesion.EsVendedor() = True Or Sesion.EsAdministrador() = True Then
+            btnCrear.Visible = True
+            btnModificar.Visible = True
+            btnBorrar.Visible = True
+            btnAgregar.Visible = True
+            btnGuardar.Visible = True
+            btnQuitar.Visible = True
+        Else
             btnCrear.Visible = False
             btnModificar.Visible = False
             btnBorrar.Visible = False
             btnAgregar.Visible = False
             btnGuardar.Visible = False
             btnQuitar.Visible = False
+            btnInforme.Visible = False
+            btnProveedores.Visible = False
+            btnFichaProducto.Visible = False
+            GroupBox1.Visible = False
+            Label1.Visible = False
+            Label6.Visible = False
+            txtNombre.Visible = False
+            txtDescripcion.Visible = False
+            Label5.Visible = False
         End If
+
         CargarGrilla()
         CargarCategorias()
         LimpiarCampos()
+
+
         ToolTip1.SetToolTip(btnFichaProducto, "Imprimir la ficha del producto seleccionado")
         ToolTip1.SetToolTip(btnProveedores, "Modificar los proveedores del producto")
         txtBuscar.PlaceholderText = "Buscar producto..."

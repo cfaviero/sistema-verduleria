@@ -63,6 +63,27 @@ Public Class Principal
 
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        If Sesion.EsAdministrador() Then
+            btnInicio.Enabled = False
+            btnClientes.Visible = True
+            btnProveedores.Visible = True
+            btnUsuarios.Visible = True
+        End If
+        If Sesion.EsVendedor() Then
+            btnInicio.Enabled = False
+            btnStock.Visible = True
+            btnClientes.Visible = True
+            btnProveedores.Visible = False
+            btnUsuarios.Visible = False
+        End If
+        If Sesion.EsRepositor() Then
+            btnInicio.Enabled = False
+            btnStock.Visible = True
+            btnClientes.Visible = False
+            btnProveedores.Visible = True
+            btnUsuarios.Visible = False
+            btnCaja.Visible = False
+        End If
         'Verifica admin
         Dim esadmin As Boolean = Sesion.EsAdministrador
         'Agrega tema
@@ -70,10 +91,7 @@ Public Class Principal
 
         MostrarFormulario(New frmDashboard())
         'Validaciones
-        btnInicio.Enabled = False
-        btnClientes.Visible = esadmin
-        btnProveedores.Visible = esadmin
-        btnUsuarios.Visible = esadmin
+
     End Sub
     '# EVENTOS CLICK BARRA ## 
     Private Sub btnProv_Click(sender As Object, e As EventArgs)
@@ -101,12 +119,6 @@ Public Class Principal
         Me.Close()
     End Sub
     Private Sub btnClientes_Click_1(sender As Object, e As EventArgs) Handles btnClientes.Click
-        'Valido usuario por las dudas
-        If Not Sesion.EsAdministrador() Then
-            MessageBox.Show("No tiene los permisos para acceder",
-                    "Acceso restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
-        End If
         MostrarFormulario(New Clientes)
         DeshabilitarBotones()
     End Sub
@@ -115,22 +127,10 @@ Public Class Principal
         DeshabilitarBotones()
     End Sub
     Private Sub btnProveedores_Click(sender As Object, e As EventArgs) Handles btnProveedores.Click
-        'Valido usuario por las dudas
-        If Not Sesion.EsAdministrador() Then
-            MessageBox.Show("No tiene los permisos para acceder",
-                    "Acceso restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
-        End If
         MostrarFormulario(New Proveedores_ABM())
         DeshabilitarBotones()
     End Sub
     Private Sub btnUsuarios_Click(sender As Object, e As EventArgs) Handles btnUsuarios.Click
-        'Valido usuario por las dudas
-        If Not Sesion.EsAdministrador() Then
-            MessageBox.Show("No tiene los permisos para acceder",
-                    "Acceso restringido", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Exit Sub
-        End If
         MostrarFormulario(New Usuarios())
         DeshabilitarBotones()
     End Sub
