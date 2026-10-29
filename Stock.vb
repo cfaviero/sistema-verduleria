@@ -152,6 +152,29 @@ Public Class Stock
             Return memoria.ToArray()
         End Using
     End Function
+
+    Private Function RecortarYRedimensionar(imgOriginal As Image, tamanoLado As Integer) As Image
+        ' Creamos un lienzo cuadrado en blanco
+        Dim bmpCuadrado As New Bitmap(tamanoLado, tamanoLado)
+
+        ' Calculamos cómo recortar el centro
+        Dim ladoMinimo As Integer = Math.Min(imgOriginal.Width, imgOriginal.Height)
+        Dim srcX As Integer = (imgOriginal.Width - ladoMinimo) \ 2
+        Dim srcY As Integer = (imgOriginal.Height - ladoMinimo) \ 2
+        Dim srcRect As New Rectangle(srcX, srcY, ladoMinimo, ladoMinimo)
+
+        ' Dibujamos el recorte en nuestro lienzo con alta calidad
+        Using g As Graphics = Graphics.FromImage(bmpCuadrado)
+            g.InterpolationMode = Drawing2D.InterpolationMode.HighQualityBicubic
+            g.SmoothingMode = Drawing2D.SmoothingMode.HighQuality
+            g.PixelOffsetMode = Drawing2D.PixelOffsetMode.HighQuality
+
+            g.DrawImage(imgOriginal, New Rectangle(0, 0, tamanoLado, tamanoLado), srcRect, GraphicsUnit.Pixel)
+        End Using
+
+        ' Retornamos la imagen lista para usar
+        Return bmpCuadrado
+    End Function
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
@@ -430,6 +453,8 @@ Public Class Stock
             If dlg.ShowDialog() = DialogResult.OK Then
                 Using temporal As Image = Image.FromFile(dlg.FileName)
                     PictureBox1.Image = New Bitmap(temporal)
+
+                    PictureBox1.Image = RecortarYRedimensionar(temporal, 400)
                 End Using
             End If
         End Using
