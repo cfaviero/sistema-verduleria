@@ -565,15 +565,15 @@ Public Class Stock
         CargarImagen(lblId.Text)
     End Sub
 
-
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
-    'Cantidad de productos que aparecen en el informe (caben hasta 6 en la hoja)
-    Private Const CANTIDAD_INFORME As Integer = 5
 
+    'Cantidad de productos que aparecen en el informe
+    Private Const CANTIDAD_INFORME As Integer = 5
     'Datos del informe, cargados al hacer clic y usados al dibujar la hoja
     Private informeProductos As DataTable
     Private indiceFila As Integer
+    Private numeroPagina As Integer
 
     Private Sub btnInforme_Click(sender As Object, e As EventArgs) Handles btnInforme.Click
         Try
@@ -614,37 +614,69 @@ Public Class Stock
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
         Const ALTO_FILA As Integer = 130
         Const LADO_IMG As Integer = 110
+        Const ALTO_ENCABEZADO As Integer = 110
+        Const ALTO_PIE As Integer = 40
+        Const STOCK_BAJO As Integer = 5
 
         Dim g As Graphics = e.Graphics
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias
+        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+
         Dim marco As Rectangle = e.MarginBounds
-        Dim centrado As New StringFormat() With {.Alignment = StringAlignment.Center}
+        Dim colorVerde As Color = Color.FromArgb(46, 125, 50)
+        Dim colorFondo As Color = Color.FromArgb(241, 248, 233)
+        Dim colorGris As Color = Color.FromArgb(100, 100, 100)
 
-        Using fTitulo As New Font("Arial", 18, FontStyle.Bold),
-              fNormal As New Font("Arial", 12, FontStyle.Regular),
-              fNegrita As New Font("Arial", 12, FontStyle.Bold),
-              lapizMarco As New Pen(Color.Black, 2)
+        'Numeración de páginas
+        numeroPagina += 1
+        Dim filasPorHoja As Integer = (marco.Height - ALTO_ENCABEZADO - ALTO_PIE) \ ALTO_FILA
+        Dim totalPaginas As Integer = CInt(Math.Ceiling(informeProductos.Rows.Count / filasPorHoja))
 
-            ' Recuadro alrededor de toda la información
+        Using fTitulo As New Font("Arial", 24, FontStyle.Bold),
+          fNormal As New Font("Arial", 11, FontStyle.Regular),
+          fNombre As New Font("Arial", 13, FontStyle.Bold),
+          fPequena As New Font("Arial", 9, FontStyle.Regular),
+          fStock As New Font("Arial", 20, FontStyle.Bold),
+          bVerde As New SolidBrush(colorVerde),
+          bFondo As New SolidBrush(colorFondo),
+          bGris As New SolidBrush(colorGris),
+          lapizMarco As New Pen(Color.FromArgb(180, 180, 180), 1),
+          derecha As New StringFormat() With {.Alignment = StringAlignment.Far}
+
+            'Recuadro general
             g.DrawRectangle(lapizMarco, marco)
 
-            ' Encabezado
-            g.DrawString("Informe de productos con menos stock", fTitulo, Brushes.Black,
-                         New RectangleF(marco.Left, marco.Top + 15, marco.Width, 40), centrado)
-            g.DrawString("Fecha: " & Now.ToString("dd/MM/yyyy HH:mm"), fNormal, Brushes.Black,
-                         marco.Left + 15, marco.Top + 60)
-            g.DrawLine(Pens.Black, marco.Left, marco.Top + 90, marco.Right, marco.Top + 90)
+            'Encabezado
+            Using logo As Image = My.Resources.LogoVerduleria
+                Dim lado As Integer = 90
+                Dim escala As Single = Math.Min(lado / logo.Width, lado / logo.Height)
+                Dim ancho As Integer = CInt(logo.Width * escala)
+                Dim alto As Integer = CInt(logo.Height * escala)
+                g.DrawImage(logo, marco.Left + 15 + (lado - ancho) \ 2,
+                        marco.Top + 8 + (lado - alto) \ 2, ancho, alto)
+            End Using
 
-            ' Una fila por producto
-            Dim y As Integer = marco.Top + 100
+            g.DrawString("Productos con menos stock", fTitulo, bVerde,
+                     marco.Left + 120, marco.Top + 25)
+            g.DrawString("Fecha: " & Now.ToString("dd/MM/yyyy HH:mm"), fNormal, bGris,
+                     marco.Left + 122, marco.Top + 62)
+            g.FillRectangle(bVerde, marco.Left, marco.Top + ALTO_ENCABEZADO - 6, marco.Width, 4)
+
+            'Filas
+            Dim y As Integer = marco.Top + ALTO_ENCABEZADO
             Do While indiceFila < informeProductos.Rows.Count
 
-                ' Si no entra otra fila en esta hoja, corto y sigo en la siguiente
-                If y + ALTO_FILA > marco.Bottom - 40 Then Exit Do
+                If y + ALTO_FILA > marco.Bottom - ALTO_PIE Then Exit Do
 
                 Dim fila As DataRow = informeProductos.Rows(indiceFila)
 
-                ' Imagen (ajustada sin deformarla) o aviso si no tiene
-                Dim rectImg As New Rectangle(marco.Left + 15, y, LADO_IMG, LADO_IMG)
+                'Fondo alternado
+                If indiceFila Mod 2 = 0 Then
+                    g.FillRectangle(bFondo, marco.Left + 1, y, marco.Width - 2, ALTO_FILA)
+                End If
+
+                'Imagen del producto
+                Dim rectImg As New Rectangle(marco.Left + 15, y + 10, LADO_IMG, LADO_IMG)
                 If Not IsDBNull(fila("imagen_producto")) Then
                     Using memoria As New MemoryStream(DirectCast(fila("imagen_producto"), Byte()))
                         Using img As Image = Image.FromStream(memoria)
@@ -652,41 +684,67 @@ Public Class Stock
                             Dim ancho As Integer = CInt(img.Width * escala)
                             Dim alto As Integer = CInt(img.Height * escala)
                             g.DrawImage(img, rectImg.X + (LADO_IMG - ancho) \ 2,
-                                        rectImg.Y + (LADO_IMG - alto) \ 2, ancho, alto)
+                                    rectImg.Y + (LADO_IMG - alto) \ 2, ancho, alto)
                         End Using
                     End Using
                 Else
-                    g.DrawString("Sin imagen", fNormal, Brushes.Gray, rectImg.X + 10, rectImg.Y + 45)
+                    g.DrawString("Sin imagen", fNormal, Brushes.Gray, rectImg.X + 12, rectImg.Y + 45)
                 End If
-                g.DrawRectangle(Pens.Gray, rectImg)
+                g.DrawRectangle(Pens.LightGray, rectImg)
 
-                ' Datos del producto
+                'Datos del producto
                 Dim xTexto As Integer = rectImg.Right + 20
-                g.DrawString(fila("nombre").ToString(), fNegrita, Brushes.Black, xTexto, y + 5)
-                g.DrawString("Categoría: " & fila("nombre_categoria").ToString(), fNormal, Brushes.Black, xTexto, y + 35)
+                g.DrawString(fila("nombre").ToString(), fNombre, Brushes.Black, xTexto, y + 25)
+                g.DrawString("Categoría: " & fila("nombre_categoria").ToString(), fNormal, bGris, xTexto, y + 55)
                 g.DrawString("Precio: " & Convert.ToDecimal(fila("precio_unitario")).ToString("C2"),
-                             fNormal, Brushes.Black, xTexto, y + 60)
-                g.DrawString("Stock: " & Convert.ToDecimal(fila("stock")).ToString("0.###"),
-                             fNegrita, Brushes.Black, xTexto, y + 85)
+                         fNormal, Brushes.Black, xTexto, y + 80)
+
+                'Stock
+                Dim cantidad As Decimal = Convert.ToDecimal(fila("stock"))
+                Dim colorStock As Color
+                Dim estado As String
+                If cantidad <= 0 Then
+                    colorStock = Color.Firebrick
+                    estado = "Sin stock"
+                ElseIf cantidad <= STOCK_BAJO Then
+                    colorStock = Color.DarkOrange
+                    estado = "Stock bajo"
+                Else
+                    colorStock = colorVerde
+                    estado = "Stock normal"
+                End If
+
+                Dim rectDerecha As New RectangleF(marco.Right - 165, y, 150, ALTO_FILA)
+                Using bStock As New SolidBrush(colorStock)
+                    g.DrawString("STOCK", fPequena, bGris,
+                             New RectangleF(rectDerecha.X, y + 25, rectDerecha.Width, 20), derecha)
+                    g.DrawString(cantidad.ToString("0.###"), fStock, bStock,
+                             New RectangleF(rectDerecha.X, y + 42, rectDerecha.Width, 35), derecha)
+                    g.DrawString(estado, fPequena, bStock,
+                             New RectangleF(rectDerecha.X, y + 80, rectDerecha.Width, 20), derecha)
+                End Using
 
                 y += ALTO_FILA
-                g.DrawLine(Pens.LightGray, marco.Left + 15, y - 10, marco.Right - 15, y - 10)
-
-                indiceFila += 1   ' paso al siguiente producto
+                indiceFila += 1
             Loop
 
-            ' Si quedan productos, la impresión genera otra hoja
+            'Pie de pagina
+            g.DrawLine(lapizMarco, marco.Left + 15, marco.Bottom - ALTO_PIE + 5, marco.Right - 15, marco.Bottom - ALTO_PIE + 5)
+            g.DrawString("Verdulería THIAN", fPequena, bGris, marco.Left + 15, marco.Bottom - ALTO_PIE + 15)
+            g.DrawString("Página " & numeroPagina & " de " & totalPaginas, fPequena, bGris,
+                     New RectangleF(marco.Left, marco.Bottom - ALTO_PIE + 15, marco.Width - 15, 20), derecha)
+
             e.HasMorePages = (indiceFila < informeProductos.Rows.Count)
         End Using
     End Sub
+
     Private Sub PrintDocument1_BeginPrint(sender As Object, e As Printing.PrintEventArgs) Handles PrintDocument1.BeginPrint
         indiceFila = 0
+        numeroPagina = 0
     End Sub
 
 
-
     Private WithEvents docFicha As New PrintDocument
-
     'Datos de la ficha, cargados al hacer clic y usados al dibujar la hoja
     Private fichaProducto As DataRow
     Private fichaProveedores As DataTable
@@ -761,31 +819,71 @@ Public Class Stock
     Private Sub docFicha_PrintPage(sender As Object, e As PrintPageEventArgs) Handles docFicha.PrintPage
         Const LADO_IMG As Integer = 220
         Const MARGEN As Integer = 20
+        Const ALTO_ENCABEZADO As Integer = 110
+        Const ALTO_PIE As Integer = 40
+        Const STOCK_BAJO As Integer = 5
 
         Dim g As Graphics = e.Graphics
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias
+        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
+
         Dim marco As Rectangle = e.MarginBounds
         Dim unidad As String = fichaProducto("unidad_medida").ToString()
+        Dim colorVerde As Color = Color.FromArgb(46, 125, 50)
+        Dim colorFondo As Color = Color.FromArgb(241, 248, 233)
+        Dim colorGris As Color = Color.FromArgb(100, 100, 100)
 
-        Using centrado As New StringFormat() With {.Alignment = StringAlignment.Center},
-          fTitulo As New Font("Arial", 18, FontStyle.Bold),
-          fNombre As New Font("Arial", 16, FontStyle.Bold),
+        'Nivel de stock
+        Dim cantidad As Decimal = Convert.ToDecimal(fichaProducto("stock"))
+        Dim colorStock As Color
+        Dim estadoStock As String
+        If cantidad <= 0 Then
+            colorStock = Color.Firebrick
+            estadoStock = "Sin stock"
+        ElseIf cantidad <= STOCK_BAJO Then
+            colorStock = Color.DarkOrange
+            estadoStock = "Stock bajo"
+        Else
+            colorStock = colorVerde
+            estadoStock = "Stock normal"
+        End If
+
+        Using fTitulo As New Font("Arial", 20, FontStyle.Bold),
+          fNombre As New Font("Arial", 18, FontStyle.Bold),
           fNormal As New Font("Arial", 12, FontStyle.Regular),
           fNegrita As New Font("Arial", 12, FontStyle.Bold),
-          lapizMarco As New Pen(Color.Black, 2)
+          fSeccion As New Font("Arial", 13, FontStyle.Bold),
+          fPequena As New Font("Arial", 9, FontStyle.Regular),
+          bVerde As New SolidBrush(colorVerde),
+          bFondo As New SolidBrush(colorFondo),
+          bGris As New SolidBrush(colorGris),
+          bStock As New SolidBrush(colorStock),
+          lapizMarco As New Pen(Color.FromArgb(180, 180, 180), 1),
+          derecha As New StringFormat() With {.Alignment = StringAlignment.Far},
+          centrado As New StringFormat() With {.Alignment = StringAlignment.Center}
 
-            ' Recuadro alrededor de toda la información
+            'Recuadro general
             g.DrawRectangle(lapizMarco, marco)
 
-            ' Encabezado (mismo estilo que el informe de stock)
-            g.DrawString("Ficha de producto", fTitulo, Brushes.Black,
-                     New RectangleF(marco.Left, marco.Top + 15, marco.Width, 40), centrado)
-            g.DrawString("Fecha: " & Now.ToString("dd/MM/yyyy HH:mm"), fNormal, Brushes.Black,
-                     marco.Left + 15, marco.Top + 60)
-            g.DrawLine(Pens.Black, marco.Left, marco.Top + 90, marco.Right, marco.Top + 90)
+            'Encabezado
+            Using logo As Image = My.Resources.LogoVerduleria
+                Dim lado As Integer = 90
+                Dim escalaLogo As Single = Math.Min(lado / logo.Width, lado / logo.Height)
+                Dim anchoLogo As Integer = CInt(logo.Width * escalaLogo)
+                Dim altoLogo As Integer = CInt(logo.Height * escalaLogo)
+                g.DrawImage(logo, marco.Left + 15 + (lado - anchoLogo) \ 2,
+                        marco.Top + 8 + (lado - altoLogo) \ 2, anchoLogo, altoLogo)
+            End Using
 
-            ' ---------- Imagen (ajustada sin deformarla) o aviso si no tiene ----------
-            Dim y As Integer = marco.Top + 110
+            g.DrawString("Ficha de producto", fTitulo, bVerde, marco.Left + 120, marco.Top + 25)
+            g.DrawString("Fecha: " & Now.ToString("dd/MM/yyyy HH:mm"), fNormal, bGris,
+                     marco.Left + 122, marco.Top + 62)
+            g.FillRectangle(bVerde, marco.Left, marco.Top + ALTO_ENCABEZADO - 6, marco.Width, 4)
+
+            'Imagen
+            Dim y As Integer = marco.Top + ALTO_ENCABEZADO + 20
             Dim rectImg As New Rectangle(marco.Left + MARGEN, y, LADO_IMG, LADO_IMG)
+            g.FillRectangle(Brushes.White, rectImg)
             If Not IsDBNull(fichaProducto("imagen_producto")) Then
                 Using memoria As New MemoryStream(DirectCast(fichaProducto("imagen_producto"), Byte()))
                     Using img As Image = Image.FromStream(memoria)
@@ -797,68 +895,86 @@ Public Class Stock
                     End Using
                 End Using
             Else
-                g.DrawString("Sin imagen", fNormal, Brushes.Gray, rectImg.X + 55, rectImg.Y + 100)
+                g.DrawString("Sin imagen", fNormal, Brushes.Gray,
+                         New RectangleF(rectImg.X, rectImg.Y + 100, LADO_IMG, 25), centrado)
             End If
-            g.DrawRectangle(Pens.Gray, rectImg)
+            g.DrawRectangle(Pens.LightGray, rectImg)
 
-            ' ---------- Datos principales (a la derecha de la imagen) ----------
+            'Datos principales
             Dim xTexto As Integer = rectImg.Right + 25
+            Dim xValor As Integer = xTexto + 125
             Dim yTexto As Integer = y
 
-            g.DrawString(fichaProducto("nombre").ToString(), fNombre, Brushes.Black, xTexto, yTexto)
-            yTexto += 45
+            g.DrawString(fichaProducto("nombre").ToString(), fNombre, bVerde, xTexto, yTexto)
+            yTexto += 50
 
-            Dim filas As New List(Of KeyValuePair(Of String, String))
-            filas.Add(New KeyValuePair(Of String, String)("Código: ", fichaProducto("id_producto").ToString()))
-            filas.Add(New KeyValuePair(Of String, String)("Categoría: ", fichaProducto("nombre_categoria").ToString()))
-            filas.Add(New KeyValuePair(Of String, String)("Precio: ",
-            Convert.ToDecimal(fichaProducto("precio_unitario")).ToString("C2") & " / " & unidad))
-            filas.Add(New KeyValuePair(Of String, String)("Stock actual: ",
-            Convert.ToDecimal(fichaProducto("stock")).ToString("0.###") & " " & unidad))
-            filas.Add(New KeyValuePair(Of String, String)("Último ingreso: ",
-            If(IsDBNull(fichaProducto("ultimo_ingreso")), "Sin registros",
-               Convert.ToDateTime(fichaProducto("ultimo_ingreso")).ToString("dd/MM/yyyy"))))
-            filas.Add(New KeyValuePair(Of String, String)("Último costo: ",
-            If(IsDBNull(fichaProducto("ultimo_costo")), "Sin registros",
-               Convert.ToDecimal(fichaProducto("ultimo_costo")).ToString("C2") & " / " & unidad)))
+            Dim filas As New List(Of Tuple(Of String, String, Brush))
+            filas.Add(Tuple.Create("Código", fichaProducto("id_producto").ToString(), CType(Brushes.Black, Brush)))
+            filas.Add(Tuple.Create("Categoría", fichaProducto("nombre_categoria").ToString(), CType(Brushes.Black, Brush)))
+            filas.Add(Tuple.Create("Precio",
+                  Convert.ToDecimal(fichaProducto("precio_unitario")).ToString("C2") & " / " & unidad,
+                  CType(Brushes.Black, Brush)))
+            filas.Add(Tuple.Create("Stock actual",
+                  cantidad.ToString("0.###") & " " & unidad & "  (" & estadoStock & ")",
+                  CType(bStock, Brush)))
+            filas.Add(Tuple.Create("Último ingreso",
+                  If(IsDBNull(fichaProducto("ultimo_ingreso")), "Sin registros",
+                     Convert.ToDateTime(fichaProducto("ultimo_ingreso")).ToString("dd/MM/yyyy")),
+                  CType(Brushes.Black, Brush)))
+            filas.Add(Tuple.Create("Último costo",
+                  If(IsDBNull(fichaProducto("ultimo_costo")), "Sin registros",
+                     Convert.ToDecimal(fichaProducto("ultimo_costo")).ToString("C2") & " / " & unidad),
+                  CType(Brushes.Black, Brush)))
 
             For Each fila In filas
-                g.DrawString(fila.Key, fNegrita, Brushes.Black, xTexto, yTexto)
-                Dim anchoEtiqueta As Single = g.MeasureString(fila.Key, fNegrita).Width - 8
-                g.DrawString(fila.Value, fNormal, Brushes.Black, xTexto + anchoEtiqueta, yTexto)
-                yTexto += 28
+                g.DrawString(fila.Item1, fNormal, bGris, xTexto, yTexto)
+                g.DrawString(fila.Item2, fNegrita, fila.Item3, xValor, yTexto)
+                yTexto += 27
             Next
 
-            ' ---------- Descripción (a todo el ancho, con salto de línea automático) ----------
-            y = rectImg.Bottom + 20
-            g.DrawLine(Pens.LightGray, marco.Left + MARGEN, y, marco.Right - MARGEN, y)
-            y += 10
-            g.DrawString("Descripción", fNegrita, Brushes.Black, marco.Left + MARGEN, y)
-            y += 28
+            'Descripcion
+            y = rectImg.Bottom + 25
+            g.FillRectangle(bVerde, marco.Left + MARGEN, y, 5, 22)
+            g.DrawString("Descripción", fSeccion, bVerde, marco.Left + MARGEN + 12, y)
+            y += 32
+
             Dim descripcion As String = fichaProducto("descripcion").ToString()
             If String.IsNullOrWhiteSpace(descripcion) Then descripcion = "Sin descripción"
+            Dim rectDesc As New Rectangle(marco.Left + MARGEN, y, marco.Width - 2 * MARGEN, 70)
+            g.FillRectangle(bFondo, rectDesc)
             g.DrawString(descripcion, fNormal, Brushes.Black,
-                     New RectangleF(marco.Left + MARGEN, y, marco.Width - 2 * MARGEN, 60))
-            y += 70
+                     New RectangleF(rectDesc.X + 10, rectDesc.Y + 8, rectDesc.Width - 20, rectDesc.Height - 10))
+            y += 70 + 25
 
-            ' ---------- Proveedores ----------
-            g.DrawLine(Pens.LightGray, marco.Left + MARGEN, y, marco.Right - MARGEN, y)
-            y += 10
-            g.DrawString("Proveedores", fNegrita, Brushes.Black, marco.Left + MARGEN, y)
-            y += 28
+            'Proveedores
+            g.FillRectangle(bVerde, marco.Left + MARGEN, y, 5, 22)
+            g.DrawString("Proveedores", fSeccion, bVerde, marco.Left + MARGEN + 12, y)
+            y += 32
 
             If fichaProveedores.Rows.Count = 0 Then
                 g.DrawString("Sin proveedores asignados", fNormal, Brushes.Gray, marco.Left + MARGEN, y)
             Else
+                Dim indice As Integer = 0
                 For Each prov As DataRow In fichaProveedores.Rows
-                    If y > marco.Bottom - 30 Then Exit For ' por si la lista fuera muy larga
+                    If y + 28 > marco.Bottom - ALTO_PIE Then Exit For
+
+                    If indice Mod 2 = 0 Then
+                        g.FillRectangle(bFondo, marco.Left + MARGEN, y - 3, marco.Width - 2 * MARGEN, 28)
+                    End If
 
                     Dim telefono As String = If(IsDBNull(prov("telefono")), "sin teléfono", prov("telefono").ToString())
-                    g.DrawString("• " & prov("nombre").ToString() & "  -  Tel: " & telefono,
-                             fNormal, Brushes.Black, marco.Left + MARGEN, y)
-                    y += 26
+                    g.DrawString(prov("nombre").ToString(), fNormal, Brushes.Black, marco.Left + MARGEN + 10, y)
+                    g.DrawString("Tel: " & telefono, fNormal, bGris,
+                             New RectangleF(marco.Left + MARGEN, y, marco.Width - 2 * MARGEN - 10, 25), derecha)
+                    y += 28
+                    indice += 1
                 Next
             End If
+
+            'Pie de pagina
+            g.DrawLine(lapizMarco, marco.Left + 15, marco.Bottom - ALTO_PIE + 5, marco.Right - 15, marco.Bottom - ALTO_PIE + 5)
+            g.DrawString("Verdulería THIAN", fPequena, bGris,
+                     New RectangleF(marco.Left, marco.Bottom - ALTO_PIE + 15, marco.Width, 20), centrado)
         End Using
 
         e.HasMorePages = False

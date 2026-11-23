@@ -8,6 +8,7 @@ Public Class Contra
     Public Property descNuevo As String
     <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
     Public Property rolNuevo As String
+    Private ojoCerrado As Boolean = True
 
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
 
@@ -64,5 +65,19 @@ Public Class Contra
         txtContra.Font = Tema.Fuente(12, FontStyle.Bold)
         txtRepContra.Font = Tema.Fuente(12, FontStyle.Bold)
         lblContra.Font = Tema.Fuente(15, FontStyle.Bold)
+    End Sub
+
+    Private Sub pbVer_Click(sender As Object, e As EventArgs) Handles pbVer.Click
+        If ojoCerrado Then
+            pbVer.Image = My.Resources.ojoabierto
+            ojoCerrado = False
+            txtContra.PasswordChar = ""
+            txtRepContra.PasswordChar = ""
+        Else
+            pbVer.Image = My.Resources.ojocerrado
+            ojoCerrado = True
+            txtContra.PasswordChar = "*"
+            txtRepContra.PasswordChar = "*"
+        End If
     End Sub
 End Class

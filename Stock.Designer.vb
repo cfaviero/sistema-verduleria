@@ -339,7 +339,7 @@ Partial Class stock
         btnInforme.Name = "btnInforme"
         btnInforme.Size = New Size(123, 55)
         btnInforme.TabIndex = 26
-        btnInforme.Text = "Informe de Stock"
+        btnInforme.Text = "Informe Stock"
         btnInforme.UseVisualStyleBackColor = True
         ' 
         ' Button1
@@ -357,7 +357,7 @@ Partial Class stock
         btnFichaProducto.Name = "btnFichaProducto"
         btnFichaProducto.Size = New Size(124, 55)
         btnFichaProducto.TabIndex = 28
-        btnFichaProducto.Text = "Ficha de Producto"
+        btnFichaProducto.Text = " Ficha Producto"
         btnFichaProducto.UseVisualStyleBackColor = True
         ' 
         ' stock

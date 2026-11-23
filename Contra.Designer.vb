@@ -30,7 +30,9 @@ Partial Class Contra
         lblContra = New Label()
         btnCrear = New Button()
         PictureBox3 = New PictureBox()
+        pbVer = New PictureBox()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
+        CType(pbVer, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Label2
@@ -48,13 +50,13 @@ Partial Class Contra
         txtRepContra.Location = New Point(151, 176)
         txtRepContra.Name = "txtRepContra"
         txtRepContra.PasswordChar = "*"c
-        txtRepContra.Size = New Size(224, 23)
+        txtRepContra.Size = New Size(195, 23)
         txtRepContra.TabIndex = 2
         ' 
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(35, 139)
+        Label1.Location = New Point(24, 139)
         Label1.Name = "Label1"
         Label1.Size = New Size(102, 15)
         Label1.TabIndex = 41
@@ -66,7 +68,7 @@ Partial Class Contra
         txtContra.Location = New Point(151, 131)
         txtContra.Name = "txtContra"
         txtContra.PasswordChar = "*"c
-        txtContra.Size = New Size(224, 23)
+        txtContra.Size = New Size(195, 23)
         txtContra.TabIndex = 1
         ' 
         ' lblContra
@@ -98,11 +100,22 @@ Partial Class Contra
         PictureBox3.TabIndex = 45
         PictureBox3.TabStop = False
         ' 
+        ' pbVer
+        ' 
+        pbVer.Image = My.Resources.Resources.ojocerrado
+        pbVer.Location = New Point(355, 148)
+        pbVer.Name = "pbVer"
+        pbVer.Size = New Size(43, 35)
+        pbVer.SizeMode = PictureBoxSizeMode.Zoom
+        pbVer.TabIndex = 46
+        pbVer.TabStop = False
+        ' 
         ' Contra
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(407, 285)
+        Controls.Add(pbVer)
         Controls.Add(PictureBox3)
         Controls.Add(btnCrear)
         Controls.Add(lblContra)
@@ -114,6 +127,7 @@ Partial Class Contra
         Name = "Contra"
         Text = "Contraseña"
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
+        CType(pbVer, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -125,4 +139,5 @@ Partial Class Contra
     Friend WithEvents lblContra As Label
     Friend WithEvents btnCrear As Button
     Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents pbVer As PictureBox
 End Class

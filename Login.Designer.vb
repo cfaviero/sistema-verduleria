@@ -34,11 +34,13 @@ Partial Class Login
         lblBien = New Label()
         PictureBox3 = New PictureBox()
         Panel1 = New Panel()
+        pbVer = New PictureBox()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         pnlCabecera.SuspendLayout()
         CType(PictureBox2, ComponentModel.ISupportInitialize).BeginInit()
         CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
         Panel1.SuspendLayout()
+        CType(pbVer, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnEntrar
@@ -137,6 +139,7 @@ Partial Class Login
         ' 
         ' Panel1
         ' 
+        Panel1.Controls.Add(pbVer)
         Panel1.Controls.Add(PictureBox3)
         Panel1.Controls.Add(lblBien)
         Panel1.Controls.Add(PictureBox2)
@@ -146,6 +149,16 @@ Partial Class Login
         Panel1.Name = "Panel1"
         Panel1.Size = New Size(402, 440)
         Panel1.TabIndex = 10
+        ' 
+        ' pbVer
+        ' 
+        pbVer.Image = My.Resources.Resources.ojocerrado
+        pbVer.Location = New Point(330, 283)
+        pbVer.Name = "pbVer"
+        pbVer.Size = New Size(43, 35)
+        pbVer.SizeMode = PictureBoxSizeMode.Zoom
+        pbVer.TabIndex = 10
+        pbVer.TabStop = False
         ' 
         ' Login
         ' 
@@ -167,6 +180,7 @@ Partial Class Login
         CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
         Panel1.ResumeLayout(False)
         Panel1.PerformLayout()
+        CType(pbVer, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -182,4 +196,5 @@ Partial Class Login
     Friend WithEvents lblBien As Label
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents Panel1 As Panel
+    Friend WithEvents pbVer As PictureBox
 End Class

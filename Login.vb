@@ -6,7 +6,7 @@ Public Class Login
     Private Const WM_NCLBUTTONDOWN As Integer = &HA1
     Private Const HTCAPTION As Integer = 2
     Private Const CS_DROPSHADOW As Integer = &H20000
-
+    Private ojoCerrado As Boolean = True
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'Datos de conexion a la bd
@@ -19,16 +19,17 @@ Public Class Login
         btnCerrrar.Font = Tema.Fuente(11, FontStyle.Bold)
         txtUsuario.Font = Tema.Fuente(12, FontStyle.Bold)
         txtContra.Font = Tema.Fuente(12, FontStyle.Bold)
-        Panel1.BackColor = ColorTranslator.FromHtml("#b6d7a8")
-        PictureBox2.BackColor = ColorTranslator.FromHtml("#b6d7a8")
-        PictureBox3.BackColor = ColorTranslator.FromHtml("#b6d7a8")
-        Label3.BackColor = ColorTranslator.FromHtml("#b6d7a8")
-        btnCerrrar.FlatStyle = FlatStyle.Flat
 
+        Panel1.BackColor = ColorTranslator.FromHtml("#50C878")
+        PictureBox2.BackColor = ColorTranslator.FromHtml("#50C878")
+        PictureBox3.BackColor = ColorTranslator.FromHtml("#50C878")
+        Label3.BackColor = ColorTranslator.FromHtml("#50C878")
+        btnCerrrar.FlatStyle = FlatStyle.Flat
         Me.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Me.Width, Me.Height, 25, 25))
 
         'Click en entrar al presionar enter
         MyBase.AcceptButton = btnEntrar
+        Me.CenterToScreen()
     End Sub
 
     Private Sub btnEntrar_Click(sender As Object, e As EventArgs) Handles btnEntrar.Click
@@ -101,6 +102,10 @@ Public Class Login
     End Sub
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
+    Private Sub Login_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        Me.ActiveControl = Nothing
+    End Sub
+
 
     <DllImport("gdi32.dll", EntryPoint:="CreateRoundRectRgn")>
     Private Shared Function CreateRoundRectRgn(nX1 As Integer, nY1 As Integer, nX2 As Integer, nY2 As Integer, nWidthEllipse As Integer, nHeightEllipse As Integer) As IntPtr
@@ -114,4 +119,15 @@ Public Class Login
     Private Shared Sub SendMessage(hWnd As IntPtr, Msg As Integer, wParam As Integer, lParam As Integer)
     End Sub
 
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles pbVer.Click
+        If ojoCerrado Then
+            pbVer.Image = My.Resources.ojoabierto
+            ojoCerrado = False
+            txtContra.PasswordChar = ""
+        Else
+            pbVer.Image = My.Resources.ojocerrado
+            ojoCerrado = True
+            txtContra.PasswordChar = "*"
+        End If
+    End Sub
 End Class

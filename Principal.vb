@@ -89,6 +89,7 @@ Public Class Principal
         'Agrega tema
         Tema.AplicarTema(Me)
         Me.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Me.Width, Me.Height, 25, 25))
+        Me.CenterToScreen()
         MostrarFormulario(New frmDashboard())
         'Validaciones
 
