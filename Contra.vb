@@ -1,4 +1,5 @@
-﻿Imports MySqlConnector
+﻿Imports System.Runtime.InteropServices
+Imports MySqlConnector
 
 Public Class Contra
     <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
@@ -7,7 +8,18 @@ Public Class Contra
     Public Property descNuevo As String
     <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
     Public Property rolNuevo As String
+
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
+
+        If txtContra.Text = "" OrElse txtRepContra.Text = "" OrElse txtContra.Text <> txtRepContra.Text Then
+            MessageBox.Show("Por favor, completar los campos.", "Campos Incompletos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            'Vuelve a enfocarse en el textbox usuarios
+            txtContra.Clear()
+            txtRepContra.Clear()
+            txtContra.Focus()
+            Exit Sub
+        End If
+
         Dim respuesta As DialogResult
         respuesta = MessageBox.Show("Seguro que desea crear este usuario?", "Confirmar", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
 
@@ -42,5 +54,15 @@ Public Class Contra
             MessageBox.Show("Ocurrió un error al crear: " & ex.Message,
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
+    End Sub
+
+    Private Sub Contra_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Aplicacion del tema
+        Tema.AplicarTema(Me)
+
+        'Formato
+        txtContra.Font = Tema.Fuente(12, FontStyle.Bold)
+        txtRepContra.Font = Tema.Fuente(12, FontStyle.Bold)
+        lblContra.Font = Tema.Fuente(15, FontStyle.Bold)
     End Sub
 End Class

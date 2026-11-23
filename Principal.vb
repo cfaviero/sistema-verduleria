@@ -88,7 +88,7 @@ Public Class Principal
         Dim esadmin As Boolean = Sesion.EsAdministrador
         'Agrega tema
         Tema.AplicarTema(Me)
-
+        Me.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Me.Width, Me.Height, 25, 25))
         MostrarFormulario(New frmDashboard())
         'Validaciones
 
@@ -146,6 +146,10 @@ Public Class Principal
         End If
     End Sub
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
+
+    <DllImport("gdi32.dll", EntryPoint:="CreateRoundRectRgn")>
+    Private Shared Function CreateRoundRectRgn(nX1 As Integer, nY1 As Integer, nX2 As Integer, nY2 As Integer, nWidthEllipse As Integer, nHeightEllipse As Integer) As IntPtr
+    End Function
 
     'Control para manipular la ventana con libreria nativa de windos
     <DllImport("user32.dll")>

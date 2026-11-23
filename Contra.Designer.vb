@@ -22,18 +22,21 @@ Partial Class Contra
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Contra))
         Label2 = New Label()
         txtRepContra = New TextBox()
-        Label7 = New Label()
+        Label1 = New Label()
         txtContra = New TextBox()
         lblContra = New Label()
         btnCrear = New Button()
+        PictureBox3 = New PictureBox()
+        CType(PictureBox3, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' Label2
         ' 
         Label2.AutoSize = True
-        Label2.Location = New Point(24, 195)
+        Label2.Location = New Point(24, 184)
         Label2.Name = "Label2"
         Label2.Size = New Size(113, 15)
         Label2.TabIndex = 42
@@ -42,25 +45,27 @@ Partial Class Contra
         ' txtRepContra
         ' 
         txtRepContra.BorderStyle = BorderStyle.FixedSingle
-        txtRepContra.Location = New Point(151, 193)
+        txtRepContra.Location = New Point(151, 176)
         txtRepContra.Name = "txtRepContra"
+        txtRepContra.PasswordChar = "*"c
         txtRepContra.Size = New Size(224, 23)
         txtRepContra.TabIndex = 2
         ' 
-        ' Label7
+        ' Label1
         ' 
-        Label7.AutoSize = True
-        Label7.Location = New Point(70, 166)
-        Label7.Name = "Label7"
-        Label7.Size = New Size(67, 15)
-        Label7.TabIndex = 41
-        Label7.Text = "Contraseña"
+        Label1.AutoSize = True
+        Label1.Location = New Point(35, 139)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(102, 15)
+        Label1.TabIndex = 41
+        Label1.Text = "Contraseña nueva"
         ' 
         ' txtContra
         ' 
         txtContra.BorderStyle = BorderStyle.FixedSingle
-        txtContra.Location = New Point(151, 164)
+        txtContra.Location = New Point(151, 131)
         txtContra.Name = "txtContra"
+        txtContra.PasswordChar = "*"c
         txtContra.Size = New Size(224, 23)
         txtContra.TabIndex = 1
         ' 
@@ -68,7 +73,7 @@ Partial Class Contra
         ' 
         lblContra.AutoSize = True
         lblContra.Font = New Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        lblContra.Location = New Point(90, 59)
+        lblContra.Location = New Point(90, 73)
         lblContra.Name = "lblContra"
         lblContra.Size = New Size(201, 25)
         lblContra.TabIndex = 43
@@ -76,34 +81,48 @@ Partial Class Contra
         ' 
         ' btnCrear
         ' 
-        btnCrear.Location = New Point(268, 236)
+        btnCrear.Location = New Point(300, 250)
         btnCrear.Name = "btnCrear"
         btnCrear.Size = New Size(75, 23)
         btnCrear.TabIndex = 44
         btnCrear.Text = "Crear"
         btnCrear.UseVisualStyleBackColor = True
         ' 
+        ' PictureBox3
+        ' 
+        PictureBox3.Image = My.Resources.Resources.pass
+        PictureBox3.Location = New Point(174, 35)
+        PictureBox3.Name = "PictureBox3"
+        PictureBox3.Size = New Size(35, 30)
+        PictureBox3.SizeMode = PictureBoxSizeMode.Zoom
+        PictureBox3.TabIndex = 45
+        PictureBox3.TabStop = False
+        ' 
         ' Contra
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(407, 285)
+        Controls.Add(PictureBox3)
         Controls.Add(btnCrear)
         Controls.Add(lblContra)
         Controls.Add(Label2)
         Controls.Add(txtRepContra)
-        Controls.Add(Label7)
+        Controls.Add(Label1)
         Controls.Add(txtContra)
+        Icon = CType(resources.GetObject("$this.Icon"), Icon)
         Name = "Contra"
-        Text = "Contra"
+        Text = "Contraseña"
+        CType(PictureBox3, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
 
     Friend WithEvents Label2 As Label
     Friend WithEvents txtRepContra As TextBox
-    Friend WithEvents Label7 As Label
+    Friend WithEvents Label1 As Label
     Friend WithEvents txtContra As TextBox
     Friend WithEvents lblContra As Label
     Friend WithEvents btnCrear As Button
+    Friend WithEvents PictureBox3 As PictureBox
 End Class

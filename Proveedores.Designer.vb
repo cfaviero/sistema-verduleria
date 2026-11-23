@@ -26,7 +26,7 @@ Partial Class Proveedores
         btnGuardar = New Button()
         Label1 = New Label()
         lblDescrip = New Label()
-        Label2 = New Label()
+        lbltitulo = New Label()
         SuspendLayout()
         ' 
         ' cklProveedores
@@ -66,27 +66,27 @@ Partial Class Proveedores
         ' lblDescrip
         ' 
         lblDescrip.AutoSize = True
-        lblDescrip.Location = New Point(509, 154)
+        lblDescrip.Location = New Point(466, 157)
         lblDescrip.Name = "lblDescrip"
         lblDescrip.Size = New Size(12, 15)
         lblDescrip.TabIndex = 5
         lblDescrip.Text = "-"
         ' 
-        ' Label2
+        ' lbltitulo
         ' 
-        Label2.AutoSize = True
-        Label2.Location = New Point(464, 122)
-        Label2.Name = "Label2"
-        Label2.Size = New Size(87, 15)
-        Label2.TabIndex = 6
-        Label2.Text = "Observaciones:"
+        lbltitulo.AutoSize = True
+        lbltitulo.Location = New Point(464, 122)
+        lbltitulo.Name = "lbltitulo"
+        lbltitulo.Size = New Size(87, 15)
+        lbltitulo.TabIndex = 6
+        lbltitulo.Text = "Observaciones:"
         ' 
         ' Proveedores
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(800, 450)
-        Controls.Add(Label2)
+        Controls.Add(lbltitulo)
         Controls.Add(lblDescrip)
         Controls.Add(Label1)
         Controls.Add(btnGuardar)
@@ -100,5 +100,5 @@ Partial Class Proveedores
     Friend WithEvents btnGuardar As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents lblDescrip As Label
-    Friend WithEvents Label2 As Label
+    Friend WithEvents lbltitulo As Label
 End Class

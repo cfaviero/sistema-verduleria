@@ -100,6 +100,7 @@ Public Class Proveedores
 
         Tema.AplicarTema(Me)
         Label1.Font = Tema.Fuente(22, FontStyle.Bold)
+        lbltitulo.Font = Tema.Fuente(12, FontStyle.Bold)
         'Muestro el producto seleccionado
         Label1.Text = "Seleccione los proveedores para '" & nombreProductoSeleccionado & "'"
         lblDescrip.Text = descriProd

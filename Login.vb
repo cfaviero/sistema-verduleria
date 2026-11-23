@@ -5,15 +5,32 @@ Public Class Login
 
     Private Const WM_NCLBUTTONDOWN As Integer = &HA1
     Private Const HTCAPTION As Integer = 2
+    Private Const CS_DROPSHADOW As Integer = &H20000
+
     '# EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ## EVENTOS ##
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Datos de conexion a la bd
+        ObtenerDatosConexion()
         'Aplicacion del tema
         Tema.AplicarTema(Me)
-        'Cambio el tamano del titulo del label
-        Label3.Font = Tema.Fuente(18, FontStyle.Bold)
+        'Formatos
+        Label3.Font = Tema.Fuente(15, FontStyle.Regular)
+        lblBien.Font = Tema.Fuente(15, FontStyle.Bold)
+        btnCerrrar.Font = Tema.Fuente(11, FontStyle.Bold)
+        txtUsuario.Font = Tema.Fuente(12, FontStyle.Bold)
+        txtContra.Font = Tema.Fuente(12, FontStyle.Bold)
+        Panel1.BackColor = ColorTranslator.FromHtml("#b6d7a8")
+        PictureBox2.BackColor = ColorTranslator.FromHtml("#b6d7a8")
+        PictureBox3.BackColor = ColorTranslator.FromHtml("#b6d7a8")
+        Label3.BackColor = ColorTranslator.FromHtml("#b6d7a8")
+        btnCerrrar.FlatStyle = FlatStyle.Flat
+
+        Me.Region = Region.FromHrgn(CreateRoundRectRgn(0, 0, Me.Width, Me.Height, 25, 25))
+
         'Click en entrar al presionar enter
         MyBase.AcceptButton = btnEntrar
     End Sub
+
     Private Sub btnEntrar_Click(sender As Object, e As EventArgs) Handles btnEntrar.Click
         'Valido los campos completos
         If txtUsuario.Text = "" OrElse txtContra.Text = "" Then
@@ -84,6 +101,11 @@ Public Class Login
     End Sub
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
+
+    <DllImport("gdi32.dll", EntryPoint:="CreateRoundRectRgn")>
+    Private Shared Function CreateRoundRectRgn(nX1 As Integer, nY1 As Integer, nX2 As Integer, nY2 As Integer, nWidthEllipse As Integer, nHeightEllipse As Integer) As IntPtr
+    End Function
+
     'Control para manipular la ventana con libreria nativa de windos
     <DllImport("user32.dll")>
     Private Shared Sub ReleaseCapture()
@@ -91,4 +113,5 @@ Public Class Login
     <DllImport("user32.dll")>
     Private Shared Sub SendMessage(hWnd As IntPtr, Msg As Integer, wParam As Integer, lParam As Integer)
     End Sub
+
 End Class

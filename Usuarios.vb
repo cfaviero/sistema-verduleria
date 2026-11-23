@@ -109,7 +109,6 @@ Public Class Usuarios
     Private Sub Usuarios_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Tema.AplicarTema(Me)
         CargarGrilla()
-        MessageBox.Show(Sesion.EsRepositor)
         txtBuscar.PlaceholderText = "Buscar usuario..."
         txtUsuario.PlaceholderText = "Ej. Usuario"
         txtDescripUser.PlaceholderText = "Ej. Claudio Altamirano"
@@ -118,8 +117,6 @@ Public Class Usuarios
         btnModificar.Enabled = False
         btnBorrar.Enabled = False
         btnAgregar.Enabled = False
-
-        LimpiarCampos()
 
     End Sub
 
@@ -138,8 +135,11 @@ Public Class Usuarios
             rol = 1
         ElseIf rbVendedor.Checked Then
             rol = 2
-        Else
+        ElseIf rbRepositor.Checked Then
             rol = 3
+        Else
+            MessageBox.Show("Seleccione un rol")
+            Exit Sub
         End If
         Dim nuevousuario As New Contra()
         nuevousuario.UsuarioNuevo = txtUsuario.Text
@@ -295,6 +295,10 @@ Public Class Usuarios
         ValidarCamposParaAgregar()
         btnModificar.Enabled = False
         btnBorrar.Enabled = False
+    End Sub
+
+    Private Sub Usuarios_shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        LimpiarCampos()
     End Sub
 
 End Class

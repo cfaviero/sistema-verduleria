@@ -568,12 +568,10 @@ Public Class Stock
 
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^
 
-
-
-    ' Cantidad de productos que aparecen en el informe (caben hasta 6 en la hoja)
+    'Cantidad de productos que aparecen en el informe (caben hasta 6 en la hoja)
     Private Const CANTIDAD_INFORME As Integer = 5
 
-    ' Datos del informe, cargados al hacer clic y usados al dibujar la hoja
+    'Datos del informe, cargados al hacer clic y usados al dibujar la hoja
     Private informeProductos As DataTable
     Private indiceFila As Integer
 
@@ -689,7 +687,7 @@ Public Class Stock
 
     Private WithEvents docFicha As New PrintDocument
 
-    ' Datos de la ficha, cargados al hacer clic y usados al dibujar la hoja
+    'Datos de la ficha, cargados al hacer clic y usados al dibujar la hoja
     Private fichaProducto As DataRow
     Private fichaProveedores As DataTable
 
