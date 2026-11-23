@@ -369,10 +369,13 @@ Public Class FrmDashboard
         'Actualizacion automatica mientra este bisible
         tmrActualizar.Interval = 60000
         tmrActualizar.Start()
-        CargarDashboard()
     End Sub
 
     Private Sub btnActualizar_Click(sender As Object, e As EventArgs) Handles btnActualizar.Click
+        CargarDashboard()
+    End Sub
+
+    Private Sub FrmDashboard_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
         CargarDashboard()
     End Sub
 
