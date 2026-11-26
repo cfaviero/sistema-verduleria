@@ -6,7 +6,7 @@ Public Class Caja
     ' Carrito de un solo producto ingresadio
     Private carrito As New DataTable()
     'Empleado actual
-    Private idEmpleadoActual As Integer = Sesion.idEmpleado
+    Private idEmpleadoActual As Integer = 0
     'Datos del comprobante que se cargan al confirmar la venta y usados para dibujar la oja
     Private comprobanteCabecera As DataTable
     Private comprobanteDetalle As DataTable
@@ -554,87 +554,137 @@ Public Class Caja
     End Sub
 
     Private Sub PrintDocument1_PrintPage(sender As Object, e As Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
-        Const ALTO_FILA As Integer = 28
+        Const ALTO_CABECERA As Integer = 90
+        Const ALTO_TITULOS As Integer = 32
+        Const ALTO_FILA As Integer = 30
+        Const ALTO_TOTAL As Integer = 50
 
         Dim g As Graphics = e.Graphics
-        Dim marco As Rectangle = e.MarginBounds
-        Dim centrado As New StringFormat() With {.Alignment = StringAlignment.Center}
-        Dim derecha As New StringFormat() With {.Alignment = StringAlignment.Far}
+        g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias
+        g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic
 
+        Dim marco As Rectangle = e.MarginBounds
         Dim cabecera As DataRow = comprobanteCabecera.Rows(0)
 
-        ' Columnas de la tabla de productos
-        Dim xProducto As Integer = marco.Left + 15
-        Dim xCantidad As Integer = marco.Left + 330
-        Dim xPrecio As Integer = marco.Left + 460
-        Dim xSubtotal As Integer = marco.Right - 15
+        'Paleta (verde del login)
+        Dim colVerde As Color = ColorTranslator.FromHtml("#50C878")
+        Dim colVerdeOscuro As Color = ColorTranslator.FromHtml("#1F6B3F")
+        Dim colVerdeClaro As Color = ColorTranslator.FromHtml("#EAF7EF")
+        Dim colTexto As Color = ColorTranslator.FromHtml("#222222")
+        Dim colGris As Color = ColorTranslator.FromHtml("#777777")
+        Dim colLinea As Color = ColorTranslator.FromHtml("#DDDDDD")
 
-        Using fTitulo As New Font("Arial", 18, FontStyle.Bold),
-              fNormal As New Font("Arial", 12, FontStyle.Regular),
-              fNegrita As New Font("Arial", 12, FontStyle.Bold),
-              lapizMarco As New Pen(Color.Black, 2)
+        'Formatos de texto
+        Dim fmtIzq As New StringFormat() With {.LineAlignment = StringAlignment.Center,
+                                           .Trimming = StringTrimming.EllipsisCharacter,
+                                           .FormatFlags = StringFormatFlags.NoWrap}
+        Dim fmtDer As New StringFormat() With {.Alignment = StringAlignment.Far,
+                                           .LineAlignment = StringAlignment.Center}
 
-            ' Recuadro alrededor de toda la informacion
-            g.DrawRectangle(lapizMarco, marco)
+        Using fTitulo As New Font("Segoe UI", 20, FontStyle.Bold),
+          fNro As New Font("Segoe UI", 14, FontStyle.Bold),
+          fEtiqueta As New Font("Segoe UI", 9, FontStyle.Regular),
+          fValor As New Font("Segoe UI", 11, FontStyle.Regular),
+          fTitulosTabla As New Font("Segoe UI", 10, FontStyle.Bold),
+          fFila As New Font("Segoe UI", 11, FontStyle.Regular),
+          fTotal As New Font("Segoe UI", 18, FontStyle.Bold),
+          bVerde As New SolidBrush(colVerde),
+          bVerdeOscuro As New SolidBrush(colVerdeOscuro),
+          bVerdeClaro As New SolidBrush(colVerdeClaro),
+          bTexto As New SolidBrush(colTexto),
+          bGris As New SolidBrush(colGris),
+          pLinea As New Pen(colLinea, 1)
 
-            ' Encabezado
-            g.DrawString("Comprobante de venta", fTitulo, Brushes.Black,
-                         New RectangleF(marco.Left, marco.Top + 15, marco.Width, 40), centrado)
-            g.DrawString("Nro. " & cabecera("id_venta").ToString(), fNegrita, Brushes.Black,
-                         marco.Left + 15, marco.Top + 60)
-            g.DrawString("Fecha: " & Convert.ToDateTime(cabecera("fecha")).ToString("dd/MM/yyyy HH:mm"),
-                         fNormal, Brushes.Black, marco.Left + 15, marco.Top + 85)
-            g.DrawString("Cliente: " & cabecera("cliente").ToString(), fNormal, Brushes.Black,
-                         marco.Left + 15, marco.Top + 110)
-            g.DrawString("Atendio: " & cabecera("empleado").ToString(), fNormal, Brushes.Black,
-                         marco.Left + 15, marco.Top + 135)
-            g.DrawString("Pago: " & cabecera("metodo_pago").ToString(), fNormal, Brushes.Black,
-                         marco.Left + 15, marco.Top + 160)
-            g.DrawLine(Pens.Black, marco.Left, marco.Top + 195, marco.Right, marco.Top + 195)
+            '# ENCABEZADO
+            g.FillRectangle(bVerde, marco.Left, marco.Top, marco.Width, ALTO_CABECERA)
 
-            'Titulos de la tabla
-            Dim y As Integer = marco.Top + 205
-            g.DrawString("Producto", fNegrita, Brushes.Black, xProducto, y)
-            g.DrawString("Cantidad", fNegrita, Brushes.Black, xCantidad, y)
-            g.DrawString("Precio", fNegrita, Brushes.Black, xPrecio, y)
-            g.DrawString("Subtotal", fNegrita, Brushes.Black,
-                         New RectangleF(xSubtotal - 120, y, 120, ALTO_FILA), derecha)
-            y += ALTO_FILA
-            g.DrawLine(Pens.Gray, marco.Left + 15, y, marco.Right - 15, y)
-            y += 8
+            'Logo sobre cuadrado blanco
+            Dim lado As Integer = ALTO_CABECERA - 20
+            Dim rInsignia As New Rectangle(marco.Left + 15, marco.Top + 10, lado, lado)
+            g.FillRectangle(Brushes.White, rInsignia)
 
-            'Una fila por producto
+            'Se recorta el espacio transparente que rodea al logo para que se vea mas grande
+            Dim origenLogo As New Rectangle(350, 32, 710, 710)
+            Dim destinoLogo As New Rectangle(rInsignia.X + 4, rInsignia.Y + 4, lado - 8, lado - 8)
+            Using logo As Image = My.Resources.LogoVerduleria
+                g.DrawImage(logo, destinoLogo, origenLogo, GraphicsUnit.Pixel)
+            End Using
+
+            'Titulo junto al logo y numero a la derecha
+            g.DrawString("Comprobante de venta", fTitulo, Brushes.White,
+                     New RectangleF(rInsignia.Right + 15, marco.Top, marco.Width \ 2 + 60, ALTO_CABECERA), fmtIzq)
+            g.DrawString("Nro. " & cabecera("id_venta").ToString(), fNro, Brushes.White,
+                     New RectangleF(marco.Left, marco.Top, marco.Width - 20, ALTO_CABECERA), fmtDer)
+
+            '# DATOS (dos columnas: etiqueta gris y valor debajo)
+            Dim xCol1 As Integer = marco.Left + 20
+            Dim xCol2 As Integer = marco.Left + marco.Width \ 2 + 20
+            Dim anchoDato As Single = marco.Width \ 2 - 40
+            Dim y As Integer = marco.Top + ALTO_CABECERA + 20
+
+            Dim dibujarDato = Sub(etiqueta As String, valor As String, x As Integer, yy As Integer)
+                                  g.DrawString(etiqueta.ToUpper(), fEtiqueta, bGris, x, yy)
+                                  g.DrawString(valor, fValor, bTexto, New RectangleF(x, yy + 16, anchoDato, 24), fmtIzq)
+                              End Sub
+
+            dibujarDato("Fecha", Convert.ToDateTime(cabecera("fecha")).ToString("dd/MM/yyyy HH:mm"), xCol1, y)
+            dibujarDato("Cliente", cabecera("cliente").ToString(), xCol1, y + 50)
+            dibujarDato("Atendió", Sesion.descripcion.ToString(), xCol2, y)
+            dibujarDato("Pago", cabecera("metodo_pago").ToString(), xCol2, y + 50)
+            y += 110
+
+            '# TABLA
+            Dim rProducto As New RectangleF(marco.Left + 20, 0, 230, ALTO_FILA)
+            Dim xCantidad As Integer = marco.Left + 260
+            Dim xPrecio As Integer = marco.Left + 380
+            Dim xSubtotal As Integer = marco.Right - 130
+
+            g.FillRectangle(bVerdeClaro, marco.Left, y, marco.Width, ALTO_TITULOS)
+            g.DrawString("Producto", fTitulosTabla, bVerdeOscuro, New RectangleF(rProducto.X, y, rProducto.Width, ALTO_TITULOS), fmtIzq)
+            g.DrawString("Cantidad", fTitulosTabla, bVerdeOscuro, New RectangleF(xCantidad, y, 110, ALTO_TITULOS), fmtDer)
+            g.DrawString("Precio", fTitulosTabla, bVerdeOscuro, New RectangleF(xPrecio, y, 110, ALTO_TITULOS), fmtDer)
+            g.DrawString("Subtotal", fTitulosTabla, bVerdeOscuro, New RectangleF(xSubtotal, y, 110, ALTO_TITULOS), fmtDer)
+            y += ALTO_TITULOS
+
             Do While indiceFila < comprobanteDetalle.Rows.Count
-
-                ' Si no entra otra fila sigo en la siguiente hoja
-                If y + ALTO_FILA > marco.Bottom - 80 Then Exit Do
+                'Si no entra otra fila (dejando lugar al total) sigo en la hoja siguiente
+                If y + ALTO_FILA > marco.Bottom - (ALTO_TOTAL + 30) Then Exit Do
 
                 Dim fila As DataRow = comprobanteDetalle.Rows(indiceFila)
-                'Dibujo
-                g.DrawString(fila("nombre").ToString(), fNormal, Brushes.Black, xProducto, y)
-                g.DrawString(Convert.ToDecimal(fila("cantidad")).ToString("0.###") & " " & fila("unidad_medida").ToString(), fNormal, Brushes.Black, xCantidad, y)
-                g.DrawString(Convert.ToDecimal(fila("precio_unitario")).ToString("C2"), fNormal, Brushes.Black, xPrecio, y)
-                g.DrawString(Convert.ToDecimal(fila("subtotal")).ToString("C2"), fNormal, Brushes.Black, New RectangleF(xSubtotal - 120, y, 120, ALTO_FILA), derecha)
+
+                g.DrawString(fila("nombre").ToString(), fFila, bTexto, New RectangleF(rProducto.X, y, rProducto.Width, ALTO_FILA), fmtIzq)
+                g.DrawString(Convert.ToDecimal(fila("cantidad")).ToString("0.###") & " " & fila("unidad_medida").ToString(),
+                         fFila, bTexto, New RectangleF(xCantidad, y, 110, ALTO_FILA), fmtDer)
+                g.DrawString(Convert.ToDecimal(fila("precio_unitario")).ToString("C2"),
+                         fFila, bTexto, New RectangleF(xPrecio, y, 110, ALTO_FILA), fmtDer)
+                g.DrawString(Convert.ToDecimal(fila("subtotal")).ToString("C2"),
+                         fFila, bTexto, New RectangleF(xSubtotal, y, 110, ALTO_FILA), fmtDer)
 
                 y += ALTO_FILA
-                'Paso al siguiente producto
+                g.DrawLine(pLinea, marco.Left + 20, y, marco.Right - 20, y)
                 indiceFila += 1
             Loop
 
-            'La impresion agregaa otra hoja si hay producto
             e.HasMorePages = (indiceFila < comprobanteDetalle.Rows.Count)
 
-            'El total va solo en la ultima hoja
+            '# TOTAL (solo en la última hoja, debajo de la última fila)
             If Not e.HasMorePages Then
                 Dim total As Decimal = 0
                 For Each fila As DataRow In comprobanteDetalle.Rows
                     total += Convert.ToDecimal(fila("subtotal"))
                 Next
 
-                g.DrawLine(Pens.Black, marco.Left + 15, marco.Bottom - 70, marco.Right - 15, marco.Bottom - 70)
-                g.DrawString("TOTAL: " & total.ToString("C2"), fTitulo, Brushes.Black, New RectangleF(marco.Left, marco.Bottom - 60, marco.Width - 15, 40), derecha)
+                Dim rTotal As New Rectangle(marco.Right - 300, y + 20, 300, ALTO_TOTAL)
+                g.FillRectangle(bVerde, rTotal)
+                g.DrawString("TOTAL", fTitulosTabla, Brushes.White,
+                         New RectangleF(rTotal.X + 15, rTotal.Y, 100, ALTO_TOTAL), fmtIzq)
+                g.DrawString(total.ToString("C2"), fTotal, Brushes.White,
+                         New RectangleF(rTotal.X, rTotal.Y, rTotal.Width - 15, ALTO_TOTAL), fmtDer)
             End If
         End Using
+
+        fmtIzq.Dispose()
+        fmtDer.Dispose()
     End Sub
 
     '# ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^ # ^^^

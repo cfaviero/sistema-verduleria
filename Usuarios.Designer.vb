@@ -169,9 +169,9 @@ Partial Class Usuarios
         Label6.AutoSize = True
         Label6.Location = New Point(38, 113)
         Label6.Name = "Label6"
-        Label6.Size = New Size(69, 15)
+        Label6.Size = New Size(52, 15)
         Label6.TabIndex = 33
-        Label6.Text = "Descripcion"
+        Label6.Text = "Personal"
         ' 
         ' btnModificar
         ' 

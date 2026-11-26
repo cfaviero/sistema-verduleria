@@ -74,10 +74,10 @@ Public Class Login
                         End If
 
                         Sesion.idusuario = Convert.ToInt32(rd("id_usuario"))
-                        Sesion.idEmpleado = Convert.ToInt32(rd("id_empleado"))
                         Sesion.nombreusuario = rd("usuario").ToString()
                         Sesion.rolusuario = rd("rol").ToString()
                         Sesion.descripcion = rd("descripcion").ToString()
+                        Sesion.idEmpleado = If(IsDBNull(rd("id_empleado")), 0, Convert.ToInt32(rd("id_empleado")))
 
                         Principal.Show()
                         Me.Hide()

@@ -52,8 +52,7 @@ Public Class Usuarios
         txtDescripUser.Clear()
         rbAdmin.Checked = False
         rbVendedor.Checked = False
-        rbVendedor.Checked = False
-
+        rbRepositor.Checked = False
         dgvUsuarios.ClearSelection()
         dgvUsuarios.CurrentCell = Nothing
         Me.ActiveControl = Nothing
@@ -70,7 +69,7 @@ Public Class Usuarios
     End Sub
 
     Private Sub ValidarCamposParaAgregar()
-        Dim camposCompletos As Boolean = Not String.IsNullOrWhiteSpace(txtUsuario.Text)
+        Dim camposCompletos As Boolean = Not String.IsNullOrWhiteSpace(txtUsuario.Text) AndAlso Not String.IsNullOrWhiteSpace(txtDescripUser.Text)
 
         btnAgregar.Enabled = camposCompletos
     End Sub
@@ -148,7 +147,6 @@ Public Class Usuarios
         nuevousuario.ShowDialog()
         CargarGrilla()
         LimpiarCampos()
-
     End Sub
 
     Private Sub txtBuscar_KeyDown(sender As Object, e As KeyEventArgs) Handles txtBuscar.KeyDown
@@ -246,7 +244,7 @@ Public Class Usuarios
 
     Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
         If dgvUsuarios.SelectedRows.Count = 0 Then
-            MessageBox.Show("Selecciona un producto de la grilla")
+            MessageBox.Show("Selecciona un usuario de la grilla")
             Exit Sub
         End If
 
@@ -267,11 +265,11 @@ Public Class Usuarios
 
                     Dim filasAfectadas = comando.ExecuteNonQuery
                     If filasAfectadas > 0 Then
-                        MessageBox.Show("Producto eliminado correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        MessageBox.Show("Usuario eliminado correctamente", "Confirmacion", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         LimpiarCampos()
                         CargarGrilla()
                     Else
-                        MessageBox.Show("No se encontro el producto seleccionado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        MessageBox.Show("No se encontro el usuario seleccionado.", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
 
                 End Using
@@ -287,6 +285,13 @@ Public Class Usuarios
     Private Sub txtUsuario_TextChanged(sender As Object, e As EventArgs) Handles txtUsuario.TextChanged
         If Not dgvUsuarios.SelectedRows.Count > 0 Then
             ValidarCamposParaAgregar()
+        End If
+    End Sub
+
+    Private Sub txtDescripUser_TextChanged(sender As Object, e As EventArgs) Handles txtDescripUser.TextChanged
+        If Not dgvUsuarios.SelectedRows.Count > 0 Then
+            ValidarCamposParaAgregar()
+
         End If
     End Sub
 

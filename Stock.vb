@@ -81,6 +81,8 @@ Public Class Stock
         cmbCategoria.SelectedIndex = -1
         dgvStock.ClearSelection()
         dgvStock.CurrentCell = Nothing
+        Dim rutaImagen As String = IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "images", "images (1).png")
+        PictureBox1.Image = Image.FromFile(rutaImagen)
         Me.ActiveControl = Nothing
     End Sub
 

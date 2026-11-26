@@ -9,6 +9,7 @@ Public Class Contra
     <System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)>
     Public Property rolNuevo As String
     Private ojoCerrado As Boolean = True
+    Dim id_usuario As Integer
 
     Private Sub btnCrear_Click(sender As Object, e As EventArgs) Handles btnCrear.Click
 
@@ -46,6 +47,31 @@ Public Class Contra
                     comando.Parameters.AddWithValue("@rol", rolNuevo)
                     comando.ExecuteNonQuery()
                 End Using
+            End Using
+
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+                Dim consultaid As String = "select id_usuario " &
+                    "from usuarios where usuario = @usuario"
+
+                Using comando As New MySqlCommand(consultaid, cn)
+                    comando.Parameters.AddWithValue("@usuario", UsuarioNuevo.Trim())
+
+                    Dim lector As Object = comando.ExecuteScalar()
+                    id_usuario = Convert.ToInt32(lector)
+                End Using
+            End Using
+            Using cn As New MySqlConnection(ConnectionString)
+                cn.Open()
+                Dim consulta As String = "insert into empleados " &
+                "(nombre, id_usuario) values (@descripcion, @idusuario)"
+
+                Using comando As New MySqlCommand(consulta, cn)
+                    comando.Parameters.AddWithValue("@descripcion", descNuevo.Trim())
+                    comando.Parameters.AddWithValue("@idusuario", CInt(id_usuario))
+                    comando.ExecuteNonQuery()
+                End Using
+
             End Using
 
             MessageBox.Show("Usuario creado",
